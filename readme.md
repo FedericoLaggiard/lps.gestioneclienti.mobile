@@ -4,7 +4,7 @@
 
 ### Version 0.0.1
 
-* BDD
+* √ BDD 
 * app root
 * toolbar
 * list customers
