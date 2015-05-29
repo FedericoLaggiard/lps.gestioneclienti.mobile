@@ -1,13 +1,6 @@
 /**
  * Created by federicolaggiard on 29/05/15.
  */
-var m = require('mithril');
-var mocha = require('mocha');
-var chai = require('chai');
-var should = chai.should();
-var mock = require('./libs/mock').window;
-
-m.deps(mock);
 
 describe('test mithril', function(){
 

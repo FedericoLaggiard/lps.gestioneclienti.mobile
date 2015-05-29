@@ -11,7 +11,18 @@ module.exports = {
     },
 
     view: function(ctrl){
-        return m('h1', "I'm aliveeeeeee");
+        return [
+
+            m('div',{
+                id: 'toolbar'
+            }, 'toolbar'),
+
+            m('div',{
+                id: 'mainView',
+                class: 'withTopBar'
+            }, 'mainView')
+
+        ]
     }
 
 };
