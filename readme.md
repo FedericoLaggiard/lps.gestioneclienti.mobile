@@ -1,5 +1,18 @@
 # Gestione Clienti LPS
 
+## How-to:
+
+* npm i 
+
+### Build
+
+    npm run build
+    
+### Test
+
+    npm run test
+
+
 ##Roadmap
 
 ### Version 0.0.1

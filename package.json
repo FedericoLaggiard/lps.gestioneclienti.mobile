@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "test": "mocha spec/"
+    "test": "mocha spec/",
+    "build": "browserify src/index.js > build/build.js"
   },
   "repository": {
     "type": "git",
@@ -13,6 +14,7 @@
   "author": "Federico Laggiard",
   "license": "ISC",
   "dependencies": {
+    "browserify": "10.2.3",
     "mithril": "0.2.0"
   },
   "devDependencies": {
