@@ -1,6 +1,6 @@
 {
   "name": "lps.gestioneclienti.mobile",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.html",
   "scripts": {
@@ -11,5 +11,8 @@
     "url": "git@bitbucket.org:federicolaggiard/lps.gestioneclienti.mobile.git"
   },
   "author": "Federico Laggiard",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mithril": "0.2.0"
+  }
 }
