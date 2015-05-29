@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha spec/"
   },
   "repository": {
     "type": "git",
@@ -14,5 +14,9 @@
   "license": "ISC",
   "dependencies": {
     "mithril": "0.2.0"
+  },
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "mocha": "^2.2.5"
   }
 }
