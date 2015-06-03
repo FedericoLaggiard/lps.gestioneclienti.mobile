@@ -1,0 +1,82 @@
+html{
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    margin: 0;
+    font-size: 14px;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    width: 100%;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+input {
+    font-size: 1em;
+    padding: 1.5% .3%;
+}
+
+label {
+    display: block;
+}
+
+#mainView {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    position: absolute;
+}
+
+#mainView.withTopBar {
+    margin-top: 8.4%;
+    height: 88%;
+}
+
+.containerScroll {
+    height: 100%;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+#conflictManagerContainer {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+#snackbarsContainer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 100%;
+}
+
+/**
+*   Smartphones (portrait and landscape)
+**/
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px){
+    #mainView.withTopBar {
+        margin-top: 9%;
+        height: 95%;
+    }
+}
+
+/**
+*   Tablet (portrait and landscape)
+**/
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px){
+    #mainView.withTopBar {
+        margin-top: 8.4%;
+        height: 88.7%;
+        width: 100%;
+    }
+}

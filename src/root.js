@@ -2,6 +2,7 @@
  * Created by federicolaggiard on 29/05/15.
  */
 
+m = require('mithril');
 models = require('./models');
 components = require('./components');
 

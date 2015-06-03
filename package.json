@@ -5,7 +5,9 @@
   "main": "index.html",
   "scripts": {
     "test": "mocha spec/",
-    "build": "browserify src/index.js > build/build.js"
+    "build:css": "cat assets/styles/*.css | cleancss -o build/build.css",
+    "build:app": "browserify src/index.js > build/build.js",
+    "build": "npm run build:css && npm run build:app"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "chai": "^2.3.0",
+    "clean-css": "^3.3.1",
     "mocha": "^2.2.5"
   }
 }
