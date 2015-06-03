@@ -2,6 +2,8 @@
  * Created by federicolaggiard on 29/05/15.
  */
 
+'use strict';
+
 describe('test mithril', function(){
 
     beforeEach(function(done){
@@ -23,6 +25,8 @@ describe('test mithril', function(){
         root.setAttribute('id','app');
 
         m.mount(root, m.component(app,items));
+
+        m.redraw();
 
         var list = root.childNodes[0];
         list.childNodes.should.have.length(5);

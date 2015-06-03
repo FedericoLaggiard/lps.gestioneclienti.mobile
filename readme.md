@@ -19,8 +19,8 @@
 
 * √ BDD 
 * √ app root
-* toolbar
 * list customers
+* toolbar
 * customer details
 * messages snackbar
 * DB attach

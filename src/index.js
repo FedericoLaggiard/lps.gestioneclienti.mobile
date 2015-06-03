@@ -7,4 +7,4 @@
 var m = require('mithril');
 var Root = require('./root');
 
-var app = m.mount(document.getElementById('app'), m.component(Root));
+window.app = m.mount(document.getElementById('app'), m.component(Root));

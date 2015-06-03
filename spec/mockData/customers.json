@@ -1,0 +1,21 @@
+{
+  "total_rows": 3,
+  "offset": 0,
+  "rows": [
+    {
+      "id": "4615134a396fd24d545fb55967386f6a",
+      "key": "VISCONTI S.R.L.",
+      "value": "4615134a396fd24d545fb55967386f6a"
+    },
+    {
+      "id": "4615134a396fd24d545fb55967387681",
+      "key": "VIVIANO F.LLI s.n.c. Salumificio",
+      "value": "4615134a396fd24d545fb55967387681"
+    },
+    {
+      "id": "4615134a396fd24d545fb55967387f5d",
+      "key": "VOGLIAZZI S.P.A.",
+      "value": "4615134a396fd24d545fb55967387f5d"
+    }
+  ]
+}
