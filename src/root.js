@@ -10,8 +10,11 @@ module.exports = {
 
     controller: function(){
 
+        var baseUrl = 'http://192.168.1.101:5984/';
+
         var customersModel = models.customers;
-        customersModel.getCustomers('./spec/mockData/customers.json');
+        //customersModel.getCustomers('./spec/mockData/customers.json');
+        customersModel.getCustomers(baseUrl + 'lps_clienti/_design/lps_clienti/_view/listByRagSoc');
 
         function getCustomers(){
 
@@ -25,9 +28,34 @@ module.exports = {
             return customers();
         }
 
+        var filterText = m.prop("");
+        function setFilter(filter){
+
+            filterText(filter);
+            customersModel.filterCustomers(filterText());
+
+            console.log(filterText());
+        }
+
+        var routes = {
+            customersList : "cutstomersList",
+            customer: "customer"
+        };
+        function getRoutes(){
+            return routes;
+        }
+
+        var curRoute = m.prop(routes["customersList"]);
+        function getCurrentRoute(){
+            return curRoute();
+        }
+
         return {
             getCustomers: getCustomers,
-            setCustomers: setCustomers
+            setCustomers: setCustomers,
+            setFilter: setFilter,
+            getRoutes: getRoutes,
+            getCurrentRoute: getCurrentRoute
         };
 
     },
@@ -37,12 +65,20 @@ module.exports = {
 
             m('div',{
                 id: 'toolbar'
-            }, m.component(components.toolbar, {setItems: ctrl.setCustomers})),
+            }, m.component(components.toolbar, {
+                setItems: ctrl.setCustomers,
+                setFilter: ctrl.setFilter,
+                currentRoute: ctrl.getCurrentRoute,
+                routes: ctrl.getRoutes()
+            })),
 
             m('div',{
                 id: 'mainView',
                 class: 'withTopBar'
-            }, m.component(components.customersList, {items: ctrl.getCustomers(), getItems: ctrl.getCustomers}))
+            }, m.component(components.customersList, {
+                items: ctrl.getCustomers(),
+                getItems: ctrl.getCustomers
+            }))
 
         ]
     }

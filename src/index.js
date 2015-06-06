@@ -7,4 +7,12 @@
 var m = require('mithril');
 var Root = require('./root');
 
-window.app = m.mount(document.getElementById('app'), m.component(Root));
+if(!!window.cordova) {
+    window.app = m.mount(document.getElementById('app'), m.component(Root));
+}else{
+    document.onreadystatechange = function () {
+        if (document.readyState === 'complete') {
+            window.app = m.mount(document.getElementById('app'), m.component(Root));
+        }
+    }
+}

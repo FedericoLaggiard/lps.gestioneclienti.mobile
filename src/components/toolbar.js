@@ -4,33 +4,72 @@
 
 module.exports = {
 
-    controller: function(input){
+    controller: function(args){
 
-        var data = input;
+        var data = args;
 
-        function update(){
-            console.log('update');
+        var _filter = "";
 
-            var d = [
-                {
-                    id: 1,
-                    key: 'AAAA'
-                }
-            ];
+        function filter(text){
+            console.log(text);
 
-            data.setItems(d);
+            if(text)
+                _filter = _filter.concat(text);
 
+            return _filter;
+        }
+
+        function isBackButtonVisible(){
+            if(data.getCurrentRoute() === data.routes["customersList"])
+                return 'hidden';
+            return '';
         }
 
         return{
-            update: update
+            filter: filter,
+            isBackButtonVisible: isBackButtonVisible
         }
     },
 
     view: function(ctrl, args){
-        return m('button',{
-            onclick: ctrl.update
-        },'premi qui')
+
+        return m("div", {},[
+            //Back Icon
+            m('div',{
+                    class: 'icon',
+                    id: 'backIcon',
+                    style: {
+                        visibility: ctrl.isBackButtonVisible
+                    }
+                    //,onclick: ctrl.backClick.bind(ctrl)
+                },
+                m('img',{
+                    src: 'assets/img/ic_arrow_back_24px.svg'
+                })
+            ),
+            //Search field
+            m('input',{
+                id: 'txtSearch',
+                style: {
+                    //display: ctrl.model.displaySearchText()
+                },
+                oninput: m.withAttr("value",args.setFilter)
+
+            }),
+            //Menu icon
+            m('div',{
+                    class: 'icon',
+                    id: 'menuIcon',
+                    style: {
+                        //display: ctrl.model.displayMenu()
+                    }
+                    //,onclick: ctrl.menuClick.bind(ctrl)
+                },
+                m('img',{
+                    src: 'assets/img/ic_list_24px.svg'
+                })
+            )
+        ]);
     }
 
 };

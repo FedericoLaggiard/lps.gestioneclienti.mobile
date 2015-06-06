@@ -18,17 +18,17 @@ module.exports = {
         return m('div', {
             class: "containerScroll customersList"
         }, m('ul', data.items.map(function(item,index){
-            return m('li',{
-                id: item.id,
-                key: item.id
-            }, [
-                m('div',{
-                    class: 'checkContainer'
-                }),
-                m('p',{
-
-                }, item.key)
-            ])
+            if(item.visible) {
+                return m('li', {
+                    id: item.id,
+                    key: item.id
+                }, [
+                    m('div', {
+                        class: 'checkContainer'
+                    }),
+                    m('p', {}, m.trust(item.key))
+                ])
+            }
         })))
 
     }
