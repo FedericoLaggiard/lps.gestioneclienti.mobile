@@ -21,6 +21,7 @@ let app = {
     login: storage('login'),
     customers: storage('customers'),
     customer: storage('customer'),
+    customerEdit: m.prop(false),
     searchText: m.prop('')
 
   }
