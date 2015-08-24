@@ -22,7 +22,7 @@ function Customer(data){
   this.fax =            m.prop(data.fax || '-');
   this.email =          m.prop(data.email || '-');
   this.responsabile =   m.prop(data.responsabile || '-');
-  this.attivita =       m.prop(data.attivita || '-');
+  this.attivita =       m.prop(data.attvita || '-');
   this.ultimaVisita =   m.prop(data.ultimaVisita || '');
 
 }
