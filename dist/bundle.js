@@ -1640,7 +1640,9 @@
 	    customers: (0, _libsStore2['default'])('customers'),
 	    customer: (0, _libsStore2['default'])('customer'),
 	    customerEdit: _mithril2['default'].prop(false),
-	    searchText: _mithril2['default'].prop('')
+	    searchText: _mithril2['default'].prop(''),
+	
+	    focusedField: _mithril2['default'].prop('')
 	
 	  }
 	
@@ -1685,7 +1687,7 @@
 	
 	
 	// module
-	exports.push([module.id, "/*reset*/\nhtml,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  font: inherit;\n  font-size: 1rem;\n  margin: 0;\n  padding: 0;\n  vertical-align: baseline;\n  border: 0;\n  box-sizing: border-box;\n}\nhtml,\nbody {\n  height: 100%;\n  width: 100%;\n  font-size: 13px;\n}\nbody {\n  font-family: Roboto, sans-serif;\n}\nmain {\n  height: 100%;\n}\n.material-icons {\n  font-family: 'Material Icons';\n  font-weight: normal;\n  font-style: normal;\n  font-size: 24px;\n  /* Preferred icon size */\n  display: inline-block;\n  width: 1em;\n  height: 1em;\n  line-height: 1;\n  text-transform: none;\n  letter-spacing: normal;\n  word-wrap: normal;\n  /* Support for all WebKit browsers. */\n  -webkit-font-smoothing: antialiased;\n  /* Support for Safari and Chrome. */\n  text-rendering: optimizeLegibility;\n  /* Support for Firefox. */\n  -moz-osx-font-smoothing: grayscale;\n  /* Support for IE. */\n  -webkit-font-feature-settings: 'liga';\n     -moz-font-feature-settings: 'liga';\n          font-feature-settings: 'liga';\n}\n.circular {\n  width: 6em;\n  height: 5.7em;\n  border-radius: 50%;\n  -webkit-border-radius: 50%;\n  -moz-border-radius: 50%;\n  background: url(" + __webpack_require__(11) + ") no-repeat;\n  background-size: 100%;\n  background-position: 50%;\n}\n", ""]);
+	exports.push([module.id, "/*reset*/\nhtml,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  font: inherit;\n  font-size: 1rem;\n  margin: 0;\n  padding: 0;\n  vertical-align: baseline;\n  border: 0;\n  box-sizing: border-box;\n}\nhtml,\nbody {\n  height: 100%;\n  width: 100%;\n  font-size: 13px;\n}\nbody {\n  font-family: Roboto, sans-serif;\n}\nmain {\n  height: 100%;\n}\n.material-icons {\n  font-family: 'Material Icons';\n  font-weight: normal;\n  font-style: normal;\n  font-size: 24px;\n  /* Preferred icon size */\n  display: inline-block;\n  width: 1em;\n  height: 1em;\n  line-height: 1;\n  text-transform: none;\n  letter-spacing: normal;\n  word-wrap: normal;\n  /* Support for all WebKit browsers. */\n  -webkit-font-smoothing: antialiased;\n  /* Support for Safari and Chrome. */\n  text-rendering: optimizeLegibility;\n  /* Support for Firefox. */\n  -moz-osx-font-smoothing: grayscale;\n  /* Support for IE. */\n  -webkit-font-feature-settings: 'liga';\n     -moz-font-feature-settings: 'liga';\n          font-feature-settings: 'liga';\n}\n.circular {\n  width: 6em;\n  height: 5.7em;\n  border-radius: 50%;\n  -webkit-border-radius: 50%;\n  -moz-border-radius: 50%;\n  background: url(" + __webpack_require__(11) + ") no-repeat;\n  background-size: 100%;\n  background-position: 50%;\n}\n.textfield {\n  width: 100%;\n  margin: .5rem 0;\n  line-height: 1.5rem;\n  font-size: 1rem;\n  border: none;\n  border-bottom: solid 2px #c9c9c9;\n  outline: 0;\n  -webkit-transition: border 0.3s;\n  transition: border 0.3s;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  box-shadow: none;\n  border-radius: 0;\n}\n.textfield:focus {\n  border-bottom: solid 2px #3f51b5;\n}\n.txtLabel {\n  font-size: .8rem;\n  color: #c9c9c9;\n  -webkit-transition: color 0.3s;\n  transition: color 0.3s;\n}\n.txtLabel.focus {\n  color: #3f51b5;\n}\n", ""]);
 	
 	// exports
 
@@ -2401,38 +2403,33 @@
 	  controller: function controller() {
 	
 	    var cardFlipped = _mithril2['default'].prop(app.state.customerEdit());
-	    var customer = _mithril2['default'].prop(app.state.customer());
+	    var customer = app.state.customer() ? new _modelsCustomerModel2['default'](app.state.customer()) : null;
 	
 	    if (!app.state.customer() || app.state.customer()._id !== _mithril2['default'].route.param('id')) {
 	      _modelsCustomerModel2['default'].fetch(function (err, cust) {
 	
 	        if (err) return console.log(err);
 	
-	        customer(cust);
+	        customer = cust;
 	      });
+	    }
+	
+	    function btnBack() {
+	      if (cardFlipped()) {
+	        flipCard();
+	      } else {
+	        _mithril2['default'].route('customers');
+	      }
 	    }
 	
 	    function flipCard() {
 	      cardFlipped(app.state.customerEdit(!app.state.customerEdit()));
 	    }
 	
-	    function refreshForm(element, isInitialized) {
-	
-	      if (!isInitialized) {}
-	      //componentHandler.upgradeDom();
-	
-	      //let nodeList = document.getElementsByClassName('mdl-textfield__input');
-	      //
-	      //for (var i = 0; i < nodeList.length; ++i) {
-	      //  var item = nodeList[i];
-	      //  componentHandler.upgradeElement(item);
-	      //}
-	    }
-	
 	    return {
 	      customer: customer,
 	      cardFlipped: cardFlipped,
-	      refreshForm: refreshForm,
+	      btnBack: btnBack,
 	      flipCard: flipCard
 	    };
 	  },
@@ -2441,9 +2438,7 @@
 	
 	    return (0, _mithril2['default'])('div', { className: 'mdl-layout mdl-js-layout' }, [(0, _mithril2['default'])('main', { className: 'mdl-layout__container' }, (0, _mithril2['default'])('div', { className: 'bg' }), (0, _mithril2['default'])('div', { className: 'nav' }, [(0, _mithril2['default'])('button', {
 	      className: 'mdl-button mdl-js-button mdl-button--icon',
-	      onclick: function onclick() {
-	        _mithril2['default'].route('customers');
-	      }
+	      onclick: ctrl.btnBack
 	    }, (0, _mithril2['default'])('i', { className: 'material-icons' }, 'arrow_back')), (0, _mithril2['default'])('button', {
 	      className: 'mdl-button mdl-js-button mdl-button--icon',
 	      id: 'edit',
@@ -2454,37 +2449,222 @@
 	      className: 'page-content card' + (ctrl.cardFlipped() ? ' flipped' : ''),
 	      id: 'customerContainer' }, [
 	    //FRONT
-	    (0, _mithril2['default'])('figure', { className: 'front' }, [(0, _mithril2['default'])('section', { className: 'head' }, [(0, _mithril2['default'])('h1', { className: 'name' }, ctrl.customer().ragioneSociale), (0, _mithril2['default'])('div', { className: 'leftInfo' }, [(0, _mithril2['default'])('span', { className: 'lblInfo' }, 'Cliente di:'), (0, _mithril2['default'])('span', { className: 'Info' }, ctrl.customer().codAgente)]), (0, _mithril2['default'])('div', { className: 'circular' }), (0, _mithril2['default'])('div', { className: 'rightInfo' }, [(0, _mithril2['default'])('span', { className: 'lblInfo' }, 'Visitato il:'), (0, _mithril2['default'])('span', { className: 'Info' }, ctrl.customer().ultimaVisita)])]), (0, _mithril2['default'])('section', { className: 'contact' }, [(0, _mithril2['default'])('a', { href: 'tel:' + ctrl.customer().telefono }, (0, _mithril2['default'])('h2', { className: 'tel' }, ctrl.customer().telefono)), (0, _mithril2['default'])('a', { href: 'mailto:' + ctrl.customer().email }, (0, _mithril2['default'])('h2', { className: 'mail' }, ctrl.customer().email))]), (0, _mithril2['default'])('a', {
-	      href: 'https://www.google.it/maps/place/' + ctrl.customer().indirizzo + ',+' + ctrl.customer().citta + ',+' + ctrl.customer().provincia,
+	    (0, _mithril2['default'])('div', { className: 'front' }, [(0, _mithril2['default'])('section', { className: 'head' }, [(0, _mithril2['default'])('h1', { className: 'name' }, ctrl.customer.ragioneSociale()), (0, _mithril2['default'])('div', { className: 'leftInfo' }, [(0, _mithril2['default'])('span', { className: 'lblInfo' }, 'Cliente di:'), (0, _mithril2['default'])('span', { className: 'Info' }, ctrl.customer.codAgente() ? ctrl.customer.codAgente() : '')]), (0, _mithril2['default'])('div', { className: 'circular' }), (0, _mithril2['default'])('div', { className: 'rightInfo' }, [(0, _mithril2['default'])('span', { className: 'lblInfo' }, 'Visitato il:'), (0, _mithril2['default'])('span', { className: 'Info' }, ctrl.customer.ultimaVisita() ? ctrl.customer.ultimaVisita() : '')])]), (0, _mithril2['default'])('section', { className: 'contact' }, [(0, _mithril2['default'])('a', { href: 'tel:' + ctrl.customer.telefono() }, (0, _mithril2['default'])('h2', { className: 'tel' }, ctrl.customer.telefono() ? ctrl.customer.telefono() : '')), (0, _mithril2['default'])('a', { href: 'mailto:' + ctrl.customer.email() }, (0, _mithril2['default'])('h2', { className: 'mail' }, ctrl.customer.email() ? ctrl.customer.email() : ''))]), (0, _mithril2['default'])('a', {
+	      href: 'https://www.google.it/maps/place/' + ctrl.customer.indirizzo() + ',+' + ctrl.customer.citta() + ',+' + ctrl.customer.provincia(),
 	      className: 'location',
 	      target: '_blank'
-	    }, [(0, _mithril2['default'])('span', ctrl.customer().indirizzo), (0, _mithril2['default'])('span', ctrl.customer().citta), (0, _mithril2['default'])('span', ctrl.customer().provincia), (0, _mithril2['default'])('i', { className: 'material-icons' }, 'location_on')]), (0, _mithril2['default'])('section', { className: 'other' }, (0, _mithril2['default'])('ul', { id: 'lista_detail' }, [(0, _mithril2['default'])('li', { className: 'icona_detail' }, 'Attività'), (0, _mithril2['default'])('li', { className: 'descr_detail' }, ctrl.customer().attivita), (0, _mithril2['default'])('li', { className: 'icona_detail' }, 'Responsabile'), (0, _mithril2['default'])('li', { className: 'descr_detail' }, ctrl.customer().responsabile)]))]),
+	    }, [(0, _mithril2['default'])('span', ctrl.customer.indirizzo()), (0, _mithril2['default'])('span', ctrl.customer.citta()), (0, _mithril2['default'])('span', ctrl.customer.provincia()), (0, _mithril2['default'])('i', { className: 'material-icons' }, 'location_on')]), (0, _mithril2['default'])('section', { className: 'other' }, (0, _mithril2['default'])('ul', { id: 'lista_detail' }, [(0, _mithril2['default'])('li', { className: 'icona_detail' }, 'Attività'), (0, _mithril2['default'])('li', { className: 'descr_detail' }, ctrl.customer.attivita() ? ctrl.customer.attivita() : ''), (0, _mithril2['default'])('li', { className: 'icona_detail' }, 'Responsabile'), (0, _mithril2['default'])('li', { className: 'descr_detail' }, ctrl.customer.responsabile() ? ctrl.customer.responsabile() : '')]))]),
 	    //BACK
-	    (0, _mithril2['default'])('figure', { className: 'back', config: ctrl.refreshForm }, (0, _mithril2['default'])('div', { id: 'formContainer' }, (0, _mithril2['default'])('form', { id: 'formEdit' }, [
+	    (0, _mithril2['default'])('div', { className: 'back' }, [(0, _mithril2['default'])('div', { id: 'formContainer' }, (0, _mithril2['default'])('form', { id: 'formEdit' }, [
 	    //RAG SOC
-	    (0, _mithril2['default'])('div', {
-	      className: 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label'
-	    }, [(0, _mithril2['default'])('input', {
-	      className: 'mdl-textfield__input',
+	    (0, _mithril2['default'])('label', {
+	      className: 'txtLabel' + (app.state.focusedField() === 'txtRagSoc' ? ' focus' : '')
+	    }, 'Ragione Sociale'), (0, _mithril2['default'])('input', {
+	      className: 'textfield',
 	      type: 'text',
 	      id: 'txtRagSoc',
-	      value: ctrl.customer().ragioneSociale
-	    }), (0, _mithril2['default'])('label', {
-	      className: 'mdl-textfield__label',
-	      'for': 'txtRagSoc'
-	    }, 'Ragione Sociale')]),
+	      value: ctrl.customer.ragioneSociale(),
+	      oninput: _mithril2['default'].withAttr('value', function (value) {
+	        ctrl.customer.ragioneSociale(value);
+	        app.state.customer(ctrl.customer);
+	      }),
+	      onfocus: function onfocus() {
+	        app.state.focusedField('txtRagSoc');
+	      },
+	      onblur: function onblur() {
+	        app.state.focusedField('');
+	      }
+	    }),
 	    //TELEFONO
-	    (0, _mithril2['default'])('div', {
-	      className: 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label'
-	    }, [(0, _mithril2['default'])('input', {
-	      className: 'mdl-textfield__input',
+	    (0, _mithril2['default'])('label', {
+	      className: 'txtLabel' + (app.state.focusedField() === 'txtTelefono' ? ' focus' : '')
+	    }, 'Telefono'), (0, _mithril2['default'])('input', {
+	      className: 'textfield',
 	      type: 'text',
 	      id: 'txtTelefono',
-	      value: ctrl.customer().telefono
-	    }), (0, _mithril2['default'])('label', {
-	      className: 'mdl-textfield__label',
-	      'for': 'txtTelefono'
-	    }, 'Telefono'), (0, _mithril2['default'])('span', { className: 'mdl-textfield__error' }, 'Sono ammessi solo numeri.')])])))])))]);
+	      value: ctrl.customer.telefono(),
+	      oninput: _mithril2['default'].withAttr('value', function (value) {
+	        ctrl.customer.telefono(value);
+	        app.state.customer(ctrl.customer);
+	      }),
+	      onfocus: function onfocus() {
+	        app.state.focusedField('txtTelefono');
+	      },
+	      onblur: function onblur() {
+	        app.state.focusedField('');
+	      }
+	    }),
+	    //EMAIL
+	    (0, _mithril2['default'])('label', {
+	      className: 'txtLabel' + (app.state.focusedField() === 'txtEmail' ? ' focus' : '')
+	    }, 'E-mail'), (0, _mithril2['default'])('input', {
+	      className: 'textfield',
+	      type: 'text',
+	      id: 'txtEmail',
+	      value: ctrl.customer.email(),
+	      oninput: _mithril2['default'].withAttr('value', function (value) {
+	        ctrl.customer.email(value);
+	        app.state.customer(ctrl.customer);
+	      }),
+	      onfocus: function onfocus() {
+	        app.state.focusedField('txtEmail');
+	      },
+	      onblur: function onblur() {
+	        app.state.focusedField('');
+	      }
+	    }),
+	    //FAX
+	    (0, _mithril2['default'])('label', {
+	      className: 'txtLabel' + (app.state.focusedField() === 'txtFax' ? ' focus' : '')
+	    }, 'Fax'), (0, _mithril2['default'])('input', {
+	      className: 'textfield',
+	      type: 'text',
+	      id: 'txtFax',
+	      value: ctrl.customer.fax(),
+	      oninput: _mithril2['default'].withAttr('value', function (value) {
+	        ctrl.customer.fax(value);
+	        app.state.customer(ctrl.customer);
+	      }),
+	      onfocus: function onfocus() {
+	        app.state.focusedField('txtFax');
+	      },
+	      onblur: function onblur() {
+	        app.state.focusedField('');
+	      }
+	    }),
+	    //INDIRIZZO
+	    (0, _mithril2['default'])('label', {
+	      className: 'txtLabel' + (app.state.focusedField() === 'txtIndirizzo' ? ' focus' : '')
+	    }, 'Indirizzo'), (0, _mithril2['default'])('input', {
+	      className: 'textfield',
+	      type: 'text',
+	      id: 'txtIndirizzo',
+	      value: ctrl.customer.indirizzo(),
+	      oninput: _mithril2['default'].withAttr('value', function (value) {
+	        ctrl.customer.indirizzo(value);
+	        app.state.customer(ctrl.customer);
+	      }),
+	      onfocus: function onfocus() {
+	        app.state.focusedField('txtIndirizzo');
+	      },
+	      onblur: function onblur() {
+	        app.state.focusedField('');
+	      }
+	    }),
+	    //CITTA
+	    (0, _mithril2['default'])('label', {
+	      className: 'txtLabel' + (app.state.focusedField() === 'txtCitta' ? ' focus' : '')
+	    }, 'Città'), (0, _mithril2['default'])('input', {
+	      className: 'textfield',
+	      type: 'text',
+	      id: 'txtCitta',
+	      value: ctrl.customer.citta(),
+	      oninput: _mithril2['default'].withAttr('value', function (value) {
+	        ctrl.customer.citta(value);
+	        app.state.customer(ctrl.customer);
+	      }),
+	      onfocus: function onfocus() {
+	        app.state.focusedField('txtCitta');
+	      },
+	      onblur: function onblur() {
+	        app.state.focusedField('');
+	      }
+	    }),
+	    //PROVINCIA
+	    (0, _mithril2['default'])('label', {
+	      className: 'txtLabel' + (app.state.focusedField() === 'txtProvincia' ? ' focus' : '')
+	    }, 'Provincia'), (0, _mithril2['default'])('input', {
+	      className: 'textfield',
+	      type: 'text',
+	      id: 'txtProvincia',
+	      value: ctrl.customer.provincia(),
+	      oninput: _mithril2['default'].withAttr('value', function (value) {
+	        ctrl.customer.provincia(value);
+	        app.state.customer(ctrl.customer);
+	      }),
+	      onfocus: function onfocus() {
+	        app.state.focusedField('txtProvincia');
+	      },
+	      onblur: function onblur() {
+	        app.state.focusedField('');
+	      }
+	    }),
+	    //RESPONSABILE
+	    (0, _mithril2['default'])('label', {
+	      className: 'txtLabel' + (app.state.focusedField() === 'txtResponsabile' ? ' focus' : '')
+	    }, 'Responsabile'), (0, _mithril2['default'])('input', {
+	      className: 'textfield',
+	      type: 'text',
+	      id: 'txtResponsabile',
+	      value: ctrl.customer.responsabile(),
+	      oninput: _mithril2['default'].withAttr('value', function (value) {
+	        ctrl.customer.responsabile(value);
+	        app.state.customer(ctrl.customer);
+	      }),
+	      onfocus: function onfocus() {
+	        app.state.focusedField('txtResponsabile');
+	      },
+	      onblur: function onblur() {
+	        app.state.focusedField('');
+	      }
+	    }),
+	    //ATTIVITA
+	    (0, _mithril2['default'])('label', {
+	      className: 'txtLabel' + (app.state.focusedField() === 'txtAttivita' ? ' focus' : '')
+	    }, 'Attività'), (0, _mithril2['default'])('input', {
+	      className: 'textfield',
+	      type: 'text',
+	      id: 'txtAttivita',
+	      value: ctrl.customer.attivita(),
+	      oninput: _mithril2['default'].withAttr('value', function (value) {
+	        ctrl.customer.attivita(value);
+	        app.state.customer(ctrl.customer);
+	      }),
+	      onfocus: function onfocus() {
+	        app.state.focusedField('txtAttivita');
+	      },
+	      onblur: function onblur() {
+	        app.state.focusedField('');
+	      }
+	    }),
+	    //ULTIMA VISITA
+	    (0, _mithril2['default'])('label', {
+	      className: 'txtLabel' + (app.state.focusedField() === 'txtUltima' ? ' focus' : '')
+	    }, 'Ultima visita'), (0, _mithril2['default'])('input', {
+	      className: 'textfield',
+	      type: 'text',
+	      id: 'txtUltima',
+	      value: ctrl.customer.ultimaVisita(),
+	      oninput: _mithril2['default'].withAttr('value', function (value) {
+	        ctrl.customer.ultimaVisita(value);
+	        app.state.customer(ctrl.customer);
+	      }),
+	      onfocus: function onfocus() {
+	        app.state.focusedField('txtUltima');
+	      },
+	      onblur: function onblur() {
+	        app.state.focusedField('');
+	      }
+	    }),
+	    //Agente
+	    (0, _mithril2['default'])('label', {
+	      className: 'txtLabel' + (app.state.focusedField() === 'txtAgente' ? ' focus' : '')
+	    }, 'Agente'), (0, _mithril2['default'])('input', {
+	      className: 'textfield',
+	      type: 'text',
+	      id: 'txtAgente',
+	      value: ctrl.customer.codAgente(),
+	      oninput: _mithril2['default'].withAttr('value', function (value) {
+	        ctrl.customer.codAgente(value);
+	        app.state.customer(ctrl.customer);
+	      }),
+	      onfocus: function onfocus() {
+	        app.state.focusedField('txtAgente');
+	      },
+	      onblur: function onblur() {
+	        app.state.focusedField('');
+	      }
+	    })]))])])))]);
 	  }
 	
 	};
@@ -2525,7 +2705,7 @@
 	
 	
 	// module
-	exports.push([module.id, "#customerContainer {\n  width: 95%;\n  box-shadow: 0px 0px 79px 0px rgba(0, 0, 0, 0.57);\n  left: 0;\n  right: 0;\n  margin-left: auto;\n  margin-right: auto;\n}\n.bg {\n  background-image: url(" + __webpack_require__(30) + ");\n  width: 100%;\n  position: absolute;\n  top: 0;\n  height: 12em;\n  z-index: -1;\n  background-size: cover;\n}\n.nav {\n  padding: 2em 1em 1em 1em;\n  color: white;\n}\n.nav i {\n  font-size: 1.5em;\n}\nsection.head {\n  height: 30%;\n  background-color: rgba(255, 255, 255, 0.7);\n  border: 1px solid gray;\n  border-bottom: none;\n  border-radius: .5em .5em 0 0;\n  padding: 1em;\n  position: relative;\n}\nh1.name {\n  text-align: center;\n  font-size: 1.3em;\n  font-weight: bold;\n  margin: .5em 0;\n}\nsection.head .circular {\n  margin: 0 auto;\n}\n.leftInfo {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  padding-left: 1em;\n  padding-bottom: 1em;\n}\n.rightInfo {\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  padding-right: 1em;\n  padding-bottom: 1em;\n}\nspan.lblInfo {\n  display: block;\n  color: gray;\n  font-weight: 500;\n  text-transform: uppercase;\n  font-size: .7em;\n}\nspan.Info {\n  font-size: 1.5em;\n  font-weight: 300;\n}\nsection.contact {\n  padding: 0 1em;\n  background-color: #3F51B5;\n}\nsection.contact a {\n  font-size: 1.3em;\n  font-weight: 300;\n  line-height: 1.5em;\n  text-align: center;\n  color: white;\n  text-decoration: none;\n  padding: .6em 0;\n  display: block;\n}\nsection.contact a:nth-child(1) {\n  border-bottom: 1px solid white;\n}\nh2.tel {\n  font-size: 2em;\n}\n.location {\n  padding: 1em 2.7em;\n  border: 1px solid gray;\n  text-align: center;\n  position: relative;\n  display: block;\n  text-decoration: none;\n  color: inherit;\n}\n.location span {\n  display: block;\n  font-size: 1.2em;\n  font-weight: 200;\n}\na.location i {\n  position: absolute;\n  top: 0.7em;\n  width: 15%;\n  height: 100%;\n  display: block;\n  font-size: 3em;\n  color: #FF6E40;\n  left: 0;\n}\nsection.other {\n  padding: 1em;\n  border: 1px solid gray;\n  border-bottom: none;\n  border-top: none;\n}\n#lista_detail {\n  height: 110%;\n  width: 100%;\n  background-color: #FFF;\n  padding-top: .5em;\n  margin-bottom: 4.5em;\n}\n#lista_detail ul,\n#lista_detail li {\n  list-style-type: none;\n}\n.icona_detail {\n  display: block;\n  color: #FF6E40;\n}\n.descr_detail {\n  width: 70%;\n  display: inline-block;\n  vertical-align: top;\n  padding: .5em 0;\n}\n#edit {\n  float: right;\n}\n/*\n\nCARD FLIP\n\n*/\n.container {\n  height: 100%;\n  position: relative;\n  -webkit-perspective: 800px;\n          perspective: 800px;\n}\n.container .card {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  -webkit-transform-style: preserve-3d;\n          transform-style: preserve-3d;\n  -webkit-transition: -webkit-transform 1s;\n          transition: transform 1s;\n  -webkit-transform-origin: right center;\n      -ms-transform-origin: right center;\n          transform-origin: right center;\n}\n.container .card figure {\n  margin: 0;\n  display: block;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  -webkit-backface-visibility: hidden;\n          backface-visibility: hidden;\n}\n.container .card .back {\n  background: white;\n  height: 100%;\n  -webkit-transform: rotateY(180deg);\n          transform: rotateY(180deg);\n}\n.container .card.flipped {\n  -webkit-transform: translateX(-100%) rotateY(-180deg);\n          transform: translateX(-100%) rotateY(-180deg);\n}\n/*\n\nEND CARD FLIP\n\n*/\n#formContainer {\n  padding: 1em;\n}\n#formEdit .mdl-textfield {\n  width: 100%;\n}\n", ""]);
+	exports.push([module.id, "#customerContainer {\n  width: 95%;\n  box-shadow: 0px 0px 79px 0px rgba(0, 0, 0, 0.57);\n  left: 0;\n  right: 0;\n  margin-left: auto;\n  margin-right: auto;\n  top: 6rem;\n}\n.bg {\n  background-image: url(" + __webpack_require__(30) + ");\n  width: 100%;\n  position: absolute;\n  top: 0;\n  height: 12.5rem;\n  z-index: -1;\n  background-size: cover;\n}\n.nav {\n  padding: 2em 1em 1em 1em;\n  color: white;\n  position: fixed;\n  z-index: 1;\n  background-color: black;\n  width: 100%;\n  background-image: url(" + __webpack_require__(30) + ");\n  background-size: cover;\n}\n.nav i {\n  font-size: 1.5em;\n}\nsection.head {\n  height: 11.5rem;\n  background-color: rgba(255, 255, 255, 0.7);\n  border: 1px solid gray;\n  border-bottom: none;\n  border-radius: .5em .5em 0 0;\n  padding: 1em;\n  position: relative;\n}\nh1.name {\n  text-align: center;\n  font-size: 1.3em;\n  font-weight: bold;\n  margin: .5em 0;\n  max-width: 100%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  word-wrap: break-word;\n  word-break: break-all;\n  display: block;\n  white-space: nowrap;\n}\nsection.head .circular {\n  margin: 0 auto;\n}\n.leftInfo {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  padding-left: 3em;\n  padding-bottom: 1em;\n}\n.rightInfo {\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  padding-right: 2em;\n  padding-bottom: 1em;\n}\nspan.lblInfo {\n  display: block;\n  color: gray;\n  font-weight: 500;\n  text-transform: uppercase;\n  font-size: .7em;\n}\nspan.Info {\n  font-size: 1.5em;\n  font-weight: 300;\n}\nsection.contact {\n  padding: 0 1em;\n  background-color: #3F51B5;\n  min-height: 7em;\n}\nsection.contact a {\n  font-size: 1.3em;\n  font-weight: 300;\n  line-height: 1.5em;\n  text-align: center;\n  color: white;\n  text-decoration: none;\n  padding: .6em 0;\n  display: block;\n}\nsection.contact a:nth-child(1) {\n  border-bottom: 1px solid white;\n}\nh2.tel {\n  font-size: 2em;\n}\n.location {\n  padding: 1em 2.7em;\n  border: 1px solid gray;\n  text-align: center;\n  position: relative;\n  display: block;\n  text-decoration: none;\n  color: inherit;\n  min-height: 6.3rem;\n}\n.location span {\n  display: block;\n  font-size: 1.2em;\n  font-weight: 200;\n}\na.location i {\n  position: absolute;\n  top: 0.7em;\n  width: 15%;\n  height: 100%;\n  display: block;\n  font-size: 3em;\n  color: #FF6E40;\n  left: 0;\n}\nsection.other {\n  padding: 1em;\n  border: 1px solid gray;\n  border-bottom: none;\n  border-top: none;\n}\n#lista_detail {\n  height: 110%;\n  width: 100%;\n  background-color: #FFF;\n  padding-top: .5em;\n  margin-bottom: 4.5em;\n}\n#lista_detail ul,\n#lista_detail li {\n  list-style-type: none;\n}\n.icona_detail {\n  display: block;\n  color: #FF6E40;\n}\n.descr_detail {\n  width: 70%;\n  display: inline-block;\n  vertical-align: top;\n  padding: .5em 0;\n}\n#edit {\n  float: right;\n  font-size: 15px;\n}\n/*\n\nCARD FLIP\n\n*/\n.container {\n  height: 100%;\n  position: relative;\n  -webkit-perspective: 800px;\n          perspective: 800px;\n}\n.container .card {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  -webkit-transition: -webkit-transform 1s;\n          transition: transform 1s;\n  -webkit-transform-origin: right center;\n  -ms-transform-origin: right center;\n  transform-origin: right center;\n  -webkit-transform-style: preserve-3d;\n  -ms-transform-style: preserve-3d;\n  transform-style: preserve-3d;\n}\n.container .card > div {\n  margin: 0;\n  display: block;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n}\n.container .card .back {\n  background: white;\n  height: 100%;\n  -webkit-transform: rotateY(180deg);\n          transform: rotateY(180deg);\n  -webkit-backface-visibility: hidden;\n  -ms-backface-visibility: hidden;\n  backface-visibility: hidden;\n}\n.container .card.flipped {\n  -webkit-transform: translateX(-100%) rotateY(-180deg) translateZ(1px);\n          transform: translateX(-100%) rotateY(-180deg) translateZ(1px);\n}\n/*\n\nEND CARD FLIP\n\n*/\n#formContainer {\n  padding: 1em;\n  background-color: white;\n}\n#formEdit .mdl-textfield {\n  width: 100%;\n}\n", ""]);
 	
 	// exports
 
@@ -2566,17 +2746,17 @@
 	
 	  this._id = _mithril2['default'].prop(data._id || null);
 	  this._rev = _mithril2['default'].prop(data._rev || null);
-	  this.codCliente = _mithril2['default'].prop(data.codCliente || '-');
-	  this.ragioneSociale = _mithril2['default'].prop(data.ragioneSociale || '-');
-	  this.codAgente = _mithril2['default'].prop(data.codAgente || '-');
+	  this.codCliente = _mithril2['default'].prop(data.codCliente || '');
+	  this.ragioneSociale = _mithril2['default'].prop(data.ragioneSociale || '');
+	  this.codAgente = _mithril2['default'].prop(data.codAgente || '');
 	  this.indirizzo = _mithril2['default'].prop(data.indirizzo || '');
 	  this.citta = _mithril2['default'].prop(data.citta || '');
 	  this.provincia = _mithril2['default'].prop(data.provincia || '');
-	  this.telefono = _mithril2['default'].prop(data.telefono || '-');
-	  this.fax = _mithril2['default'].prop(data.fax || '-');
-	  this.email = _mithril2['default'].prop(data.email || '-');
-	  this.responsabile = _mithril2['default'].prop(data.responsabile || '-');
-	  this.attivita = _mithril2['default'].prop(data.attvita || '-');
+	  this.telefono = _mithril2['default'].prop(data.telefono || '');
+	  this.fax = _mithril2['default'].prop(data.fax || '');
+	  this.email = _mithril2['default'].prop(data.email || '');
+	  this.responsabile = _mithril2['default'].prop(data.responsabile || '');
+	  this.attivita = _mithril2['default'].prop(data.attvita || '');
 	  this.ultimaVisita = _mithril2['default'].prop(data.ultimaVisita || '');
 	}
 	
@@ -2589,7 +2769,7 @@
 	  }, function (err, customer) {
 	    if (err) return callback(err, null);
 	
-	    customer = cleanCustomer(customer);
+	    //customer = cleanCustomer(customer);
 	
 	    app.state.customer(customer);
 	    callback(null, customer);

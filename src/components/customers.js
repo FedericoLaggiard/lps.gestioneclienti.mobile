@@ -27,7 +27,11 @@ export default {
     }
 
     if(app.state.searchText().length > 0){
-      customers(customers().filter(Customers.filterByText));
+      if(customers()){
+        customers(customers().filter(Customers.filterByText));
+      }else{
+        app.state.searchText('')
+      }
     }
 
     return {
