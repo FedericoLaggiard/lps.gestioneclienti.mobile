@@ -22,7 +22,9 @@ let app = {
     customers: storage('customers'),
     customer: storage('customer'),
     customerEdit: m.prop(false),
-    searchText: m.prop('')
+    searchText: m.prop(''),
+
+    focusedField: m.prop('')
 
   }
 

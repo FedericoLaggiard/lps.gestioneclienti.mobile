@@ -3,10 +3,11 @@
   -webkit-box-shadow: 0px 0px 79px 0px rgba(0,0,0,0.57);
   -moz-box-shadow: 0px 0px 79px 0px rgba(0,0,0,0.57);
   box-shadow: 0px 0px 79px 0px rgba(0,0,0,0.57);
-  left:0;
-  right:0;
-  margin-left:auto;
-  margin-right:auto;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: 6rem;
 }
 
 .bg {
@@ -14,7 +15,7 @@
   width: 100%;
   position: absolute;
   top: 0;
-  height: 12em;
+  height: 12.5rem;
   z-index: -1;
   background-size: cover;
 }
@@ -22,15 +23,45 @@
 .nav {
   padding: 2em 1em 1em 1em;
   color: white;
+  position: fixed;
+  z-index: 1;
+  background-color: black;
+  width: 100%;
+  background-image: url(../dist/img/bg3.jpg);
+  background-size: cover;
 }
 
 .nav i {
   font-size: 1.5em;
 }
 
+.nav button {
+  float: right;
+  font-size: 1.5rem;
+  padding-right: 5.2rem;
+}
+
+#edit {
+  font-size: 1.2rem;
+  padding: 0;
+}
+
+#btnBack {
+  float: left;
+  padding: 0;
+}
+
+#save {
+  color: green;
+}
+
+#delete{
+  color: red;
+}
+
 section.head {
-  height: 30%;
-  background-color: rgba(255,255,255,.7);
+  height: 11.5rem;
+  background-color: rgba(255, 255, 255, 0.7);
   border: 1px solid gray;
   border-bottom: none;
   border-radius: .5em .5em 0 0;
@@ -43,6 +74,13 @@ h1.name {
   font-size: 1.3em;
   font-weight: bold;
   margin: .5em 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  word-break: break-all;
+  display: block;
+  white-space: nowrap;
 }
 
 section.head .circular {
@@ -53,7 +91,7 @@ section.head .circular {
   position: absolute;
   bottom: 0;
   left: 0;
-  padding-left: 1em;
+  padding-left: 3em;
   padding-bottom: 1em;
 }
 
@@ -61,7 +99,7 @@ section.head .circular {
   position: absolute;
   bottom: 0;
   right: 0;
-  padding-right: 1em;
+  padding-right: 2em;
   padding-bottom: 1em;
 }
 
@@ -81,6 +119,7 @@ span.Info {
 section.contact {
   padding: 0 1em;
   background-color: #3F51B5;
+  min-height: 7em;
 }
 
 section.contact a {
@@ -110,6 +149,7 @@ h2.tel {
   display: block;
   text-decoration: none;
   color: inherit;
+  min-height: 6.3rem;
 }
 
 .location span {
@@ -160,11 +200,6 @@ section.other {
   padding: .5em 0;
 }
 
-#edit {
-  float: right;
-  font-size: 15px;
-}
-
 /*
 
 CARD FLIP
@@ -182,28 +217,45 @@ CARD FLIP
   width: 100%;
   height: 100%;
   position: absolute;
-  transform-style: preserve-3d;
   transition: transform 1s;
+
+  -webkit-transform-origin: right center;
+  -moz-transform-origin: right center;
+  -ms-transform-origin: right center;
+  -o-transform-origin: right center;
   transform-origin: right center;
+
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
-.container .card figure {
+.container .card > div {
   margin: 0;
   display: block;
   position: absolute;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden;
+}
+
+.container .card .front {
+
 }
 
 .container .card .back {
   background: white;
   height: 100%;
   transform: rotateY( 180deg );
+
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .container .card.flipped {
-  transform: translateX( -100% ) rotateY( -180deg );
+  transform: translateX( -100% ) rotateY( -180deg ) translateZ(1px);
 }
 
 /*
@@ -214,6 +266,7 @@ END CARD FLIP
 
 #formContainer {
   padding: 1em;
+  background-color: white;
 }
 
 #formEdit .mdl-textfield{

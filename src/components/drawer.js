@@ -18,7 +18,11 @@ export default {
     return m('div', { className: 'mdl-layout__drawer' }, [
       m('span', { className: 'mdl-layout-title'}, 'Menu'),
       m('nav',{ className: 'mdl-navigation'}, [
-        m('a', { className: 'mdl-navigation__link' }, 'Nuovo cliente')
+        m('a', {
+          className: 'mdl-navigation__link',
+          href: '/customers/new',
+          config: m.route
+        }, 'Nuovo cliente')
       ])
     ]);
 
