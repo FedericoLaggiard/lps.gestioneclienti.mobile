@@ -4,7 +4,7 @@
 
 'use strict';
 
-export const env = 'prod';
+export const env = 'dev';
 
 const baseUrl = {
 
@@ -18,13 +18,15 @@ export const urls = {
   prod: {
     login:        baseUrl[env] + '/_session',
     customer:     baseUrl[env] + '/lps_clienti',
-    customers:    baseUrl[env] + '/lps_clienti/_design/listByRagSoc/_view/listByRagSoc'
+    customers:    baseUrl[env] + '/lps_clienti/_design/listByRagSoc/_view/listByRagSoc',
+    reports:      baseUrl[env] + '/lps_reports/_design/reportsByCustomer/_view/reportsByCustomer'
   },
 
   dev: {
     login:        baseUrl[env] + '/_session',
     customer:     baseUrl[env] + '/lps_clienti',
-    customers:    baseUrl[env] + '/lps_clienti/_design/listByRagSoc/_view/listByRagSoc'
+    customers:    baseUrl[env] + '/lps_clienti/_design/listByRagSoc/_view/listByRagSoc',
+    reports:      baseUrl[env] + '/lps_reports/_design/reportsByCustomer/_view/reportsByCustomer'
   }
 
 };

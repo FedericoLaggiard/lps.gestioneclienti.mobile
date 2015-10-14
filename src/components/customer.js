@@ -6,6 +6,7 @@
 
 import m from 'mithril';
 import style from '../../styles/customer.less';
+import redrawMat from '../libs/redrawMaterial';
 
 import Customer from '../models/customerModel';
 
@@ -50,6 +51,8 @@ export default {
           app.state.customers(null);
           app.state.customer(null);
 
+          app.state.toast.buffer().push('Il cliente è stato salvato con successo.');
+
           m.route('/customers');
 
         });
@@ -62,6 +65,7 @@ export default {
 
           customer = new Customer(app.state.customer());
 
+          app.showToast('Il cliente è stato salvato con successo.');
           console.log(success);
         });
 
@@ -86,6 +90,7 @@ export default {
         app.state.customers(null);
         app.state.customer(null);
 
+        app.state.toast.buffer().push('Il cliente è stato rimosso.');
         m.route('/customers');
 
       })
@@ -129,8 +134,8 @@ export default {
 
     ctrl.getMenuStatus();
 
-    return m('div', { className: 'mdl-layout mdl-js-layout' }, [
-      m('main', { className: 'mdl-layout__container' },
+    //return m('div', {  }, [
+    return  m('div', { config: redrawMat.removeContainer },
         m('div', { className: 'bg' }),
 
         m('div', { className: 'nav'}, [
@@ -138,6 +143,7 @@ export default {
           m('button', {
               className: 'mdl-button mdl-js-button mdl-button--icon',
               id: 'btnBack',
+              config: redrawMat,
               onclick: ctrl.btnBack
             },
             m('i', {className: 'material-icons' }, 'arrow_back')
@@ -147,6 +153,7 @@ export default {
               className: 'mdl-button mdl-js-button mdl-button--icon',
               style: { display: ctrl.showDelete() ? 'block' : 'none' },
               id: 'delete',
+              config: redrawMat,
               onclick: ctrl.btnDelete
             },
             m('i', {
@@ -158,6 +165,7 @@ export default {
               className: 'mdl-button mdl-js-button mdl-button--icon',
               style: { display: ctrl.showEdit() ? 'block' : 'none' },
               id: 'edit',
+              config: redrawMat,
               onclick: ctrl.flipCard
             },
             m('i', {
@@ -169,6 +177,7 @@ export default {
               className: 'mdl-button mdl-js-button mdl-button--icon',
               style: { display: ctrl.showSave() ? 'block' : 'none' },
               id: 'save',
+              config: redrawMat,
               onclick: ctrl.btnUpdate
             },
             m('i', {
@@ -214,6 +223,13 @@ export default {
                   m('span', ctrl.customer.provincia()),
                   m('i', { className: 'material-icons'}, 'location_on')
                 ]
+              ),
+              m('section', { className: 'relazioni' },
+                m('button', {
+                  className: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored',
+                  config: redrawMat,
+                  onclick: function() { m.route('/customers/'+ m.route.param('id') +'/reports') }
+                }, 'Relazioni')
               ),
               m('section', { className: 'other' },
                 m('ul', { id: 'lista_detail'},
@@ -411,8 +427,8 @@ export default {
             ])
           ])
         )
-      )
-    ]);
+      );
+    //]);
   }
 
 }

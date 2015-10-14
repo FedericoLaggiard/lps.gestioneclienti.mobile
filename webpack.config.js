@@ -34,12 +34,12 @@ module.exports = {
       //css loader
       {
         test:   /\.css/,
-        loader: "style!css"
+        loader: "style!css-loader"
       },
       //less loader
       {
         test:   /\.less$/,
-        loader: "style!css!autoprefixer!less"
+        loader: "style!css-loader!autoprefixer!less-loader"
       },
       //img loader
       {

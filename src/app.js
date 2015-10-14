@@ -6,8 +6,10 @@
 
 import m from 'mithril';
 
-import style from '../styles/main.less';
+import moment from 'moment';
 
+import style from '../styles/main.less';
+import Toast from './components/toast';
 import storage from './libs/store';
 
 let app = {
@@ -18,16 +20,34 @@ let app = {
       name: m.prop(''),
       password: m.prop('')
     },
+
     login: storage('login'),
     customers: storage('customers'),
     customer: storage('customer'),
-    customerEdit: m.prop(false),
+    reports: storage('reports'),
+
     searchText: m.prop(''),
 
-    focusedField: m.prop('')
+    customerEdit: m.prop(false),
+    editReportId: m.prop(null),
 
-  }
+    focusedField: m.prop(''),
 
+    toast: {
+      buffer: m.prop([]),
+      message: m.prop(''),
+      visible: m.prop('')
+    }
+  },
+
+  showToast: function(message){
+    this.state.toast.message(message);
+    this.state.toast.visible(true);
+    m.redraw();
+  },
+
+  m,
+  moment
 };
 
 window.app = app;

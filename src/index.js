@@ -15,10 +15,14 @@ import protect from './libs/protect';
 import login from './components/login';
 import customers from './components/customers';
 import customer from './components/customer';
+import toast from './components/toast';
+import reports from './components/reports';
 
 m.route.mode = 'hash';
-m.route(document.body, '/customers', {
+m.route(document.getElementById('app'), '/customers', {
   '/login':                 login,
   '/customers':             protect(customers),
-  '/customers/:id':         protect(customer)
+  '/customers/:id':         protect(customer),
+  '/customers/:id/reports': protect(reports)
 });
+m.mount(document.getElementById('toast'), toast);

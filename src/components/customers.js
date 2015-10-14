@@ -7,6 +7,7 @@
 import m from 'mithril';
 
 import style from '../../styles/customersList.less';
+import redrawMat from '../libs/redrawMaterial';
 
 import Header from './header';
 import Drawer from './drawer';
@@ -42,11 +43,14 @@ export default {
 
   view(ctrl){
     return m('div', {
-      className: 'mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header'
+      className: 'mdl-layout mdl-js-layout mdl-layout--fixed-header',
+      config: redrawMat.removeContainer
     },[
       m.component(Header, 'CLIENTI'),
       m.component(Drawer),
-      m('main', { className: 'mdl-layout__content' },
+      m('main', {
+          className: 'mdl-layout__content'
+        },
         m('div', { className: 'page-content'},
           m('ul',{ className: 'customersList' },
               ctrl.customers().map((customer) => {

@@ -24,7 +24,10 @@ Customers.fetch = function(callback){
     },
     type: Customers
   }, (err, customers) => {
-    if(err) return callback(err, null);
+    if(err) {
+      app.showToast('Si è verificato un errore.');
+      return callback(err, null);
+    }
     app.state.customers(customers);
     callback(null,customers);
   })

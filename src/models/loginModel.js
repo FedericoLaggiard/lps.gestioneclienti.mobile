@@ -22,7 +22,10 @@ Login.fetch = function(callback){
     data: app.state.credentials,
     type: Login
   }, (err, login) => {
-    if(err) return callback(err,null);
+    if(err) {
+      app.showToast('Si è verificato un errore.');
+      return callback(err,null);
+    }
     app.state.login(login);
     callback(null,login);
   })
