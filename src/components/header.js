@@ -6,6 +6,7 @@
 
 import m from 'mithril';
 import style from '../../styles/header.less';
+import redrawMat from '../libs/redrawMaterial';
 
 export default {
 
@@ -13,13 +14,7 @@ export default {
 
     return{
 
-      title,
-
-      refreshMaterial: function()
-      {
-        componentHandler.upgradeElement(document.getElementsByClassName('mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header')[0]);
-        componentHandler.upgradeElement(document.getElementsByClassName('mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right')[0]);
-      }
+      title
     }
 
   },
@@ -28,30 +23,56 @@ export default {
 
     return m('header', {
       className: 'mdl-layout__header',
-      config: ctrl.refreshMaterial
-    }, [
-      m('div', { className: 'mdl-layout__header-row' }, [
-        m('div', { className: 'mdl-layout-spacer'}),
-        m('div', { className: 'mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right'}, [
-          m('label', { className: 'mdl-button mdl-js-button mdl-button--icon', 'for': 'txtSearch'},
-            m('i', { className: 'material-icons' }, 'search')
-          ),
-          m('div', { className: 'mdl-textfield__expandable-holder'}, [
-            m('input', {
-              className: 'mdl-textfield__input',
-              type: 'text',
-              id: 'txtSearch',
-              oninput: m.withAttr('value', app.state.searchText),
-              value: app.state.searchText()
-            })
-          ])
-        ])
-      ]),
-      m('div', { className: 'mdl-layout__header-row' }, [
-        m('span', {className: 'mdl-layout-title headerTitle' }, ctrl.title)
-      ])
-    ]);
+      config: redrawMat
+      },
+        ctrl.title === 'CLIENTI' ? subViewCustomers(ctrl) : '',
+        ctrl.title === 'RELAZIONI' ? subViewReports(ctrl) : ''
+    );
 
   }
+}
 
+function subViewCustomers(ctrl){
+  return [
+    m('div', { className: 'mdl-layout__header-row' }, [
+      m('div', { className: 'mdl-layout-spacer'}),
+      m('div', { className: 'mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right'}, [
+        m('label', { className: 'mdl-button mdl-js-button mdl-button--icon', 'for': 'txtSearch'},
+          m('i', { className: 'material-icons' }, 'search')
+        ),
+        m('div', { className: 'mdl-textfield__expandable-holder'}, [
+          m('input', {
+            className: 'mdl-textfield__input',
+            type: 'text',
+            id: 'txtSearch',
+            oninput: m.withAttr('value', app.state.searchText),
+            value: app.state.searchText()
+          })
+        ])
+      ])
+    ]),
+    m('div', { className: 'mdl-layout__header-row' }, [
+      m('span', {className: 'mdl-layout-title headerTitle' }, ctrl.title)
+    ])
+  ]
+}
+
+function subViewReports(ctrl){
+  return [
+    m('div', { className: 'mdl-layout__header-row noPadding' }, [
+      //BACK
+      m('button', {
+          className: 'mdl-button mdl-js-button mdl-button--icon',
+          id: 'btnBack',
+          config: redrawMat,
+          onclick: ctrl.btnBack
+        },
+        m('i', {className: 'material-icons' }, 'arrow_back')
+      ),
+      m('span', {className: 'navTitle' }, ctrl.title)
+    ]),
+    m('div', { className: 'mdl-layout__header-row'}, [
+      m('span', {className: 'mdl-layout-title headerTitle'}, app.state.customer().ragioneSociale)
+    ])
+  ]
 }

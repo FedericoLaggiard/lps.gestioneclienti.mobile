@@ -25,6 +25,7 @@ function Customer(data){
     this.responsabile   = m.prop(data.responsabile    || '');
     this.attivita       = m.prop(data.attvita         || '');
     this.ultimaVisita   = m.prop(data.ultimaVisita    || '');
+    this.relazioni      = m.prop(data.relazioni       || []);
   }else{
     this._id            = m.prop(null);
     this._rev           = m.prop(null);
@@ -40,6 +41,7 @@ function Customer(data){
     this.responsabile   = m.prop('');
     this.attivita       = m.prop('');
     this.ultimaVisita   = m.prop('');
+    this.relazioni      = m.prop([]);
   }
 }
 
@@ -51,7 +53,10 @@ Customer.fetch = function(callback){
     url: urls[env].customer + '/' + m.route.param('id'),
     type: Customer
   }, (err, customer) => {
-    if(err) return callback(err, null);
+    if(err) {
+      app.showToast('Si è verificato un errore.');
+      return callback(err, null);
+    }
 
     //customer = cleanCustomer(customer);
 
@@ -70,7 +75,10 @@ Customer.update = function(data, callback){
     data: data
   }, (err, success) => {
 
-    if(err) return callback(err, null);
+    if(err) {
+      app.showToast('Si è verificato un errore.');
+      return callback(err, null);
+    }
 
     data._rev(success.rev);
 
@@ -95,7 +103,10 @@ Customer.insert = function(data, callback){
     url: urls[env].customer,
     data: data
   }, (err, success) => {
-    if(err) return callback(err,null);
+    if(err) {
+      app.showToast('Si è verificato un errore.');
+      return callback(err,null);
+    }
 
     callback(null,success);
   })
@@ -111,7 +122,10 @@ Customer.remove = function(data, callback){
     url: urls[env].customer + '/' + m.route.param('id') + '?rev=' + data
   }, (err, success) => {
 
-    if(err) return callback(err, null);
+    if(err) {
+      app.showToast('Si è verificato un errore.');
+      return callback(err, null);
+    }
 
     callback(null,success);
 

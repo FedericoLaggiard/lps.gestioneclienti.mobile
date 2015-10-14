@@ -7,13 +7,13 @@
 import style from '../../styles/toast.less';
 import m from 'mithril';
 
-export default {
+export default  {
 
-  controller(params) {
+  controller() {
 
-    let timeout = m.prop(1500);
-    let message = params.message;
-    let display = params.display;
+    let timeout = m.prop(3000);
+    let message = app.state.toast.message;
+    let display = app.state.toast.visible;
 
     return {
       message,
@@ -25,6 +25,12 @@ export default {
 
   view(ctrl){
 
+    if(app.state.toast.buffer().length > 0) {
+      ctrl.message(app.state.toast.buffer()[0]);
+      ctrl.display(true);
+      app.state.toast.buffer().splice(0, 1);
+    }
+
     if(ctrl.display()){
 
       setTimeout(() => {
@@ -35,11 +41,11 @@ export default {
     }
 
     return m('div', {
-          className: 'toast' + (ctrl.display() ? ' show' : '')
-        },
+        className: 'toast' + (ctrl.display() ? ' show' : '')
+      },
       m('h4', ctrl.message())
     )
 
   }
 
-}
+};
