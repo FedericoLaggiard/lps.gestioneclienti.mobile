@@ -9,7 +9,7 @@ export const env = 'dev';
 const baseUrl = {
 
   prod: 'https://couchdb-0f2b48.smileupps.com',
-  dev: 'http://0.0.0.0:5984'
+  dev: 'http://192.168.20.58:5984'
 
 };
 
