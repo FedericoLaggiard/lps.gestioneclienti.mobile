@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"  
+           id="spindox-plugin-iOSHTTPSfix"
+      version="1.0.0">
+    <name>spindox-plugin-iOSHTTPSfix</name>
+    <description>iOS9+ non HTTPS allow all configuration fix</description>
+    <platform name="ios">
+      <config-file target="*-Info.plist" parent="NSAppTransportSecurity"> 
+          <dict>
+            <key>NSAllowsArbitraryLoads</key>
+            <true/>
+          </dict>
+      </config-file>  
+    </platform>
+</plugin> 
