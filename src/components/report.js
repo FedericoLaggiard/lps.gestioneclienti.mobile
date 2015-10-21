@@ -9,10 +9,11 @@ import moment from 'moment';
 import style from '../../styles/reports.less';
 import redrawMat from '../libs/redrawMaterial';
 import {InputMask, InputMaskDefaultMask} from '../libs/inputMask';
+import Reports from '../models/reportsModel';
 
 moment.locale("it-IT");
 
-let editedReport = m.prop(null);
+//let editedReport = m.prop(null);
 
 export default {
 
@@ -28,23 +29,44 @@ export default {
     }
 
     function setCodAgente(val){
-      editedReport().codAgente = val;
+      data().codAgente = val;
     }
 
     function setNote(val){
-      editedReport().note = val;
+      data().note = val;
     }
 
     function setData(val){
-      editedReport().data = moment(val, "DD/MM/YYYY h:mm");
+      data().data = moment(val, "DD/MM/YYYY h:mm");
     }
 
     function save(){
-      let temp = app.state.customer();
-      temp.relazioni[editId()] = editedReport();
-      app.state.customer(temp);
+      event.stopPropagation();
 
+
+      if(this.data()._id === -1){
+
+        Reports.add(this.data(), (err,success) => {
+          console.log(success);
+        });
+
+      }else{
+        Reports.update(this.data(), (err, success) => {
+          //do something?
+          console.log(success);
+        });
+      }
       app.state.editReportId(null);
+    }
+
+    function remove(){
+
+      if(window.confirm('Eliminare questo elemento?')) {
+        Reports.remove(this.data(), (err, success) => {
+          if (success) app.state.editReportId(null);
+        })
+      }
+
     }
 
     function switchImage(item){
@@ -58,7 +80,7 @@ export default {
           break;
       }
 
-      editedReport(item);
+      data(item);
     }
 
     return{
@@ -70,25 +92,20 @@ export default {
       setCodAgente,
       setNote,
       setData,
+      remove,
       save
     }
   },
 
   view(ctrl){
 
-    if(ctrl.editId() !== null && editedReport() === null){
-      editedReport(ctrl.data());
-    }
-    if(ctrl.editId() === null){
-      editedReport(null);
-    }
-
     return m('div', {
         className: 'cd-timeline-block' + ( ctrl.editId() === ctrl.index() ? ' edit' : '' ),
-        id: ctrl.index()
+        id: ctrl.index(),
+        key: ctrl.index()
       },
       ctrl.editId() === ctrl.index() ?
-        viewEdit(ctrl, editedReport(), ctrl.index())
+        viewEdit(ctrl, ctrl.data(), ctrl.index())
         :
         viewStandard(ctrl, ctrl.data(), ctrl.index())
     )
@@ -110,15 +127,26 @@ function viewEdit(ctrl, item, index){
       className: 'cd-timeline-content',
       onclick: ctrl.editItem.bind(ctrl,index)
     }, [
+      m('button', {
+          className: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored delete',
+          style: {
+            display: item._id === -1 ? 'none' : 'block'
+          },
+          onclick: ctrl.remove.bind(ctrl)
+        },
+        m('i', {
+          className: 'material-icons'
+        }, 'delete')
+      ),
       m('h2', [
-        moment(item.data).fromNow(),
-        m('input', {
-            className: 'textfield dateExt',
-            value: item.codAgente,
-            oninput: m.withAttr('value', ctrl.setCodAgente)
-          }
-        )
+        moment(item.data).fromNow()
       ]),
+      m('input', {
+          className: 'textfield dateExt',
+          value: item.codAgente,
+          oninput: m.withAttr('value', ctrl.setCodAgente)
+        }
+      ),
       m('textarea',{
           className: 'txtNote',
           value: item.note,
@@ -141,7 +169,7 @@ function viewEdit(ctrl, item, index){
       m('button', {
         className: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored salvaReport',
         config: redrawMat,
-        onclick: ctrl.save
+        onclick: ctrl.save.bind(ctrl)
       }, 'Salva')
     ])
   ]

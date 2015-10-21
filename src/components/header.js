@@ -14,6 +14,15 @@ export default {
 
     return{
 
+      btnBack: function(){
+
+        switch (this.title){
+          default:
+            window.history.back()
+        }
+
+      },
+
       title
     }
 
@@ -65,7 +74,7 @@ function subViewReports(ctrl){
           className: 'mdl-button mdl-js-button mdl-button--icon',
           id: 'btnBack',
           config: redrawMat,
-          onclick: ctrl.btnBack
+          onclick: ctrl.btnBack.bind(ctrl)
         },
         m('i', {className: 'material-icons' }, 'arrow_back')
       ),

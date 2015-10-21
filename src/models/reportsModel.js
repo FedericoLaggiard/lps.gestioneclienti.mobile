@@ -39,7 +39,88 @@ Reports.fetch = function(callback){
     let orderedRep = orderByDate(reports);
 
     app.state.reports(orderedRep);
-    callback(null,orderedRep);
+    return callback(null,orderedRep);
+  })
+
+};
+
+Reports.update = function(item, callback){
+
+  request({
+
+    method: 'PUT',
+    url: urls[env].report + '/' + item._id,
+    data: item
+  }, (err, result) => {
+    if(err){
+      app.showToast('Si è verificato un errore.');
+      return callback(err, null);
+    }
+
+    item._rev = result.rev;
+
+    var index = app.state.reports().findIndex(function (it){ return (it._id === item._id) });
+    var temp = app.state.reports();
+    temp[index] = item;
+    app.state.reports(temp);
+
+    return callback(null, result);
+
+  })
+
+};
+
+Reports.add = function(item, callback){
+
+  if(item._id !== undefined)
+    delete item._id;
+  if(item._rev !== undefined)
+    delete item._rev;
+
+  request({
+
+    method: 'POST',
+    url: urls[env].report + '/',
+    data: item
+  }, (err, result) => {
+    if(err){
+      app.showToast('Si è verificato un errore.');
+      return callback(err, null);
+    }
+
+    item._rev = result.rev;
+    item._id  = result.id;
+
+    var index = app.state.reports().findIndex(function (it){ return (it._id === -1) });
+    var temp = app.state.reports();
+    temp[index] = item;
+    app.state.reports(temp);
+
+    return callback(null, result);
+
+  })
+
+};
+
+Reports.remove = function(item, callback){
+
+  request({
+
+    method: 'DELETE',
+    url: urls[env].report + '/' + item._id + '?rev=' + item._rev
+  }, (err, result) => {
+    if(err){
+      app.showToast('Si è verificato un errore.');
+      return callback(err, null);
+    }
+
+    var index = app.state.reports().findIndex(function (it){ return (it._id === item._id) });
+    var temp = app.state.reports();
+    temp.splice(index,1);
+    app.state.reports(temp);
+
+    return callback(null, result);
+
   })
 
 };
