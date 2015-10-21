@@ -491,7 +491,41 @@
   }
 
   .cd-timeline-content{
-    display: none;
+    height: 0;
+    padding: 0;
+  }
+
+  .cd-timeline-content:before{
+    border-right: 7px solid transparent;
+  }
+
+  .edit {
+    z-index: 2;
+
+    .cd-timeline-content {
+      height: 25rem !important;
+      padding: 1rem;
+    }
+
+    .cd-timeline-content:before{
+      border-right: 7px solid white!important;
+    }
+
+    .txtNote {
+      width: 100%;
+      height: 77%;
+      padding-top: .5rem;
+      font-size: 1rem;
+      margin-top: .5rem;
+    }
+
+    .textfield.dateExt {
+      width: 50%;
+      float: right;
+      height: 1rem;
+      margin: .4rem 0;
+    }
+
   }
 
 }
@@ -501,6 +535,28 @@
 
   .cd-timeline-content {
     height: 25rem !important;
+
+    h2 {
+      width: 42%;
+      float: left;
+    }
+
+    .dateExt {
+      width: 50%;
+      float: right;
+      height: 1rem;
+
+      margin: 0;
+    }
+
+    .delete{
+      position: absolute;
+      top: -9px;
+      left: 93%;
+      color: red;
+      z-index: 2;
+      background-color: gray;
+    }
   }
 
   .txtNote {
@@ -509,13 +565,6 @@
     padding-top: .5rem;
     font-size: 1rem;
     margin-top: .5rem;
-  }
-
-  .textfield.dateExt {
-    width: 50%;
-    float: right;
-    height: 1rem;
-    margin: .4rem 0;
   }
 }
 

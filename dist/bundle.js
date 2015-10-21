@@ -94,7 +94,7 @@
 	
 	var _componentsToast2 = _interopRequireDefault(_componentsToast);
 	
-	var _componentsReports = __webpack_require__(122);
+	var _componentsReports = __webpack_require__(125);
 	
 	var _componentsReports2 = _interopRequireDefault(_componentsReports);
 	
@@ -1658,6 +1658,7 @@
 	    login: (0, _libsStore2['default'])('login'),
 	    customers: (0, _libsStore2['default'])('customers'),
 	    customer: (0, _libsStore2['default'])('customer'),
+	    reportsForCustomer: (0, _libsStore2['default'])('reportsForCustomer'),
 	    reports: (0, _libsStore2['default'])('reports'),
 	
 	    searchText: _mithril2['default'].prop(''),
@@ -13167,7 +13168,7 @@
 	
 	
 	// module
-	exports.push([module.id, "/*reset*/\nhtml,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  font: inherit;\n  font-size: 1rem;\n  margin: 0;\n  padding: 0;\n  vertical-align: baseline;\n  border: 0;\n  box-sizing: border-box;\n}\nhtml,\nbody {\n  height: 100%;\n  width: 100%;\n  font-size: 13px;\n}\nbody {\n  font-family: Roboto, sans-serif;\n  background-color: #e9f0f5;\n}\n#app {\n  width: 100%;\n  height: 100%;\n}\nmain {\n  height: 100%;\n}\n.material-icons {\n  font-family: 'Material Icons';\n  font-weight: normal;\n  font-style: normal;\n  font-size: 24px;\n  /* Preferred icon size */\n  display: inline-block;\n  width: 1em;\n  height: 1em;\n  line-height: 1;\n  text-transform: none;\n  letter-spacing: normal;\n  word-wrap: normal;\n  /* Support for all WebKit browsers. */\n  -webkit-font-smoothing: antialiased;\n  /* Support for Safari and Chrome. */\n  text-rendering: optimizeLegibility;\n  /* Support for Firefox. */\n  -moz-osx-font-smoothing: grayscale;\n  /* Support for IE. */\n  -webkit-font-feature-settings: 'liga';\n     -moz-font-feature-settings: 'liga';\n          font-feature-settings: 'liga';\n}\n.circular {\n  width: 6em;\n  height: 5.7em;\n  border-radius: 50%;\n  -webkit-border-radius: 50%;\n  -moz-border-radius: 50%;\n  background: url(" + __webpack_require__(98) + ") no-repeat;\n  background-size: 100%;\n  background-position: 50%;\n}\n.textfield {\n  width: 100%;\n  margin: .5rem 0;\n  line-height: 1.5rem;\n  font-size: 1rem;\n  border: none;\n  border-bottom: solid 2px #c9c9c9;\n  outline: 0;\n  -webkit-transition: border 0.3s;\n  transition: border 0.3s;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  box-shadow: none;\n  border-radius: 0;\n}\n.textfield:focus {\n  border-bottom: solid 2px #3f51b5;\n}\n.txtLabel {\n  font-size: .8rem;\n  color: #c9c9c9;\n  -webkit-transition: color 0.3s;\n  transition: color 0.3s;\n}\n.txtLabel.focus {\n  color: #3f51b5;\n}\n", ""]);
+	exports.push([module.id, "/*reset*/\nhtml,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  font: inherit;\n  font-size: 1rem;\n  margin: 0;\n  padding: 0;\n  vertical-align: baseline;\n  border: 0;\n  box-sizing: border-box;\n}\nhtml,\nbody {\n  height: 100%;\n  width: 100%;\n  font-size: 13px;\n}\nbody {\n  font-family: Roboto, sans-serif;\n  background-color: #e9f0f5;\n  overflow: hidden;\n}\n#app {\n  width: 100%;\n  height: 100%;\n  overflow: scroll;\n}\nmain {\n  height: 100%;\n}\n.material-icons {\n  font-family: 'Material Icons';\n  font-weight: normal;\n  font-style: normal;\n  font-size: 24px;\n  /* Preferred icon size */\n  display: inline-block;\n  width: 1em;\n  height: 1em;\n  line-height: 1;\n  text-transform: none;\n  letter-spacing: normal;\n  word-wrap: normal;\n  /* Support for all WebKit browsers. */\n  -webkit-font-smoothing: antialiased;\n  /* Support for Safari and Chrome. */\n  text-rendering: optimizeLegibility;\n  /* Support for Firefox. */\n  -moz-osx-font-smoothing: grayscale;\n  /* Support for IE. */\n  -webkit-font-feature-settings: 'liga';\n     -moz-font-feature-settings: 'liga';\n          font-feature-settings: 'liga';\n}\n.circular {\n  width: 6em;\n  height: 5.7em;\n  border-radius: 50%;\n  -webkit-border-radius: 50%;\n  -moz-border-radius: 50%;\n  background: url(" + __webpack_require__(98) + ") no-repeat;\n  background-size: 100%;\n  background-position: 50%;\n}\n.textfield {\n  width: 100%;\n  margin: .5rem 0;\n  line-height: 1.5rem;\n  font-size: 1rem;\n  border: none;\n  border-bottom: solid 2px #c9c9c9;\n  outline: 0;\n  -webkit-transition: border 0.3s;\n  transition: border 0.3s;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  box-shadow: none;\n  border-radius: 0;\n}\n.textfield:focus {\n  border-bottom: solid 2px #3f51b5;\n}\n.txtLabel {\n  font-size: .8rem;\n  color: #c9c9c9;\n  -webkit-transition: color 0.3s;\n  transition: color 0.3s;\n}\n.txtLabel.focus {\n  color: #3f51b5;\n}\n.capitalize {\n  text-transform: capitalize;\n}\n", ""]);
 	
 	// exports
 
@@ -13566,6 +13567,7 @@
 	    login: baseUrl[env] + '/_session',
 	    customer: baseUrl[env] + '/lps_clienti',
 	    customers: baseUrl[env] + '/lps_clienti/_design/listByRagSoc/_view/listByRagSoc',
+	    report: baseUrl[env] + '/lps_reports',
 	    reports: baseUrl[env] + '/lps_reports/_design/reportsByCustomer/_view/reportsByCustomer'
 	  },
 	
@@ -13573,6 +13575,7 @@
 	    login: baseUrl[env] + '/_session',
 	    customer: baseUrl[env] + '/lps_clienti',
 	    customers: baseUrl[env] + '/lps_clienti/_design/listByRagSoc/_view/listByRagSoc',
+	    report: baseUrl[env] + '/lps_reports',
 	    reports: baseUrl[env] + '/lps_reports/_design/reportsByCustomer/_view/reportsByCustomer'
 	  }
 	
@@ -13856,6 +13859,14 @@
 	
 	    return {
 	
+	      btnBack: function btnBack() {
+	
+	        switch (this.title) {
+	          default:
+	            window.history.back();
+	        }
+	      },
+	
 	      title: title
 	    };
 	  },
@@ -13886,7 +13897,7 @@
 	    className: 'mdl-button mdl-js-button mdl-button--icon',
 	    id: 'btnBack',
 	    config: _libsRedrawMaterial2['default'],
-	    onclick: ctrl.btnBack
+	    onclick: ctrl.btnBack.bind(ctrl)
 	  }, (0, _mithril2['default'])('i', { className: 'material-icons' }, 'arrow_back')), (0, _mithril2['default'])('span', { className: 'navTitle' }, ctrl.title)]), (0, _mithril2['default'])('div', { className: 'mdl-layout__header-row' }, [(0, _mithril2['default'])('span', { className: 'mdl-layout-title headerTitle' }, app.state.customer().ragioneSociale)])];
 	}
 	module.exports = exports['default'];
@@ -14058,6 +14069,10 @@
 	
 	var _modelsCustomerModel2 = _interopRequireDefault(_modelsCustomerModel);
 	
+	var _gMap = __webpack_require__(122);
+	
+	var _gMap2 = _interopRequireDefault(_gMap);
+	
 	exports['default'] = {
 	
 	  controller: function controller() {
@@ -14212,17 +14227,7 @@
 	      className: 'page-content card' + (ctrl.cardFlipped() ? ' flipped' : ''),
 	      id: 'customerContainer' }, [
 	    //FRONT
-	    (0, _mithril2['default'])('div', { className: 'front' }, [(0, _mithril2['default'])('section', { className: 'head' }, [(0, _mithril2['default'])('h1', { className: 'name' }, ctrl.customer.ragioneSociale()), (0, _mithril2['default'])('div', { className: 'leftInfo' }, [(0, _mithril2['default'])('span', { className: 'lblInfo' }, 'Cliente di:'), (0, _mithril2['default'])('span', { className: 'Info' }, ctrl.customer.codAgente() ? ctrl.customer.codAgente() : '')]), (0, _mithril2['default'])('div', { className: 'circular' }), (0, _mithril2['default'])('div', { className: 'rightInfo' }, [(0, _mithril2['default'])('span', { className: 'lblInfo' }, 'Visitato il:'), (0, _mithril2['default'])('span', { className: 'Info' }, ctrl.customer.ultimaVisita() ? ctrl.customer.ultimaVisita() : '')])]), (0, _mithril2['default'])('section', { className: 'contact' }, [(0, _mithril2['default'])('a', { href: 'tel:' + ctrl.customer.telefono() }, (0, _mithril2['default'])('h2', { className: 'tel' }, ctrl.customer.telefono() ? ctrl.customer.telefono() : '')), (0, _mithril2['default'])('a', { href: 'mailto:' + ctrl.customer.email() }, (0, _mithril2['default'])('h2', { className: 'mail' }, ctrl.customer.email() ? ctrl.customer.email() : ''))]), (0, _mithril2['default'])('a', {
-	      href: 'https://www.google.it/maps/place/' + ctrl.customer.indirizzo() + ',+' + ctrl.customer.citta() + ',+' + ctrl.customer.provincia(),
-	      className: 'location',
-	      target: '_blank'
-	    }, [(0, _mithril2['default'])('span', ctrl.customer.indirizzo()), (0, _mithril2['default'])('span', ctrl.customer.citta()), (0, _mithril2['default'])('span', ctrl.customer.provincia()), (0, _mithril2['default'])('i', { className: 'material-icons' }, 'location_on')]), (0, _mithril2['default'])('section', { className: 'relazioni' }, (0, _mithril2['default'])('button', {
-	      className: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored',
-	      config: _libsRedrawMaterial2['default'],
-	      onclick: function onclick() {
-	        _mithril2['default'].route('/customers/' + _mithril2['default'].route.param('id') + '/reports');
-	      }
-	    }, 'Relazioni')), (0, _mithril2['default'])('section', { className: 'other' }, (0, _mithril2['default'])('ul', { id: 'lista_detail' }, [(0, _mithril2['default'])('li', { className: 'icona_detail' }, 'Attività'), (0, _mithril2['default'])('li', { className: 'descr_detail' }, ctrl.customer.attivita() ? ctrl.customer.attivita() : ''), (0, _mithril2['default'])('li', { className: 'icona_detail' }, 'Responsabile'), (0, _mithril2['default'])('li', { className: 'descr_detail' }, ctrl.customer.responsabile() ? ctrl.customer.responsabile() : '')]))]),
+	    (0, _mithril2['default'])('div', { className: 'front' }, customerView(ctrl)),
 	    //BACK
 	    (0, _mithril2['default'])('div', { className: 'back' }, [(0, _mithril2['default'])('div', { id: 'formContainer' }, (0, _mithril2['default'])('form', { id: 'formEdit' }, [
 	    //RAG SOC
@@ -14438,6 +14443,39 @@
 	  }
 	
 	};
+	
+	function customerView(ctrl) {
+	
+	  return [(0, _mithril2['default'])('section', { className: 'head mdl-shadow--4dp' }, [(0, _mithril2['default'])('div', { className: 'circular' }), (0, _mithril2['default'])('h2', { className: 'name' }, ctrl.customer.ragioneSociale()), (0, _mithril2['default'])('div', { className: 'table' }, [(0, _mithril2['default'])('div', { className: 'left' }, [(0, _mithril2['default'])('span', { className: 'label' }, 'ULTIMA VISITA:'), (0, _mithril2['default'])('span', { className: 'value' }, ctrl.customer.ultimaVisita() ? ctrl.customer.ultimaVisita() : 'n/d')]), (0, _mithril2['default'])('div', { className: 'right' }, [(0, _mithril2['default'])('span', { className: 'label' }, 'AGENTE:'), (0, _mithril2['default'])('span', { className: 'value' }, ctrl.customer.codAgente() ? ctrl.customer.codAgente() : 'n/d')])]), (0, _mithril2['default'])('span', { className: 'line' }), (0, _mithril2['default'])('button', {
+	    className: 'mdl-button mdl-js-button mdl-js-ripple-effect action',
+	    config: _libsRedrawMaterial2['default'],
+	    onclick: function onclick() {
+	      _mithril2['default'].route('/customers/' + _mithril2['default'].route.param('id') + '/reports');
+	    }
+	  }, ['Relazioni', (0, _mithril2['default'])('i', { className: 'material-icons arrow' }, 'arrow_forward')])]), (0, _mithril2['default'])('section', { className: 'contacts mdl-shadow--4dp' }, [(0, _mithril2['default'])('span', { className: 'label' }, 'CONTATTI:'), (0, _mithril2['default'])('a', {
+	    className: 'tel',
+	    href: 'tel:' + ctrl.customer.telefono()
+	  }, (0, _mithril2['default'])('button', {
+	    className: 'mdl-button mdl-js-button mdl-js-ripple-effect phone',
+	    config: _libsRedrawMaterial2['default']
+	  }, [ctrl.customer.telefono()
+	  //m('i', {className: 'material-icons arrow'}, 'phone')
+	  ])), (0, _mithril2['default'])('span', { className: 'line' }), (0, _mithril2['default'])('a', {
+	    className: 'mail',
+	    href: 'mailto:' + ctrl.customer.email()
+	  }, (0, _mithril2['default'])('button', {
+	    className: 'mdl-button mdl-js-button mdl-js-ripple-effect mail',
+	    config: _libsRedrawMaterial2['default']
+	  }, [ctrl.customer.email()
+	  //m('i', {className: 'material-icons arrow'}, 'email')
+	  ]))]), (0, _mithril2['default'])('section', { className: 'map mdl-shadow--4dp' }, [_mithril2['default'].component(_gMap2['default'], { address: ctrl.customer.indirizzo() + ',+' + ctrl.customer.citta() + ',+' + ctrl.customer.provincia() }), (0, _mithril2['default'])('div', { className: 'btnHover' }, (0, _mithril2['default'])('button', {
+	    className: 'mdl-button mdl-js-button mdl-js-ripple-effect action',
+	    config: _libsRedrawMaterial2['default'],
+	    onclick: function onclick() {
+	      window.open('https://www.google.it/maps/place/' + ctrl.customer.indirizzo() + ',+' + ctrl.customer.citta() + ',+' + ctrl.customer.provincia(), '_blank');
+	    }
+	  }, ["Indicazioni", (0, _mithril2['default'])('i', { className: 'material-icons arrow' }, 'arrow_forward')]))]), (0, _mithril2['default'])('section', { className: 'other mdl-shadow--4dp' }, [(0, _mithril2['default'])('span', { className: 'label' }, 'INDIRIZZO:'), (0, _mithril2['default'])('span', { className: 'value capitalize' }, ctrl.customer.indirizzo().toLowerCase()), (0, _mithril2['default'])('span', { className: 'value' }, ctrl.customer.citta() + ' - ' + ctrl.customer.provincia()), (0, _mithril2['default'])('span', { className: 'label' }, "ATTIVITA':"), (0, _mithril2['default'])('span', { className: 'value' }, ctrl.customer.attivita() ? ctrl.customer.attivita() : 'n/d'), (0, _mithril2['default'])('span', { className: 'label' }, "RESPONSABILE:"), (0, _mithril2['default'])('span', { className: 'value' }, ctrl.customer.responsabile() ? ctrl.customer.responsabile() : 'n/d')])];
+	}
 	module.exports = exports['default'];
 
 /***/ },
@@ -14475,7 +14513,7 @@
 	
 	
 	// module
-	exports.push([module.id, "#customerContainer {\n  width: 95%;\n  box-shadow: 0px 0px 79px 0px rgba(0, 0, 0, 0.57);\n  left: 0;\n  right: 0;\n  margin-left: auto;\n  margin-right: auto;\n  top: 6rem;\n}\n.bg {\n  width: 100%;\n  position: absolute;\n  top: 0;\n  height: 12.5rem;\n  z-index: -1;\n  background-color: #303F9F;\n}\n.nav {\n  padding: 2em 1em 1em 1em;\n  color: white;\n  position: fixed;\n  z-index: 1;\n  width: 100%;\n}\n.nav i {\n  font-size: 1.5em;\n}\n.nav button {\n  float: right;\n  font-size: 1.5rem;\n  padding-right: 5.2rem;\n}\n#edit {\n  font-size: 1.2rem;\n  padding: 0;\n}\n#btnBack {\n  float: left;\n  padding: 0;\n}\n#save {\n  color: green;\n}\n#delete {\n  color: red;\n}\nsection.head {\n  height: 11.5rem;\n  background-color: rgba(255, 255, 255, 0.7);\n  border: 1px solid gray;\n  border-bottom: none;\n  border-radius: .5em .5em 0 0;\n  padding: 1em;\n  position: relative;\n}\nh1.name {\n  text-align: center;\n  font-size: 1.3em;\n  font-weight: bold;\n  margin: .5em 0;\n  max-width: 100%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  word-wrap: break-word;\n  word-break: break-all;\n  display: block;\n  white-space: nowrap;\n}\nsection.head .circular {\n  margin: 0 auto;\n}\n.leftInfo {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  padding-left: 3em;\n  padding-bottom: 1em;\n}\n.rightInfo {\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  padding-right: 2em;\n  padding-bottom: 1em;\n}\nspan.lblInfo {\n  display: block;\n  color: gray;\n  font-weight: 500;\n  text-transform: uppercase;\n  font-size: .7em;\n}\nspan.Info {\n  font-size: 1.5em;\n  font-weight: 300;\n}\nsection.contact {\n  padding: 0 1em;\n  background-color: #3F51B5;\n  min-height: 7em;\n}\nsection.contact a {\n  font-size: 1.3em;\n  font-weight: 300;\n  line-height: 1.5em;\n  text-align: center;\n  color: white;\n  text-decoration: none;\n  padding: .6em 0;\n  display: block;\n}\nsection.contact a:nth-child(1) {\n  border-bottom: 1px solid white;\n}\nh2.tel {\n  font-size: 2em;\n}\n.location {\n  padding: 1em 2.7em;\n  border: 1px solid gray;\n  text-align: center;\n  position: relative;\n  display: block;\n  text-decoration: none;\n  color: inherit;\n  min-height: 6.3rem;\n  background-color: white;\n}\n.location span {\n  display: block;\n  font-size: 1.2em;\n  font-weight: 200;\n}\na.location i {\n  position: absolute;\n  top: 0.7em;\n  width: 15%;\n  height: 100%;\n  display: block;\n  font-size: 3em;\n  color: #FF6E40;\n  left: 0;\n}\nsection.other {\n  padding: 1em;\n  border: 1px solid gray;\n  border-bottom: none;\n  border-top: none;\n  background-color: white;\n}\n#lista_detail {\n  height: 110%;\n  width: 100%;\n  background-color: #FFF;\n  padding-top: .5em;\n  margin-bottom: 4.5em;\n}\n#lista_detail ul,\n#lista_detail li {\n  list-style-type: none;\n}\n.icona_detail {\n  display: block;\n  color: #FF6E40;\n}\n.descr_detail {\n  width: 70%;\n  display: inline-block;\n  vertical-align: top;\n  padding: .5em 0;\n}\n/*\n\nCARD FLIP\n\n*/\n.container {\n  height: 100%;\n  position: relative;\n  -webkit-perspective: 800px;\n          perspective: 800px;\n}\n.container .card {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  -webkit-transition: -webkit-transform 1s;\n          transition: transform 1s;\n  -webkit-transform-origin: right center;\n  -ms-transform-origin: right center;\n  transform-origin: right center;\n  -webkit-transform-style: preserve-3d;\n  -ms-transform-style: preserve-3d;\n  transform-style: preserve-3d;\n}\n.container .card > div {\n  margin: 0;\n  display: block;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n}\n.container .card .back {\n  background: white;\n  height: 100%;\n  -webkit-transform: rotateY(180deg);\n          transform: rotateY(180deg);\n  -webkit-backface-visibility: hidden;\n  -ms-backface-visibility: hidden;\n  backface-visibility: hidden;\n}\n.container .card.flipped {\n  -webkit-transform: translateX(-100%) rotateY(-180deg) translateZ(1px);\n          transform: translateX(-100%) rotateY(-180deg) translateZ(1px);\n}\n/*\n\nEND CARD FLIP\n\n*/\n#formContainer {\n  padding: 1em;\n  background-color: white;\n}\n#formEdit .mdl-textfield {\n  width: 100%;\n}\nsection.relazioni button {\n  width: 90%;\n  margin: 0 auto;\n  display: block;\n}\nsection.relazioni {\n  border-left: 1px solid gray;\n  border-right: 1px solid gray;\n  padding: 1rem 0;\n}\n.dateMask {\n  width: 43%;\n}\n", ""]);
+	exports.push([module.id, "#customerContainer {\n  width: 95%;\n  box-shadow: 0px 0px 79px 0px rgba(0, 0, 0, 0.57);\n  left: 0;\n  right: 0;\n  margin-left: auto;\n  margin-right: auto;\n  top: 6rem;\n}\n#customerContainer .front section {\n  background-color: #FFFFFF;\n  border: 1px solid #FFFFFF;\n  min-height: 10rem;\n  border-radius: 0.3rem;\n  margin-bottom: 1rem;\n  padding: 1.5rem;\n  line-height: 1.5rem;\n  position: relative;\n}\n#customerContainer .front section div.circular {\n  position: absolute;\n  left: 80%;\n  top: -40px;\n  border: 2px solid #8f8f8f;\n  box-shadow: 0px 4px 8px #838383;\n}\n#customerContainer .front section h2.name {\n  font-size: 1.5rem;\n  max-width: 100%;\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  margin-bottom: 1.1rem;\n}\n#customerContainer .front section div.table {\n  height: 3rem;\n}\n#customerContainer .front section div.table div.left {\n  width: 57%;\n  float: left;\n}\n#customerContainer .front section div.table div.right {\n  width: 43%;\n  float: right;\n}\n#customerContainer .front section span.label {\n  display: block;\n  text-transform: uppercase;\n  color: #8f8f8f;\n}\n#customerContainer .front section span.value {\n  display: block;\n}\n#customerContainer .front section span.line {\n  display: block;\n  border-bottom: 1px solid white;\n  margin: 1rem -0.5rem 0.5rem -0.5rem;\n  box-shadow: 0px 1px 1px #838383;\n}\n#customerContainer .front section button.action {\n  width: 100%;\n  text-align: left;\n  color: #ff6e40;\n}\n#customerContainer .front section button.action i.arrow {\n  text-align: right;\n  width: 76%;\n}\n#customerContainer .front section button.phone,\n#customerContainer .front section button.mail {\n  width: 100%;\n  color: black;\n  font-size: 1.5rem;\n  font-weight: 300;\n  text-align: center;\n}\n#customerContainer .front section button.phone i,\n#customerContainer .front section button.mail i {\n  text-align: right;\n  width: 76%;\n}\n#customerContainer .front section div.btnHover {\n  position: absolute;\n  bottom: .4rem;\n  width: 96%;\n  margin: 0 2%;\n  background-color: #FFFFFF;\n  border-radius: .2rem;\n  padding: 0 1rem;\n}\n#customerContainer .front section div.btnHover i.arrow {\n  width: 72%;\n}\n#customerContainer .front section.head {\n  margin-top: 2rem;\n}\n#customerContainer .front section.contacts span.line {\n  box-shadow: none;\n  border-bottom: 1px dashed gray;\n  margin: 0.5rem -0.5rem 0.5rem -0.5rem;\n}\n#customerContainer .front section.map {\n  padding: 0;\n  height: 13rem;\n}\n.bg {\n  width: 100%;\n  position: absolute;\n  top: 0;\n  height: 12.5rem;\n  z-index: -1;\n  background-color: #303F9F;\n}\n.nav {\n  padding: 2em 1em 0em 1em;\n  color: white;\n  position: fixed;\n  z-index: 1;\n  width: 100%;\n  background-color: #303F9F;\n}\n.nav i {\n  font-size: 1.5em;\n}\n.nav button {\n  float: right;\n  font-size: 1.5rem;\n  padding-right: 5.2rem;\n}\n#edit {\n  font-size: 1.2rem;\n  padding: 0;\n}\n#btnBack {\n  float: left;\n  padding: 0;\n}\n#save {\n  color: green;\n}\n#delete {\n  color: red;\n}\n/*\n\nCARD FLIP\n\n*/\n.container {\n  height: 100%;\n  position: relative;\n  -webkit-perspective: 800px;\n          perspective: 800px;\n}\n.container .card {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  -webkit-transition: -webkit-transform 1s;\n          transition: transform 1s;\n  -webkit-transform-origin: right center;\n  -ms-transform-origin: right center;\n  transform-origin: right center;\n  -webkit-transform-style: preserve-3d;\n  -ms-transform-style: preserve-3d;\n  transform-style: preserve-3d;\n}\n.container .card > div {\n  margin: 0;\n  display: block;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n}\n.container .card .back {\n  background: white;\n  height: 100%;\n  -webkit-transform: rotateY(180deg);\n          transform: rotateY(180deg);\n  -webkit-backface-visibility: hidden;\n  -ms-backface-visibility: hidden;\n  backface-visibility: hidden;\n}\n.container .card.flipped {\n  -webkit-transform: translateX(-100%) rotateY(-180deg) translateZ(1px);\n          transform: translateX(-100%) rotateY(-180deg) translateZ(1px);\n}\n/*\n\nEND CARD FLIP\n\n*/\n#formContainer {\n  padding: 1em;\n  background-color: white;\n}\n#formEdit .mdl-textfield {\n  width: 100%;\n}\nsection.relazioni button {\n  width: 90%;\n  margin: 0 auto;\n  display: block;\n}\nsection.relazioni {\n  border-left: 1px solid gray;\n  border-right: 1px solid gray;\n  padding: 1rem 0;\n}\n.dateMask {\n  width: 43%;\n}\n", ""]);
 	
 	// exports
 
@@ -14640,7 +14678,11 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * Created by federicolaggiard on 23/09/15.
+	 * Created by federicolaggiard on 19/10/15.
+	 *
+	 *
+	 * <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	 *
 	 */
 	
 	'use strict';
@@ -14655,84 +14697,131 @@
 	
 	var _mithril2 = _interopRequireDefault(_mithril);
 	
-	var _moment = __webpack_require__(9);
+	var _libsRequest = __webpack_require__(108);
 	
-	var _moment2 = _interopRequireDefault(_moment);
+	var _libsRequest2 = _interopRequireDefault(_libsRequest);
 	
-	var _stylesReportsLess = __webpack_require__(123);
+	var _stylesGMapLess = __webpack_require__(123);
 	
-	var _stylesReportsLess2 = _interopRequireDefault(_stylesReportsLess);
+	var _stylesGMapLess2 = _interopRequireDefault(_stylesGMapLess);
 	
-	var _libsRedrawMaterial = __webpack_require__(112);
-	
-	var _libsRedrawMaterial2 = _interopRequireDefault(_libsRedrawMaterial);
-	
-	var _libsInputMask = __webpack_require__(125);
-	
-	var _libsInputMask2 = _interopRequireDefault(_libsInputMask);
-	
-	var _modelsReportsModel = __webpack_require__(126);
-	
-	var _modelsReportsModel2 = _interopRequireDefault(_modelsReportsModel);
-	
-	var _header = __webpack_require__(113);
-	
-	var _header2 = _interopRequireDefault(_header);
-	
-	var _report = __webpack_require__(127);
-	
-	var _report2 = _interopRequireDefault(_report);
+	var API_KEY = "AIzaSyD_rcypgYydqbK5M8ItAtpb16AKcS3yvqI";
+	var map = undefined;
+	var marker = undefined;
+	var location = undefined;
+	var lat = 45.0734673;
+	var long = 7.6055664;
 	
 	exports['default'] = {
 	
-	  controller: function controller() {
+	  controller: function controller(data) {
 	
-	    _moment2['default'].locale("it-IT");
+	    function gMapConfig(element, isInit) {
 	
-	    var editId = app.state.editReportId;
-	    var reports = _mithril2['default'].prop(app.state.reports());
+	      if (typeof google !== 'undefined' && !isInit) {
 	
-	    if (!app.state.reports()) {
-	      _modelsReportsModel2['default'].fetch(function (err, r) {
-	        if (err) return console.log(err);
+	        window.that = this;
+	        google.load("maps", "3", { other_params: 'sensor=false&key=' + API_KEY, callback: function callback() {
 	
-	        reports(r);
-	      });
-	    }
+	            geoCode(data.address, function (err, success) {
 	
-	    function initBlur(element, isInit) {
-	      if (!isInit) {
-	        document.getElementById('blur').style.height = document.getElementsByClassName('mdl-layout')[0].scrollHeight + 'px';
+	              location = success;
+	
+	              switch (success.status) {
+	                case "OK":
+	
+	                  lat = success.results[0].geometry.location.lat;
+	                  long = success.results[0].geometry.location.lng;
+	
+	                  _showMap();
+	
+	                  break;
+	                case "ZERO_RESULTS":
+	
+	                  break;
+	                case "OVER_QUERY_LIMIT":
+	
+	                  break;
+	                default:
+	                  //REQUEST_DENIED, INVALID_REQUEST, UNKNOWN_ERROR
+	
+	                  break;
+	              }
+	            });
+	          } });
 	      }
 	    }
 	
-	    function editItem(itemId) {
-	      app.state.editReportId(itemId);
-	      editId(app.state.editReportId());
+	    function _showMap() {
+	
+	      var myLatlng = new google.maps.LatLng(lat, long);
+	      var mapOptions = {
+	        zoom: 15,
+	        disableDefaultUI: true,
+	        center: myLatlng,
+	        mapTypeId: google.maps.MapTypeId.ROADMAP
+	      };
+	      map = new google.maps.Map(document.getElementsByClassName("gMap")[0], mapOptions);
+	
+	      marker = new google.maps.Marker({
+	        position: myLatlng,
+	        map: map,
+	        title: 'Hello World!'
+	      });
+	
+	      marker.setMap(map);
+	    }
+	
+	    function geoCode(address, callback) {
+	
+	      (0, _libsRequest2['default'])({
+	        method: 'GET',
+	        url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=' + API_KEY
+	      }, function (err, success) {
+	
+	        if (err) {
+	          app.showToast('Si è verificato un errore durante la geolocalizzazione.');
+	          return callback(err, null);
+	        }
+	
+	        console.log(success);
+	        return callback(null, success);
+	      });
 	    }
 	
 	    return {
-	      editId: editId,
-	      initBlur: initBlur,
-	      editItem: editItem,
-	      reports: reports
+	      gMapConfig: gMapConfig,
+	      geoCode: geoCode
 	    };
 	  },
 	
 	  view: function view(ctrl) {
 	
-	    return [(0, _mithril2['default'])('div', {
-	      className: 'mdl-layout mdl-js-layout mdl-layout--fixed-header',
-	      config: _libsRedrawMaterial2['default'].removeContainer
-	    }, [_mithril2['default'].component(_header2['default'], 'RELAZIONI'), (0, _mithril2['default'])('div', {
-	      className: ctrl.editId() === null ? '' : 'on',
-	      id: 'blur',
-	      onclick: ctrl.editItem.bind(ctrl, null),
-	      config: ctrl.initBlur
-	    }), (0, _mithril2['default'])('section', { id: 'cd-timeline' }, (0, _mithril2['default'])('div', { className: 'cd-timeline-block add' }, [(0, _mithril2['default'])('div', { className: 'cd-timeline-img' }, [(0, _mithril2['default'])('img', { src: './img/add.svg' })]), (0, _mithril2['default'])('div', { className: 'cd-timeline-content' })]), ctrl.reports().map(function (item, index) {
+	    return (0, _mithril2['default'])('div', {
+	      className: 'gMap',
+	      config: ctrl.gMapConfig
+	    }, getContent(ctrl));
 	
-	      return _mithril2['default'].component(_report2['default'], { index: index, data: item });
-	    }))])];
+	    function getContent(ctrl) {
+	
+	      if (location) {
+	        switch (location.status) {
+	
+	          case 'OK':
+	            return null; //return nothing, the map will render here
+	            break;
+	          case 'ZERO_RESULTS':
+	            return [(0, _mithril2['default'])('i', { className: 'material-icons mapErrorIcon' }, 'gps_off'), (0, _mithril2['default'])('h3', { className: 'mapErrorText' }, "L'indirizzo non è stato trovato.")];
+	            break;
+	          case 'OVER_QUERY_LIMIT':
+	            return [(0, _mithril2['default'])('i', { className: 'material-icons mapErrorIcon' }, 'report_problem'), (0, _mithril2['default'])('h3', { className: 'mapErrorText' }, 'Troppe Richieste a Google Maps per oggi.')];
+	            break;
+	          default:
+	            return [(0, _mithril2['default'])('i', { className: 'material-icons mapErrorIcon' }, 'error'), (0, _mithril2['default'])('h3', { className: 'mapErrorText' }, 'Errore sconosciuto. Probabilmente Google è in vacanza.')];
+	            break;
+	        }
+	      }
+	    }
 	  }
 	
 	};
@@ -14754,8 +14843,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js!./../node_modules/less-loader/index.js!./reports.less", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js!./../node_modules/less-loader/index.js!./reports.less");
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js!./../node_modules/less-loader/index.js!./gMap.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js!./../node_modules/less-loader/index.js!./gMap.less");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -14773,13 +14862,179 @@
 	
 	
 	// module
-	exports.push([module.id, "#cd-timeline::before {\n  /* this is the vertical line */\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 18px;\n  height: 100%;\n  width: 4px;\n  background: #d7e4ed;\n  margin: 1rem;\n}\n#cd-timeline {\n  position: relative;\n  padding: 1rem;\n  margin-bottom: 2em;\n}\n#cd-timeline .cd-container {\n  /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */\n  width: 90%;\n  max-width: 1170px;\n  margin: 0 auto;\n}\n#cd-timeline .cd-container::after {\n  /* clearfix */\n  content: '';\n  display: table;\n  clear: both;\n}\n#cd-timeline header {\n  height: 200px;\n  line-height: 200px;\n  text-align: center;\n  background: #303e49;\n}\n#cd-timeline header h1 {\n  color: white;\n  font-size: 18px;\n  font-size: 1.125rem;\n}\n#cd-timeline .dateExt {\n  font-size: 0.8rem;\n  float: right;\n  opacity: .7;\n}\n@media only screen and (min-width: 1170px) {\n  #cd-timeline header {\n    height: 300px;\n    line-height: 300px;\n  }\n  #cd-timeline header h1 {\n    font-size: 24px;\n    font-size: 1.5rem;\n  }\n}\n@media only screen and (min-width: 1170px) {\n  #cd-timeline {\n    margin-top: 3em;\n    margin-bottom: 3em;\n  }\n  #cd-timeline::before {\n    left: 50%;\n    margin-left: -2px;\n  }\n}\n.cd-timeline-block {\n  position: relative;\n  margin: 2em 0;\n}\n.cd-timeline-block:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\n.cd-timeline-block:first-child {\n  margin-top: 0;\n}\n.cd-timeline-block:last-child {\n  margin-bottom: 0;\n}\n@media only screen and (min-width: 1170px) {\n  .cd-timeline-block {\n    margin: 4em 0;\n  }\n  .cd-timeline-block:first-child {\n    margin-top: 0;\n  }\n  .cd-timeline-block:last-child {\n    margin-bottom: 0;\n  }\n}\n.cd-timeline-img {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 40px;\n  height: 40px;\n  border-radius: 50%;\n  box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);\n  background-color: #FF5722;\n}\n.cd-timeline-img img {\n  display: block;\n  width: 24px;\n  height: 24px;\n  position: relative;\n  left: 50%;\n  top: 50%;\n  margin-left: -12px;\n  margin-top: -12px;\n}\n.cd-timeline-img.cd-picture {\n  background: #75ce66;\n}\n.cd-timeline-img.cd-movie {\n  background: #c03b44;\n}\n.cd-timeline-img.cd-location {\n  background: #f0ca45;\n}\n@media only screen and (min-width: 1170px) {\n  .cd-timeline-img {\n    width: 60px;\n    height: 60px;\n    left: 50%;\n    margin-left: -30px;\n    /* Force Hardware Acceleration in WebKit */\n    -webkit-transform: translateZ(0);\n    -webkit-backface-visibility: hidden;\n  }\n  .cssanimations .cd-timeline-img.is-hidden {\n    visibility: hidden;\n  }\n  .cssanimations .cd-timeline-img.bounce-in {\n    visibility: visible;\n    -webkit-animation: cd-bounce-1 0.6s;\n    animation: cd-bounce-1 0.6s;\n  }\n}\n@-webkit-keyframes cd-bounce-1 {\n  0% {\n    opacity: 0;\n    -webkit-transform: scale(0.5);\n  }\n  60% {\n    opacity: 1;\n    -webkit-transform: scale(1.2);\n  }\n  100% {\n    -webkit-transform: scale(1);\n  }\n}\n@keyframes cd-bounce-1 {\n  0% {\n    opacity: 0;\n    -webkit-transform: scale(0.5);\n    -ms-transform: scale(0.5);\n    transform: scale(0.5);\n  }\n  60% {\n    opacity: 1;\n    -webkit-transform: scale(1.2);\n    -ms-transform: scale(1.2);\n    transform: scale(1.2);\n  }\n  100% {\n    -webkit-transform: scale(1);\n    -ms-transform: scale(1);\n    transform: scale(1);\n  }\n}\n.cd-timeline-content {\n  position: relative;\n  margin-left: 60px;\n  background: white;\n  border-radius: 0.25em;\n  padding: 1em;\n  box-shadow: 0 3px 0 #d7e4ed;\n  height: 10rem;\n  -webkit-transition: height .5s;\n  transition: height .5s;\n}\n.cd-timeline-content:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\n.cd-timeline-content h2 {\n  color: #303e49;\n}\n.cd-timeline-content p,\n.cd-timeline-content .cd-read-more,\n.cd-timeline-content .cd-date {\n  font-size: 13px;\n  font-size: 0.8125rem;\n}\n.cd-timeline-content p {\n  margin: 1em 0;\n  line-height: 1.6;\n  display: block;\n  height: 2.9rem;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-line-clamp: 2;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n}\n.cd-timeline-content .cd-read-more,\n.cd-timeline-content .cd-date {\n  display: inline-block;\n}\n.cd-timeline-content p {\n  margin: 1em 0;\n  line-height: 1.6;\n}\n.cd-timeline-content .cd-read-more {\n  float: right;\n  padding: .8em 1em;\n  background: #FF5722;\n  color: white;\n  border-radius: 0.25em;\n}\n.no-touch .cd-timeline-content .cd-read-more:hover {\n  background-color: #FF5722;\n}\n.cd-timeline-content .cd-date {\n  float: left;\n  padding: .8em 0;\n  opacity: .7;\n}\n.cd-timeline-content::before {\n  content: '';\n  position: absolute;\n  top: 16px;\n  right: 100%;\n  height: 0;\n  width: 0;\n  border: 7px solid transparent;\n  border-right: 7px solid white;\n}\n@media only screen and (min-width: 768px) {\n  .cd-timeline-content h2 {\n    font-size: 20px;\n    font-size: 1.25rem;\n  }\n  .cd-timeline-content p {\n    font-size: 16px;\n    font-size: 1rem;\n  }\n  .cd-timeline-content .cd-read-more,\n  .cd-timeline-content .cd-date {\n    font-size: 14px;\n    font-size: 0.875rem;\n  }\n}\n@media only screen and (min-width: 1170px) {\n  .cd-timeline-content {\n    margin-left: 0;\n    padding: 1.6em;\n    width: 45%;\n  }\n  .cd-timeline-content::before {\n    top: 24px;\n    left: 100%;\n    border-color: transparent;\n    border-left-color: white;\n  }\n  .cd-timeline-content .cd-read-more {\n    float: left;\n  }\n  .cd-timeline-content .cd-date {\n    position: absolute;\n    width: 100%;\n    left: 122%;\n    top: 6px;\n    font-size: 16px;\n    font-size: 1rem;\n  }\n  .cd-timeline-block:nth-child(even) .cd-timeline-content {\n    float: right;\n  }\n  .cd-timeline-block:nth-child(even) .cd-timeline-content::before {\n    top: 24px;\n    left: auto;\n    right: 100%;\n    border-color: transparent;\n    border-right-color: white;\n  }\n  .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-read-more {\n    float: right;\n  }\n  .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-date {\n    left: auto;\n    right: 122%;\n    text-align: right;\n  }\n  .cssanimations .cd-timeline-content.is-hidden {\n    visibility: hidden;\n  }\n  .cssanimations .cd-timeline-content.bounce-in {\n    visibility: visible;\n    -webkit-animation: cd-bounce-2 0.6s;\n    animation: cd-bounce-2 0.6s;\n  }\n}\n@media only screen and (min-width: 1170px) {\n  /* inverse bounce effect on even content blocks */\n  .cssanimations .cd-timeline-block:nth-child(even) .cd-timeline-content.bounce-in {\n    -webkit-animation: cd-bounce-2-inverse 0.6s;\n    animation: cd-bounce-2-inverse 0.6s;\n  }\n}\n@-webkit-keyframes cd-bounce-2 {\n  0% {\n    opacity: 0;\n    -webkit-transform: translateX(-100px);\n  }\n  60% {\n    opacity: 1;\n    -webkit-transform: translateX(20px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n  }\n}\n@keyframes cd-bounce-2 {\n  0% {\n    opacity: 0;\n    -webkit-transform: translateX(-100px);\n    -ms-transform: translateX(-100px);\n    transform: translateX(-100px);\n  }\n  60% {\n    opacity: 1;\n    -webkit-transform: translateX(20px);\n    -ms-transform: translateX(20px);\n    transform: translateX(20px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n    -ms-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n@-webkit-keyframes cd-bounce-2-inverse {\n  0% {\n    opacity: 0;\n    -webkit-transform: translateX(100px);\n  }\n  60% {\n    opacity: 1;\n    -webkit-transform: translateX(-20px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n  }\n}\n@keyframes cd-bounce-2-inverse {\n  0% {\n    opacity: 0;\n    -webkit-transform: translateX(100px);\n    -ms-transform: translateX(100px);\n    transform: translateX(100px);\n  }\n  60% {\n    opacity: 1;\n    -webkit-transform: translateX(-20px);\n    -ms-transform: translateX(-20px);\n    transform: translateX(-20px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n    -ms-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n.cd-timeline-block.add {\n  height: 4rem;\n}\n.cd-timeline-block.add .cd-timeline-img {\n  background-color: #4CAF50;\n}\n.cd-timeline-block.add .cd-timeline-content {\n  display: none;\n}\n.cd-timeline-block.edit {\n  z-index: 2;\n}\n.cd-timeline-block.edit .cd-timeline-content {\n  height: 25rem !important;\n}\n.cd-timeline-block.edit .txtNote {\n  width: 100%;\n  height: 77%;\n  padding-top: .5rem;\n  font-size: 1rem;\n  margin-top: .5rem;\n}\n.cd-timeline-block.edit .textfield.dateExt {\n  width: 50%;\n  float: right;\n  height: 1rem;\n  margin: .4rem 0;\n}\n#blur {\n  width: 100%;\n  position: absolute;\n  background-color: #7d7d7d;\n  opacity: 0;\n  pointer-events: none;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s;\n}\n#blur.on {\n  pointer-events: all;\n  opacity: .5;\n}\n.salvaReport {\n  margin-left: 6rem;\n}\n", ""]);
+	exports.push([module.id, "div.gMap {\n  width: 100%;\n  height: 100%;\n}\ndiv.gMap .mapErrorIcon {\n  width: 100%;\n  text-align: center;\n  height: 50%;\n  font-size: 3rem;\n  padding-top: 5%;\n  color: #ffc107;\n}\ndiv.gMap .mapErrorText {\n  text-align: center;\n  font-size: 1.5rem;\n  color: gray;\n}\n@-webkit-keyframes rotation {\n  from {\n    -webkit-transform: rotate(0deg);\n    -moz-transform: rotate(0deg);\n    -ms-transformn: rotate(0deg);\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n  to {\n    -webkit-transform-origin: 50% 42.5%;\n    -ms-transform-origin: 50% 42.5%;\n    transform-origin: 50% 42.5%;\n    -webkit-transform: rotate(360deg);\n    -moz-transform: rotate(360deg);\n    -ms-transformn: rotate(360deg);\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg);\n  }\n}\n", ""]);
 	
 	// exports
 
 
 /***/ },
 /* 125 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by federicolaggiard on 23/09/15.
+	 */
+	
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _mithril = __webpack_require__(2);
+	
+	var _mithril2 = _interopRequireDefault(_mithril);
+	
+	var _moment = __webpack_require__(9);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	var _stylesReportsLess = __webpack_require__(126);
+	
+	var _stylesReportsLess2 = _interopRequireDefault(_stylesReportsLess);
+	
+	var _libsRedrawMaterial = __webpack_require__(112);
+	
+	var _libsRedrawMaterial2 = _interopRequireDefault(_libsRedrawMaterial);
+	
+	var _libsInputMask = __webpack_require__(128);
+	
+	var _libsInputMask2 = _interopRequireDefault(_libsInputMask);
+	
+	var _modelsReportsModel = __webpack_require__(129);
+	
+	var _modelsReportsModel2 = _interopRequireDefault(_modelsReportsModel);
+	
+	var _header = __webpack_require__(113);
+	
+	var _header2 = _interopRequireDefault(_header);
+	
+	var _report = __webpack_require__(130);
+	
+	var _report2 = _interopRequireDefault(_report);
+	
+	exports['default'] = {
+	
+	  controller: function controller() {
+	
+	    _moment2['default'].locale("it-IT");
+	
+	    var editId = app.state.editReportId;
+	    var reports = _mithril2['default'].prop(app.state.reports());
+	
+	    if (!app.state.reportsForCustomer() || app.state.reportsForCustomer().id !== _mithril2['default'].route.param('id')) {
+	      app.state.reportsForCustomer({ id: _mithril2['default'].route.param('id') });
+	      _modelsReportsModel2['default'].fetch(function (err, r) {
+	        if (err) return console.log(err);
+	
+	        reports(r);
+	      });
+	    }
+	
+	    function initBlur(element, isInit) {
+	      if (!isInit) {
+	        document.getElementById('blur').style.height = document.getElementsByClassName('mdl-layout')[0].scrollHeight + 'px';
+	      }
+	    }
+	
+	    function editItem(itemId) {
+	      if (itemId === null && app.state.editReportId() === -1) {
+	        var that = this;
+	        if (window.confirm('Annullare la creazione del nuovo elemento?')) {
+	          that.editId(itemId);
+	          var t = app.state.reports();
+	          t.shift();
+	          app.state.reports(t);
+	        }
+	      } else {
+	        app.state.editReportId(itemId);
+	        editId(app.state.editReportId());
+	      }
+	    }
+	
+	    function newItem() {
+	      var t = app.state.reports();
+	      var n = new _modelsReportsModel2['default']({ doc: { _id: -1, data: (0, _moment2['default'])().format('YYYY-MM-DDTHH:mm:ss'), idCliente: _mithril2['default'].route.param('id'), tipoIncontro: 'T' } });
+	      t.unshift(n);
+	      this.reports(app.state.reports(t));
+	      this.editItem(-1);
+	    }
+	
+	    return {
+	      editId: editId,
+	      initBlur: initBlur,
+	      editItem: editItem,
+	      newItem: newItem,
+	      reports: reports
+	    };
+	  },
+	
+	  view: function view(ctrl) {
+	
+	    return [(0, _mithril2['default'])('div', {
+	      className: 'mdl-layout mdl-js-layout mdl-layout--fixed-header',
+	      config: _libsRedrawMaterial2['default'].removeContainer
+	    }, [_mithril2['default'].component(_header2['default'], 'RELAZIONI'), (0, _mithril2['default'])('div', {
+	      className: ctrl.editId() === null ? '' : 'on',
+	      id: 'blur',
+	      onclick: ctrl.editItem.bind(ctrl, null),
+	      config: ctrl.initBlur
+	    }), (0, _mithril2['default'])('section', { id: 'cd-timeline' }, (0, _mithril2['default'])('div', { className: 'cd-timeline-block add' }, [(0, _mithril2['default'])('div', {
+	      className: 'cd-timeline-img',
+	      onclick: ctrl.newItem.bind(ctrl)
+	    }, [(0, _mithril2['default'])('img', { src: './img/add.svg' })]), (0, _mithril2['default'])('div', { className: 'cd-timeline-content' })]), ctrl.reports().map(function (item, index) {
+	
+	      return _mithril2['default'].component(_report2['default'], { index: item._id, data: item });
+	    }))])];
+	  }
+	
+	};
+	module.exports = exports['default'];
+
+/***/ },
+/* 126 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(127);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(7)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js!./../node_modules/less-loader/index.js!./reports.less", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js!./../node_modules/less-loader/index.js!./reports.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 127 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(6)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "#cd-timeline::before {\n  /* this is the vertical line */\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 18px;\n  height: 100%;\n  width: 4px;\n  background: #d7e4ed;\n  margin: 1rem;\n}\n#cd-timeline {\n  position: relative;\n  padding: 1rem;\n  margin-bottom: 2em;\n}\n#cd-timeline .cd-container {\n  /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */\n  width: 90%;\n  max-width: 1170px;\n  margin: 0 auto;\n}\n#cd-timeline .cd-container::after {\n  /* clearfix */\n  content: '';\n  display: table;\n  clear: both;\n}\n#cd-timeline header {\n  height: 200px;\n  line-height: 200px;\n  text-align: center;\n  background: #303e49;\n}\n#cd-timeline header h1 {\n  color: white;\n  font-size: 18px;\n  font-size: 1.125rem;\n}\n#cd-timeline .dateExt {\n  font-size: 0.8rem;\n  float: right;\n  opacity: .7;\n}\n@media only screen and (min-width: 1170px) {\n  #cd-timeline header {\n    height: 300px;\n    line-height: 300px;\n  }\n  #cd-timeline header h1 {\n    font-size: 24px;\n    font-size: 1.5rem;\n  }\n}\n@media only screen and (min-width: 1170px) {\n  #cd-timeline {\n    margin-top: 3em;\n    margin-bottom: 3em;\n  }\n  #cd-timeline::before {\n    left: 50%;\n    margin-left: -2px;\n  }\n}\n.cd-timeline-block {\n  position: relative;\n  margin: 2em 0;\n}\n.cd-timeline-block:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\n.cd-timeline-block:first-child {\n  margin-top: 0;\n}\n.cd-timeline-block:last-child {\n  margin-bottom: 0;\n}\n@media only screen and (min-width: 1170px) {\n  .cd-timeline-block {\n    margin: 4em 0;\n  }\n  .cd-timeline-block:first-child {\n    margin-top: 0;\n  }\n  .cd-timeline-block:last-child {\n    margin-bottom: 0;\n  }\n}\n.cd-timeline-img {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 40px;\n  height: 40px;\n  border-radius: 50%;\n  box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);\n  background-color: #FF5722;\n}\n.cd-timeline-img img {\n  display: block;\n  width: 24px;\n  height: 24px;\n  position: relative;\n  left: 50%;\n  top: 50%;\n  margin-left: -12px;\n  margin-top: -12px;\n}\n.cd-timeline-img.cd-picture {\n  background: #75ce66;\n}\n.cd-timeline-img.cd-movie {\n  background: #c03b44;\n}\n.cd-timeline-img.cd-location {\n  background: #f0ca45;\n}\n@media only screen and (min-width: 1170px) {\n  .cd-timeline-img {\n    width: 60px;\n    height: 60px;\n    left: 50%;\n    margin-left: -30px;\n    /* Force Hardware Acceleration in WebKit */\n    -webkit-transform: translateZ(0);\n    -webkit-backface-visibility: hidden;\n  }\n  .cssanimations .cd-timeline-img.is-hidden {\n    visibility: hidden;\n  }\n  .cssanimations .cd-timeline-img.bounce-in {\n    visibility: visible;\n    -webkit-animation: cd-bounce-1 0.6s;\n    animation: cd-bounce-1 0.6s;\n  }\n}\n@-webkit-keyframes cd-bounce-1 {\n  0% {\n    opacity: 0;\n    -webkit-transform: scale(0.5);\n  }\n  60% {\n    opacity: 1;\n    -webkit-transform: scale(1.2);\n  }\n  100% {\n    -webkit-transform: scale(1);\n  }\n}\n@keyframes cd-bounce-1 {\n  0% {\n    opacity: 0;\n    -webkit-transform: scale(0.5);\n    -ms-transform: scale(0.5);\n    transform: scale(0.5);\n  }\n  60% {\n    opacity: 1;\n    -webkit-transform: scale(1.2);\n    -ms-transform: scale(1.2);\n    transform: scale(1.2);\n  }\n  100% {\n    -webkit-transform: scale(1);\n    -ms-transform: scale(1);\n    transform: scale(1);\n  }\n}\n.cd-timeline-content {\n  position: relative;\n  margin-left: 60px;\n  background: white;\n  border-radius: 0.25em;\n  padding: 1em;\n  box-shadow: 0 3px 0 #d7e4ed;\n  height: 10rem;\n  -webkit-transition: height .5s;\n  transition: height .5s;\n}\n.cd-timeline-content:after {\n  content: \"\";\n  display: table;\n  clear: both;\n}\n.cd-timeline-content h2 {\n  color: #303e49;\n}\n.cd-timeline-content p,\n.cd-timeline-content .cd-read-more,\n.cd-timeline-content .cd-date {\n  font-size: 13px;\n  font-size: 0.8125rem;\n}\n.cd-timeline-content p {\n  margin: 1em 0;\n  line-height: 1.6;\n  display: block;\n  height: 2.9rem;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-line-clamp: 2;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n}\n.cd-timeline-content .cd-read-more,\n.cd-timeline-content .cd-date {\n  display: inline-block;\n}\n.cd-timeline-content p {\n  margin: 1em 0;\n  line-height: 1.6;\n}\n.cd-timeline-content .cd-read-more {\n  float: right;\n  padding: .8em 1em;\n  background: #FF5722;\n  color: white;\n  border-radius: 0.25em;\n}\n.no-touch .cd-timeline-content .cd-read-more:hover {\n  background-color: #FF5722;\n}\n.cd-timeline-content .cd-date {\n  float: left;\n  padding: .8em 0;\n  opacity: .7;\n}\n.cd-timeline-content::before {\n  content: '';\n  position: absolute;\n  top: 16px;\n  right: 100%;\n  height: 0;\n  width: 0;\n  border: 7px solid transparent;\n  border-right: 7px solid white;\n}\n@media only screen and (min-width: 768px) {\n  .cd-timeline-content h2 {\n    font-size: 20px;\n    font-size: 1.25rem;\n  }\n  .cd-timeline-content p {\n    font-size: 16px;\n    font-size: 1rem;\n  }\n  .cd-timeline-content .cd-read-more,\n  .cd-timeline-content .cd-date {\n    font-size: 14px;\n    font-size: 0.875rem;\n  }\n}\n@media only screen and (min-width: 1170px) {\n  .cd-timeline-content {\n    margin-left: 0;\n    padding: 1.6em;\n    width: 45%;\n  }\n  .cd-timeline-content::before {\n    top: 24px;\n    left: 100%;\n    border-color: transparent;\n    border-left-color: white;\n  }\n  .cd-timeline-content .cd-read-more {\n    float: left;\n  }\n  .cd-timeline-content .cd-date {\n    position: absolute;\n    width: 100%;\n    left: 122%;\n    top: 6px;\n    font-size: 16px;\n    font-size: 1rem;\n  }\n  .cd-timeline-block:nth-child(even) .cd-timeline-content {\n    float: right;\n  }\n  .cd-timeline-block:nth-child(even) .cd-timeline-content::before {\n    top: 24px;\n    left: auto;\n    right: 100%;\n    border-color: transparent;\n    border-right-color: white;\n  }\n  .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-read-more {\n    float: right;\n  }\n  .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-date {\n    left: auto;\n    right: 122%;\n    text-align: right;\n  }\n  .cssanimations .cd-timeline-content.is-hidden {\n    visibility: hidden;\n  }\n  .cssanimations .cd-timeline-content.bounce-in {\n    visibility: visible;\n    -webkit-animation: cd-bounce-2 0.6s;\n    animation: cd-bounce-2 0.6s;\n  }\n}\n@media only screen and (min-width: 1170px) {\n  /* inverse bounce effect on even content blocks */\n  .cssanimations .cd-timeline-block:nth-child(even) .cd-timeline-content.bounce-in {\n    -webkit-animation: cd-bounce-2-inverse 0.6s;\n    animation: cd-bounce-2-inverse 0.6s;\n  }\n}\n@-webkit-keyframes cd-bounce-2 {\n  0% {\n    opacity: 0;\n    -webkit-transform: translateX(-100px);\n  }\n  60% {\n    opacity: 1;\n    -webkit-transform: translateX(20px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n  }\n}\n@keyframes cd-bounce-2 {\n  0% {\n    opacity: 0;\n    -webkit-transform: translateX(-100px);\n    -ms-transform: translateX(-100px);\n    transform: translateX(-100px);\n  }\n  60% {\n    opacity: 1;\n    -webkit-transform: translateX(20px);\n    -ms-transform: translateX(20px);\n    transform: translateX(20px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n    -ms-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n@-webkit-keyframes cd-bounce-2-inverse {\n  0% {\n    opacity: 0;\n    -webkit-transform: translateX(100px);\n  }\n  60% {\n    opacity: 1;\n    -webkit-transform: translateX(-20px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n  }\n}\n@keyframes cd-bounce-2-inverse {\n  0% {\n    opacity: 0;\n    -webkit-transform: translateX(100px);\n    -ms-transform: translateX(100px);\n    transform: translateX(100px);\n  }\n  60% {\n    opacity: 1;\n    -webkit-transform: translateX(-20px);\n    -ms-transform: translateX(-20px);\n    transform: translateX(-20px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n    -ms-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n.cd-timeline-block.add {\n  height: 4rem;\n}\n.cd-timeline-block.add .cd-timeline-img {\n  background-color: #4CAF50;\n}\n.cd-timeline-block.add .cd-timeline-content {\n  height: 0;\n  padding: 0;\n}\n.cd-timeline-block.add .cd-timeline-content:before {\n  border-right: 7px solid transparent;\n}\n.cd-timeline-block.add .edit {\n  z-index: 2;\n}\n.cd-timeline-block.add .edit .cd-timeline-content {\n  height: 25rem !important;\n  padding: 1rem;\n}\n.cd-timeline-block.add .edit .cd-timeline-content:before {\n  border-right: 7px solid white!important;\n}\n.cd-timeline-block.add .edit .txtNote {\n  width: 100%;\n  height: 77%;\n  padding-top: .5rem;\n  font-size: 1rem;\n  margin-top: .5rem;\n}\n.cd-timeline-block.add .edit .textfield.dateExt {\n  width: 50%;\n  float: right;\n  height: 1rem;\n  margin: .4rem 0;\n}\n.cd-timeline-block.edit {\n  z-index: 2;\n}\n.cd-timeline-block.edit .cd-timeline-content {\n  height: 25rem !important;\n}\n.cd-timeline-block.edit .cd-timeline-content h2 {\n  width: 42%;\n  float: left;\n}\n.cd-timeline-block.edit .cd-timeline-content .dateExt {\n  width: 50%;\n  float: right;\n  height: 1rem;\n  margin: 0;\n}\n.cd-timeline-block.edit .cd-timeline-content .delete {\n  position: absolute;\n  top: -9px;\n  left: 93%;\n  color: red;\n  z-index: 2;\n  background-color: gray;\n}\n.cd-timeline-block.edit .txtNote {\n  width: 100%;\n  height: 77%;\n  padding-top: .5rem;\n  font-size: 1rem;\n  margin-top: .5rem;\n}\n#blur {\n  width: 100%;\n  position: absolute;\n  background-color: #7d7d7d;\n  opacity: 0;\n  pointer-events: none;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s;\n}\n#blur.on {\n  pointer-events: all;\n  opacity: .5;\n}\n.salvaReport {\n  margin-left: 6rem;\n}\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 128 */
 /***/ function(module, exports) {
 
 	/**
@@ -15342,7 +15597,7 @@
 	exports.InputMask = InputMask;
 
 /***/ },
-/* 126 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15397,7 +15652,86 @@
 	    var orderedRep = orderByDate(reports);
 	
 	    app.state.reports(orderedRep);
-	    callback(null, orderedRep);
+	    return callback(null, orderedRep);
+	  });
+	};
+	
+	Reports.update = function (item, callback) {
+	
+	  (0, _libsRequest2['default'])({
+	
+	    method: 'PUT',
+	    url: _config.urls[_config.env].report + '/' + item._id,
+	    data: item
+	  }, function (err, result) {
+	    if (err) {
+	      app.showToast('Si è verificato un errore.');
+	      return callback(err, null);
+	    }
+	
+	    item._rev = result.rev;
+	
+	    var index = app.state.reports().findIndex(function (it) {
+	      return it._id === item._id;
+	    });
+	    var temp = app.state.reports();
+	    temp[index] = item;
+	    app.state.reports(temp);
+	
+	    return callback(null, result);
+	  });
+	};
+	
+	Reports.add = function (item, callback) {
+	
+	  if (item._id !== undefined) delete item._id;
+	  if (item._rev !== undefined) delete item._rev;
+	
+	  (0, _libsRequest2['default'])({
+	
+	    method: 'POST',
+	    url: _config.urls[_config.env].report + '/',
+	    data: item
+	  }, function (err, result) {
+	    if (err) {
+	      app.showToast('Si è verificato un errore.');
+	      return callback(err, null);
+	    }
+	
+	    item._rev = result.rev;
+	    item._id = result.id;
+	
+	    var index = app.state.reports().findIndex(function (it) {
+	      return it._id === -1;
+	    });
+	    var temp = app.state.reports();
+	    temp[index] = item;
+	    app.state.reports(temp);
+	
+	    return callback(null, result);
+	  });
+	};
+	
+	Reports.remove = function (item, callback) {
+	
+	  (0, _libsRequest2['default'])({
+	
+	    method: 'DELETE',
+	    url: _config.urls[_config.env].report + '/' + item._id + '?rev=' + item._rev
+	  }, function (err, result) {
+	    if (err) {
+	      app.showToast('Si è verificato un errore.');
+	      return callback(err, null);
+	    }
+	
+	    var index = app.state.reports().findIndex(function (it) {
+	      return it._id === item._id;
+	    });
+	    var temp = app.state.reports();
+	    temp.splice(index, 1);
+	    app.state.reports(temp);
+	
+	    return callback(null, result);
 	  });
 	};
 	
@@ -15416,7 +15750,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 127 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -15439,7 +15773,7 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _stylesReportsLess = __webpack_require__(123);
+	var _stylesReportsLess = __webpack_require__(126);
 	
 	var _stylesReportsLess2 = _interopRequireDefault(_stylesReportsLess);
 	
@@ -15447,11 +15781,15 @@
 	
 	var _libsRedrawMaterial2 = _interopRequireDefault(_libsRedrawMaterial);
 	
-	var _libsInputMask = __webpack_require__(125);
+	var _libsInputMask = __webpack_require__(128);
+	
+	var _modelsReportsModel = __webpack_require__(129);
+	
+	var _modelsReportsModel2 = _interopRequireDefault(_modelsReportsModel);
 	
 	_moment2['default'].locale("it-IT");
 	
-	var editedReport = _mithril2['default'].prop(null);
+	//let editedReport = m.prop(null);
 	
 	exports['default'] = {
 	
@@ -15467,23 +15805,41 @@
 	    }
 	
 	    function setCodAgente(val) {
-	      editedReport().codAgente = val;
+	      data().codAgente = val;
 	    }
 	
 	    function setNote(val) {
-	      editedReport().note = val;
+	      data().note = val;
 	    }
 	
 	    function setData(val) {
-	      editedReport().data = (0, _moment2['default'])(val, "DD/MM/YYYY h:mm");
+	      data().data = (0, _moment2['default'])(val, "DD/MM/YYYY h:mm");
 	    }
 	
 	    function save() {
-	      var temp = app.state.customer();
-	      temp.relazioni[editId()] = editedReport();
-	      app.state.customer(temp);
+	      event.stopPropagation();
 	
+	      if (this.data()._id === -1) {
+	
+	        _modelsReportsModel2['default'].add(this.data(), function (err, success) {
+	          console.log(success);
+	        });
+	      } else {
+	        _modelsReportsModel2['default'].update(this.data(), function (err, success) {
+	          //do something?
+	          console.log(success);
+	        });
+	      }
 	      app.state.editReportId(null);
+	    }
+	
+	    function remove() {
+	
+	      if (window.confirm('Eliminare questo elemento?')) {
+	        _modelsReportsModel2['default'].remove(this.data(), function (err, success) {
+	          if (success) app.state.editReportId(null);
+	        });
+	      }
 	    }
 	
 	    function switchImage(item) {
@@ -15497,7 +15853,7 @@
 	          break;
 	      }
 	
-	      editedReport(item);
+	      data(item);
 	    }
 	
 	    return {
@@ -15509,23 +15865,18 @@
 	      setCodAgente: setCodAgente,
 	      setNote: setNote,
 	      setData: setData,
+	      remove: remove,
 	      save: save
 	    };
 	  },
 	
 	  view: function view(ctrl) {
 	
-	    if (ctrl.editId() !== null && editedReport() === null) {
-	      editedReport(app.state.customer().relazioni[ctrl.editId()]);
-	    }
-	    if (ctrl.editId() === null) {
-	      editedReport(null);
-	    }
-	
 	    return (0, _mithril2['default'])('div', {
 	      className: 'cd-timeline-block' + (ctrl.editId() === ctrl.index() ? ' edit' : ''),
-	      id: ctrl.index()
-	    }, ctrl.editId() === ctrl.index() ? viewEdit(ctrl, editedReport(), ctrl.index()) : viewStandard(ctrl, ctrl.data(), ctrl.index()));
+	      id: ctrl.index(),
+	      key: ctrl.index()
+	    }, ctrl.editId() === ctrl.index() ? viewEdit(ctrl, ctrl.data(), ctrl.index()) : viewStandard(ctrl, ctrl.data(), ctrl.index()));
 	  }
 	
 	};
@@ -15537,11 +15888,19 @@
 	  })]), (0, _mithril2['default'])('div', {
 	    className: 'cd-timeline-content',
 	    onclick: ctrl.editItem.bind(ctrl, index)
-	  }, [(0, _mithril2['default'])('h2', [(0, _moment2['default'])(item.data).fromNow(), (0, _mithril2['default'])('input', {
+	  }, [(0, _mithril2['default'])('button', {
+	    className: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored delete',
+	    style: {
+	      display: item._id === -1 ? 'none' : 'block'
+	    },
+	    onclick: ctrl.remove.bind(ctrl)
+	  }, (0, _mithril2['default'])('i', {
+	    className: 'material-icons'
+	  }, 'delete')), (0, _mithril2['default'])('h2', [(0, _moment2['default'])(item.data).fromNow()]), (0, _mithril2['default'])('input', {
 	    className: 'textfield dateExt',
 	    value: item.codAgente,
 	    oninput: _mithril2['default'].withAttr('value', ctrl.setCodAgente)
-	  })]), (0, _mithril2['default'])('textarea', {
+	  }), (0, _mithril2['default'])('textarea', {
 	    className: 'txtNote',
 	    value: item.note,
 	    oninput: _mithril2['default'].withAttr('value', ctrl.setNote)
@@ -15561,7 +15920,7 @@
 	  }, (0, _moment2['default'])(item.data).format('DD/MM/YYYY h:mm')), (0, _mithril2['default'])('button', {
 	    className: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored salvaReport',
 	    config: _libsRedrawMaterial2['default'],
-	    onclick: ctrl.save
+	    onclick: ctrl.save.bind(ctrl)
 	  }, 'Salva')])];
 	}
 	

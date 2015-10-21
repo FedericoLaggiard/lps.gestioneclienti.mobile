@@ -24,7 +24,8 @@ export default {
     let editId = app.state.editReportId;
     let reports = m.prop(app.state.reports());
 
-    if(!app.state.reports()){
+    if(!app.state.reportsForCustomer() || app.state.reportsForCustomer().id !== m.route.param('id')){
+      app.state.reportsForCustomer({id: m.route.param('id')});
       Reports.fetch((err,r) => {
         if(err) return console.log(err);
 
@@ -39,8 +40,26 @@ export default {
     }
 
     function editItem(itemId){
-      app.state.editReportId(itemId);
-      editId(app.state.editReportId());
+      if (itemId === null && app.state.editReportId() === -1){
+        var that = this;
+        if(window.confirm('Annullare la creazione del nuovo elemento?')){
+          that.editId(itemId);
+          var t = app.state.reports();
+          t.shift();
+          app.state.reports(t)
+        }
+      }else{
+        app.state.editReportId(itemId);
+        editId(app.state.editReportId());
+      }
+    }
+
+    function newItem(){
+      var t = app.state.reports();
+      var n = new Reports({doc: {_id: -1, data: moment().format('YYYY-MM-DDTHH:mm:ss'), idCliente: m.route.param('id'), tipoIncontro: 'T' } });
+      t.unshift(n);
+      this.reports(app.state.reports(t));
+      this.editItem(-1);
     }
 
 
@@ -48,6 +67,7 @@ export default {
       editId,
       initBlur,
       editItem,
+      newItem,
       reports
     }
   },
@@ -69,7 +89,10 @@ export default {
         m('section', {id: 'cd-timeline'},
 
           m('div', { className: 'cd-timeline-block add'}, [
-            m('div', { className: 'cd-timeline-img'}, [
+            m('div', {
+              className: 'cd-timeline-img',
+              onclick: ctrl.newItem.bind(ctrl)
+            }, [
               m('img', { src: './img/add.svg'})
             ]),
             m('div', { className: 'cd-timeline-content'})

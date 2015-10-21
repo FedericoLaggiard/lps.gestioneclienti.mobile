@@ -9,6 +9,7 @@ import style from '../../styles/customer.less';
 import redrawMat from '../libs/redrawMaterial';
 
 import Customer from '../models/customerModel';
+import gMap from './gMap';
 
 
 export default {
@@ -191,57 +192,7 @@ export default {
             className: 'page-content card' + (ctrl.cardFlipped() ? ' flipped' : ''),
             id: 'customerContainer'},[
             //FRONT
-            m('div', { className: 'front'}, [
-
-              m('section', { className: 'head'}, [
-                m('h1', { className: 'name' }, ctrl.customer.ragioneSociale()),
-                m('div', { className: 'leftInfo'}, [
-                  m('span', { className: 'lblInfo'}, 'Cliente di:'),
-                  m('span', { className: 'Info'}, ctrl.customer.codAgente() ? ctrl.customer.codAgente() : '')
-                ]),
-                m('div', { className: 'circular' }),
-                m('div', { className: 'rightInfo'}, [
-                  m('span', { className: 'lblInfo'}, 'Visitato il:'),
-                  m('span', { className: 'Info'}, ctrl.customer.ultimaVisita() ? ctrl.customer.ultimaVisita() : '')
-                ])
-              ]),
-              m('section', { className: 'contact' }, [
-                m('a', { href: 'tel:' + ctrl.customer.telefono() },
-                  m('h2', { className: 'tel' }, ctrl.customer.telefono() ? ctrl.customer.telefono() : '')
-                ),
-                m('a', { href: 'mailto:'+ ctrl.customer.email()},
-                  m('h2', { className: 'mail' }, ctrl.customer.email() ? ctrl.customer.email() : '')
-                )
-              ]),
-              m('a', {
-                  href: 'https://www.google.it/maps/place/'+ ctrl.customer.indirizzo() +',+'+ ctrl.customer.citta() +',+'+ ctrl.customer.provincia(),
-                  className: 'location',
-                  target: '_blank'
-                }, [
-                  m('span', ctrl.customer.indirizzo()),
-                  m('span', ctrl.customer.citta()),
-                  m('span', ctrl.customer.provincia()),
-                  m('i', { className: 'material-icons'}, 'location_on')
-                ]
-              ),
-              m('section', { className: 'relazioni' },
-                m('button', {
-                  className: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored',
-                  config: redrawMat,
-                  onclick: function() { m.route('/customers/'+ m.route.param('id') +'/reports') }
-                }, 'Relazioni')
-              ),
-              m('section', { className: 'other' },
-                m('ul', { id: 'lista_detail'},
-                  [
-                    m('li', { className: 'icona_detail' }, 'Attività'),
-                    m('li', { className: 'descr_detail' }, ctrl.customer.attivita() ? ctrl.customer.attivita() : ''),
-                    m('li', { className: 'icona_detail' }, 'Responsabile'),
-                    m('li', { className: 'descr_detail' }, ctrl.customer.responsabile() ? ctrl.customer.responsabile() : '')
-                  ])
-              )
-
-            ]),
+            m('div', { className: 'front'}, customerView(ctrl)),
             //BACK
             m('div', { className: 'back' },[
               m('div', { id: 'formContainer' },
@@ -430,6 +381,83 @@ export default {
       );
     //]);
   }
+
+}
+
+function customerView(ctrl){
+
+
+  return [
+    m('section', { className: 'head mdl-shadow--4dp' }, [
+      m('div', { className: 'circular' }),
+      m('h2', { className: 'name' }, ctrl.customer.ragioneSociale()),
+      m('div', { className: 'table' }, [
+        m('div', { className: 'left'}, [
+          m('span', { className: 'label' }, 'ULTIMA VISITA:'),
+          m('span', { className: 'value' }, ctrl.customer.ultimaVisita() ? ctrl.customer.ultimaVisita() : 'n/d')
+        ]),
+        m('div', { className: 'right'}, [
+          m('span', { className: 'label' }, 'AGENTE:'),
+          m('span', { className: 'value' }, ctrl.customer.codAgente() ? ctrl.customer.codAgente() : 'n/d')
+        ])
+      ]),
+      m('span', { className: 'line'}),
+      m('button', {
+        className: 'mdl-button mdl-js-button mdl-js-ripple-effect action',
+        config: redrawMat,
+        onclick: function() { m.route('/customers/'+ m.route.param('id') +'/reports') }
+      }, [
+        'Relazioni',
+        m('i', {className: 'material-icons arrow'}, 'arrow_forward')
+      ])
+    ]),
+    m('section', { className: 'contacts mdl-shadow--4dp'}, [
+      m('span', { className: 'label' }, 'CONTATTI:'),
+      m('a', {
+          className: 'tel',
+          href: 'tel:' + ctrl.customer.telefono()
+        }, m('button', {
+          className: 'mdl-button mdl-js-button mdl-js-ripple-effect phone',
+          config: redrawMat
+        }, [
+          ctrl.customer.telefono()
+          //m('i', {className: 'material-icons arrow'}, 'phone')
+        ])),
+      m('span', { className: 'line' }),
+      m('a', {
+        className: 'mail',
+        href: 'mailto:' + ctrl.customer.email()
+      }, m('button', {
+        className: 'mdl-button mdl-js-button mdl-js-ripple-effect mail',
+        config: redrawMat
+      }, [
+        ctrl.customer.email()
+        //m('i', {className: 'material-icons arrow'}, 'email')
+      ]))
+    ]),
+    m('section', { className: 'map mdl-shadow--4dp'}, [
+      m.component(gMap, { address: ctrl.customer.indirizzo() +',+'+ ctrl.customer.citta() +',+'+ ctrl.customer.provincia() }),
+      m('div', {className: 'btnHover'},
+        m('button', {
+          className: 'mdl-button mdl-js-button mdl-js-ripple-effect action',
+          config: redrawMat,
+          onclick: function() { window.open('https://www.google.it/maps/place/'+ ctrl.customer.indirizzo() +',+'+ ctrl.customer.citta() +',+'+ ctrl.customer.provincia(), '_blank') }
+        }, [
+          "Indicazioni",
+          m('i', {className: 'material-icons arrow'}, 'arrow_forward')
+        ])
+      )
+    ]),
+    m('section', { className: 'other mdl-shadow--4dp'}, [
+      m('span', { className: 'label' }, 'INDIRIZZO:'),
+      m('span', { className: 'value capitalize' }, ctrl.customer.indirizzo().toLowerCase()),
+      m('span', { className: 'value' }, ctrl.customer.citta() + ' - ' + ctrl.customer.provincia()),
+      m('span', { className: 'label' }, "ATTIVITA':"),
+      m('span', { className: 'value' }, ctrl.customer.attivita() ? ctrl.customer.attivita() : 'n/d'),
+      m('span', { className: 'label' }, "RESPONSABILE:"),
+      m('span', { className: 'value' }, ctrl.customer.responsabile() ? ctrl.customer.responsabile() : 'n/d')
+    ])
+    ];
 
 }
 

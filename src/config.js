@@ -19,6 +19,7 @@ export const urls = {
     login:        baseUrl[env] + '/_session',
     customer:     baseUrl[env] + '/lps_clienti',
     customers:    baseUrl[env] + '/lps_clienti/_design/listByRagSoc/_view/listByRagSoc',
+    report:       baseUrl[env] + '/lps_reports',
     reports:      baseUrl[env] + '/lps_reports/_design/reportsByCustomer/_view/reportsByCustomer'
   },
 
@@ -26,6 +27,7 @@ export const urls = {
     login:        baseUrl[env] + '/_session',
     customer:     baseUrl[env] + '/lps_clienti',
     customers:    baseUrl[env] + '/lps_clienti/_design/listByRagSoc/_view/listByRagSoc',
+    report:       baseUrl[env] + '/lps_reports',
     reports:      baseUrl[env] + '/lps_reports/_design/reportsByCustomer/_view/reportsByCustomer'
   }
 

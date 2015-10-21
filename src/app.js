@@ -24,6 +24,7 @@ let app = {
     login: storage('login'),
     customers: storage('customers'),
     customer: storage('customer'),
+    reportsForCustomer: storage('reportsForCustomer'),
     reports: storage('reports'),
 
     searchText: m.prop(''),
