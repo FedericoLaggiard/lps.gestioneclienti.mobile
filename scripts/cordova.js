@@ -18,6 +18,19 @@ exec ("rm -R cordova/www/", function(error,stdout,stderr){
         console.log("exec error: " + error);
       } else {
 
+        exec('cordova build', {cwd: './cordova'} , function(error, stdout, stderr) {
+          sys.print("stdout: " + stdout );
+          sys.print("stderr: " + stderr );
+          if(error !== null) {
+            console.log("exec error: " + error);
+          } else {
+
+            console.log("CORDOVA BUILDED!!!");
+
+          }
+        });
+
+
       }
     });
 

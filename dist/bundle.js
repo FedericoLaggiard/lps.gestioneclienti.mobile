@@ -13277,7 +13277,7 @@
 	
 	
 	// module
-	exports.push([module.id, "div#toast {\n  position: absolute;\n  z-index: 1;\n  width: 100%;\n}\n.toast {\n  width: 96%;\n  height: 48px;\n  background-color: black;\n  margin: 0 auto;\n  border-radius: 3px;\n  max-width: 400px;\n  color: white;\n  padding: 13px;\n  font-size: 1.2em;\n  -webkit-transform: translate3d(0, 200%, 0);\n  -ms-transform: translate3d(0, 200%, 0);\n  transform: translate3d(0, 200%, 0);\n  -webkit-transition: all .2s;\n  transition: all .2s;\n}\n.toast.show {\n  -webkit-transform: translate3d(0, -110%, 0);\n  -ms-transform: translate3d(0, -110%, 0);\n  transform: translate3d(0, -110%, 0);\n}\n", ""]);
+	exports.push([module.id, "div#toast {\n  position: fixed;\n  z-index: 1;\n  width: 100%;\n}\n.toast {\n  width: 96%;\n  height: 48px;\n  background-color: black;\n  margin: 0 auto;\n  border-radius: 3px;\n  max-width: 400px;\n  color: white;\n  padding: 13px;\n  font-size: 1.2em;\n  -webkit-transform: translate3d(0, 200%, 0);\n  -ms-transform: translate3d(0, 200%, 0);\n  transform: translate3d(0, 200%, 0);\n  -webkit-transition: all .2s;\n  transition: all .2s;\n}\n.toast.show {\n  -webkit-transform: translate3d(0, -110%, 0);\n  -ms-transform: translate3d(0, -110%, 0);\n  transform: translate3d(0, -110%, 0);\n}\n", ""]);
 	
 	// exports
 
@@ -13557,7 +13557,7 @@
 	var baseUrl = {
 	
 	  prod: 'https://couchdb-0f2b48.smileupps.com',
-	  dev: 'http://0.0.0.0:5984'
+	  dev: 'http://192.168.20.58:5984'
 	
 	};
 	
