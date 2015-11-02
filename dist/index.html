@@ -90,6 +90,16 @@
   <script src="cordova.js"></script>
   <script src="bundle.js"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type='application/javascript' src='fastclick.js'></script>
+
+  <script>
+    if ('addEventListener' in document) {
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+        console.log('fastclick attached');
+      }, false);
+    }
+  </script>
 
 </body>
 </html>

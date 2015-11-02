@@ -22,7 +22,8 @@ Customers.fetch = function(callback){
     unwrapSuccess: function(response) {
       return response.rows;
     },
-    type: Customers
+    type: Customers,
+    background: true
   }, (err, customers) => {
     if(err) {
       app.showToast('Si è verificato un errore.');

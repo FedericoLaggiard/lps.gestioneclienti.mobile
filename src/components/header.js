@@ -12,7 +12,22 @@ export default {
 
   controller(title){
 
+    let isSearching = m.prop(false);
+
     return{
+
+      isSearching,
+
+      btnAdd: function(){
+
+        if(isSearching()) {
+          app.state.searchText('');
+          isSearching(false);
+        }else{
+          m.route('/customers/new');
+        }
+
+      },
 
       btnBack: function(){
 
@@ -30,45 +45,63 @@ export default {
 
   view(ctrl){
 
-    return m('header', {
-      className: 'mdl-layout__header',
-      config: redrawMat
-      },
-        ctrl.title === 'CLIENTI' ? subViewCustomers(ctrl) : '',
-        ctrl.title === 'RELAZIONI' ? subViewReports(ctrl) : ''
-    );
+
+    switch(ctrl.title){
+      case 'CLIENTI':
+        return m('header', {
+            className: 'mdl-layout__header',
+            config: redrawMat
+          },
+          subViewCustomers(ctrl)
+        );
+        break;
+      case 'RELAZIONI':
+        return subViewReports(ctrl);
+        break;
+    }
+
+
 
   }
 }
 
 function subViewCustomers(ctrl){
   return [
-    m('div', { className: 'mdl-layout__header-row' }, [
-      m('div', { className: 'mdl-layout-spacer'}),
-      m('div', { className: 'mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right'}, [
-        m('label', { className: 'mdl-button mdl-js-button mdl-button--icon', 'for': 'txtSearch'},
-          m('i', { className: 'material-icons' }, 'search')
-        ),
-        m('div', { className: 'mdl-textfield__expandable-holder'}, [
-          m('input', {
-            className: 'mdl-textfield__input',
-            type: 'text',
-            id: 'txtSearch',
-            oninput: m.withAttr('value', app.state.searchText),
-            value: app.state.searchText()
-          })
-        ])
-      ])
-    ]),
+    //Loader
+    m('div', { className: 'loader', style: { display: app.showLoader() ? 'block' : 'none'  } }),
     m('div', { className: 'mdl-layout__header-row' }, [
       m('span', {className: 'mdl-layout-title headerTitle' }, ctrl.title)
-    ])
+    ]),
+    m('button', {
+      className: 'mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored add' + (ctrl.isSearching() ? ' undo' : ''),
+      onclick: ctrl.btnAdd.bind(ctrl)
+    }, [
+      m('i', {className: 'material-icons' }, 'add')
+    ]),
+    m('button', {
+      className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored search' + (ctrl.isSearching() ? ' on' : ''),
+      onclick: function(){ ctrl.isSearching(!ctrl.isSearching()) }
+    }, [
+      m('i', {className: 'material-icons' }, 'search')
+    ]),
+    m('div', {
+      className: 'txtSearchContainer'+ (ctrl.isSearching() ? ' on' : '')
+    }, m('input', {
+        className: 'txtSearch'+ (ctrl.isSearching() ? ' on' : ''),
+        type: 'text',
+        id: 'txtSearch',
+        oninput: m.withAttr('value', app.state.searchText),
+        value: app.state.searchText()
+      })
+    )
   ]
 }
 
 function subViewReports(ctrl){
-  return [
-    m('div', { className: 'mdl-layout__header-row noPadding' }, [
+  return m('header', { className: 'mdl-layout__header' }, [
+    //Loader
+    m('div', { className: 'loader', style: { display: app.showLoader() ? 'block' : 'none'  } }),
+    m('div', { className: 'mdl-layout__header-row noPadding'}, [
       //BACK
       m('button', {
           className: 'mdl-button mdl-js-button mdl-button--icon',
@@ -80,8 +113,8 @@ function subViewReports(ctrl){
       ),
       m('span', {className: 'navTitle' }, ctrl.title)
     ]),
-    m('div', { className: 'mdl-layout__header-row'}, [
+    m('div', { className: 'mdl-layout__header-row noPadding'}, [
       m('span', {className: 'mdl-layout-title headerTitle'}, app.state.customer().ragioneSociale)
     ])
-  ]
+  ]);
 }

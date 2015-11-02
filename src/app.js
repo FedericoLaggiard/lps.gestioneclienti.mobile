@@ -16,10 +16,10 @@ let app = {
 
   state: {
 
-    credentials: {
-      name: m.prop(''),
-      password: m.prop('')
-    },
+    //credentials: {
+    //  name: m.prop(''),
+    //  password: m.prop('')
+    //},
 
     login: storage('login'),
     customers: storage('customers'),
@@ -40,6 +40,8 @@ let app = {
       visible: m.prop('')
     }
   },
+
+  showLoader: m.prop(false),
 
   showToast: function(message){
     this.state.toast.message(message);

@@ -21,8 +21,8 @@ import reports from './components/reports';
 m.route.mode = 'hash';
 m.route(document.getElementById('app'), '/customers', {
   '/login':                 login,
-  '/customers':             protect(customers),
-  '/customers/:id':         protect(customer),
-  '/customers/:id/reports': protect(reports)
+  '/customers':             customers,
+  '/customers/:id':         customer,
+  '/customers/:id/reports': reports
 });
 m.mount(document.getElementById('toast'), toast);

@@ -14,12 +14,12 @@ function Login(data){
   this.roles  = m.prop(data.roles || []);
 }
 
-Login.fetch = function(callback){
+Login.fetch = function(credentials, callback){
 
   request({
     method: 'POST',
     url: urls[env].login,
-    data: app.state.credentials,
+    data: credentials,
     type: Login
   }, (err, login) => {
     if(err) {

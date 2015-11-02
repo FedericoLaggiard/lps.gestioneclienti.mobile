@@ -23,7 +23,7 @@
 
       div.circular{
         position: absolute;
-        left: 80%;
+        left: 75%;
         top: -40px;
         border: 2px solid #8f8f8f;
         -webkit-box-shadow: 0px 4px 8px #838383;
@@ -38,6 +38,11 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         margin-bottom: 1.1rem;
+        line-height: 2rem;
+
+        &:first-letter{
+          font-size: 2rem;
+        }
       }
 
       div.table {
@@ -76,11 +81,11 @@
       button.action{
         width: 100%;
         text-align: left;
-        color: rgb(255,110,64);
+        color: #FF6E40;
 
         i.arrow {
-          text-align: right;
-          width: 76%;
+          float: right;
+          line-height: 2.8rem;
         }
       }
 
@@ -109,7 +114,7 @@
         padding: 0 1rem;
 
         i.arrow {
-          width: 72%;
+          float: right;
         }
       }
 
@@ -158,7 +163,7 @@
 }
 
 .nav i {
-  font-size: 1.5em;
+  //font-size: 1.5em;
 }
 
 .nav button {
@@ -252,6 +257,7 @@ END CARD FLIP
 #formContainer {
   padding: 1em;
   background-color: white;
+  padding-bottom: 12.1rem;
 }
 
 #formEdit .mdl-textfield{
@@ -270,6 +276,23 @@ section.relazioni {
   padding: 1rem 0;
 }
 
+section.other {
+  height: 14rem;
+  overflow-x: scroll;
+}
+
 .dateMask {
-  width: 43%;
+  width: 50%;
+}
+
+.spinner {
+  z-index: 1;
+  width: 20%;
+  position: fixed;
+  top: 50%;
+  left: 53%;
+  margin-top: -50px;
+  margin-left: -50px;
+
+  circle{stroke:#FF6E40;}
 }

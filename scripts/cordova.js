@@ -1,5 +1,6 @@
 "use strict";
 
+var beep = require('beepbeep');
 var sys = require('sys');
 var exec = require('child_process').exec;
 
@@ -27,6 +28,7 @@ exec ("rm -R cordova/www/", function(error,stdout,stderr){
 
             console.log("CORDOVA BUILDED!!!");
 
+            beep();
           }
         });
 

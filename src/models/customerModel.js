@@ -51,7 +51,8 @@ Customer.fetch = function(callback){
   request({
     method: 'GET',
     url: urls[env].customer + '/' + m.route.param('id'),
-    type: Customer
+    type: Customer,
+    background: true
   }, (err, customer) => {
     if(err) {
       app.showToast('Si è verificato un errore.');
