@@ -197,3 +197,38 @@ main {
 .capitalize {
   text-transform: capitalize;
 }
+
+/**  LOADER */
+
+@keyframes loading {
+  from {left: -200px; width: 30%;}
+  50% {width: 30%;}
+  70% {width: 70%;}
+  80% { left: 50%;}
+  95% {left: 120%;}
+  to {left: 100%;}
+}
+
+.loader {
+  height: .3rem;
+  width: 110%;
+  position: absolute;
+  overflow: hidden;
+  background-color: #3f51b5;
+  margin-left: 0;
+  margin-top: -1rem;
+  float: left;
+}
+
+.loader:before{
+  display: block;
+  position: absolute;
+  content: "";
+  left: -200%;
+  width: 200%;
+  height: 0.3em;
+  background-color: #FF5722;
+  animation: loading 2s linear infinite;
+}
+
+/** END LOADER */

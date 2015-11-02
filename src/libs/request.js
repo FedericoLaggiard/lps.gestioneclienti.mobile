@@ -43,9 +43,22 @@ export default function (options, callback, noAuth = false) {
     }
   }
 
+  app.showLoader(true);
+  m.redraw();
+
   m.request(options).then((response) => {
+
+
+      setTimeout(() => {
+        app.showLoader(false);
+        m.redraw();
         callback(null, response);
+      },1500);
+
       }, (error) => {
+        app.showLoader(false);
+        m.redraw();
+
         callback(error, null);
       }
   );

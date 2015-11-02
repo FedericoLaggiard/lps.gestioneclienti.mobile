@@ -28,18 +28,6 @@ export default {
       editId(app.state.editReportId());
     }
 
-    function setCodAgente(val){
-      data().codAgente = val;
-    }
-
-    function setNote(val){
-      data().note = val;
-    }
-
-    function setData(val){
-      data().data = moment(val, "DD/MM/YYYY h:mm");
-    }
-
     function save(){
       event.stopPropagation();
 
@@ -71,27 +59,29 @@ export default {
 
     function switchImage(item){
 
-      switch (item.tipoIncontro){
+      switch (item.tipoIncontro()){
         case "V":
-          item.tipoIncontro = "T";
+          item.tipoIncontro("T");
           break;
         case "T":
-          item.tipoIncontro = "V";
+          item.tipoIncontro("V");
           break;
       }
 
       data(item);
     }
 
+    function setData(val){
+      data().data(moment(val, "DD/MM/YYYY h:mm"));
+    }
+
     return{
       editId,
       index,
       data,
+      setData,
       editItem,
       switchImage,
-      setCodAgente,
-      setNote,
-      setData,
       remove,
       save
     }
@@ -118,7 +108,7 @@ function viewEdit(ctrl, item, index){
   return [
     m('div', { className: 'cd-timeline-img'}, [
       m('img', {
-        src: item.tipoIncontro === 'V' ? './img/person.svg' : './img/call.svg',
+        src: item.tipoIncontro() === 'V' ? './img/person.svg' : './img/call.svg',
         onclick: ctrl.switchImage.bind(ctrl, item)
       })
     ]),
@@ -130,7 +120,7 @@ function viewEdit(ctrl, item, index){
       m('button', {
           className: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored delete',
           style: {
-            display: item._id === -1 ? 'none' : 'block'
+            display: item._id() === -1 ? 'none' : 'block'
           },
           onclick: ctrl.remove.bind(ctrl)
         },
@@ -139,24 +129,24 @@ function viewEdit(ctrl, item, index){
         }, 'delete')
       ),
       m('h2', [
-        moment(item.data).fromNow()
+        moment(item.data()).fromNow()
       ]),
       m('input', {
           className: 'textfield dateExt',
-          value: item.codAgente,
-          oninput: m.withAttr('value', ctrl.setCodAgente)
+          value: item.codAgente(),
+          oninput: m.withAttr('value', item.codAgente)
         }
       ),
       m('textarea',{
           className: 'txtNote',
-          value: item.note,
-          oninput: m.withAttr('value', ctrl.setNote)
+          value: item.note(),
+          oninput: m.withAttr('value', item.note)
         }),
       m('input', {
           type: 'text',
           className: 'textfield dateMask',
-          value: moment(item.data).format('DD/MM/YYYY h:mm' ),
-          onblur: m.withAttr('value', ctrl.setData),
+          value: moment(item.data()).format('DD/MM/YYYY h:mm' ),
+          onblur: m.withAttr('value', item.data),
           config: function(element, isInit){
             if(!isInit){
               new InputMask().Initialize(document.querySelectorAll(".dateMask"), {
@@ -165,7 +155,7 @@ function viewEdit(ctrl, item, index){
               });
             }
           }
-        }, moment(item.data).format('DD/MM/YYYY h:mm' )),
+        }, moment(item.data()).format('DD/MM/YYYY h:mm' )),
       m('button', {
         className: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored salvaReport',
         config: redrawMat,
@@ -178,7 +168,7 @@ function viewEdit(ctrl, item, index){
 function viewStandard(ctrl, item, index){
   return [
     m('div', { className: 'cd-timeline-img'}, [
-      m('img', { src: item.tipoIncontro === 'V' ? './img/person.svg' : './img/call.svg'})
+      m('img', { src: item.tipoIncontro() === 'V' ? './img/person.svg' : './img/call.svg'})
     ]),
 
     m('div', {
@@ -186,11 +176,11 @@ function viewStandard(ctrl, item, index){
       onclick: ctrl.editItem.bind(ctrl,index)
     }, [
       m('h2', [
-        moment(item.data).fromNow(),
-        m('span', {className: 'dateExt'}, item.codAgente)
+        moment(item.data()).fromNow(),
+        m('span', {className: 'dateExt'}, item.codAgente())
       ]),
-      m('p', item.note),
-      m('span', {className: 'cd-date'}, moment(item.data).format('D MMMM YYYY, h:mm' ))
+      m('p', item.note()),
+      m('span', {className: 'cd-date'}, moment(item.data()).format('D MMMM YYYY, h:mm' ))
     ])
   ]
 }

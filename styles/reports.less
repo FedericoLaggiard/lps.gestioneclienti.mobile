@@ -61,18 +61,6 @@
 
 }
 
-@media only screen and (min-width: 1170px) {
-  #cd-timeline {
-    margin-top: 3em;
-    margin-bottom: 3em;
-  }
-
-  #cd-timeline::before {
-    left: 50%;
-    margin-left: -2px;
-  }
-}
-
 .cd-timeline-block {
   position: relative;
   margin: 2em 0;
@@ -87,19 +75,6 @@
 }
 .cd-timeline-block:last-child {
   margin-bottom: 0;
-}
-@media only screen and (min-width: 1170px) {
-  .cd-timeline-block {
-    margin: 4em 0;
-  }
-
-  .cd-timeline-block:first-child {
-    margin-top: 0;
-  }
-
-  .cd-timeline-block:last-child {
-    margin-bottom: 0;
-  }
 }
 
 .cd-timeline-img {
@@ -130,28 +105,6 @@
 }
 .cd-timeline-img.cd-location {
   background: #f0ca45;
-}
-@media only screen and (min-width: 1170px) {
-  .cd-timeline-img {
-    width: 60px;
-    height: 60px;
-    left: 50%;
-    margin-left: -30px;
-    /* Force Hardware Acceleration in WebKit */
-    -webkit-transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-  }
-
-  .cssanimations .cd-timeline-img.is-hidden {
-    visibility: hidden;
-  }
-
-  .cssanimations .cd-timeline-img.bounce-in {
-    visibility: visible;
-    -webkit-animation: cd-bounce-1 0.6s;
-    -moz-animation: cd-bounce-1 0.6s;
-    animation: cd-bounce-1 0.6s;
-  }
 }
 
 @-webkit-keyframes cd-bounce-1 {
@@ -220,11 +173,13 @@
   box-shadow: 0 3px 0 #d7e4ed;
   height: 10rem;
 
-  -webkit-transition: height .5s;
-  -moz-transition:    height .5s;
-  -ms-transition:     height .5s;
-  -o-transition:      height .5s;
-  transition:         height .5s;
+  will-change: height;
+
+  //-webkit-transition: height .5s;
+  //-moz-transition:    height .5s;
+  //-ms-transition:     height .5s;
+  //-o-transition:      height .5s;
+  //transition:         height .5s;
 }
 .cd-timeline-content:after {
   content: "";
@@ -281,91 +236,6 @@
   width: 0;
   border: 7px solid transparent;
   border-right: 7px solid white;
-}
-@media only screen and (min-width: 768px) {
-  .cd-timeline-content h2 {
-    font-size: 20px;
-    font-size: 1.25rem;
-  }
-
-  .cd-timeline-content p {
-    font-size: 16px;
-    font-size: 1rem;
-  }
-
-  .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
-    font-size: 14px;
-    font-size: 0.875rem;
-  }
-}
-@media only screen and (min-width: 1170px) {
-  .cd-timeline-content {
-    margin-left: 0;
-    padding: 1.6em;
-    width: 45%;
-  }
-
-  .cd-timeline-content::before {
-    top: 24px;
-    left: 100%;
-    border-color: transparent;
-    border-left-color: white;
-  }
-
-  .cd-timeline-content .cd-read-more {
-    float: left;
-  }
-
-  .cd-timeline-content .cd-date {
-    position: absolute;
-    width: 100%;
-    left: 122%;
-    top: 6px;
-    font-size: 16px;
-    font-size: 1rem;
-  }
-
-  .cd-timeline-block:nth-child(even) .cd-timeline-content {
-    float: right;
-  }
-
-  .cd-timeline-block:nth-child(even) .cd-timeline-content::before {
-    top: 24px;
-    left: auto;
-    right: 100%;
-    border-color: transparent;
-    border-right-color: white;
-  }
-
-  .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-read-more {
-    float: right;
-  }
-
-  .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-date {
-    left: auto;
-    right: 122%;
-    text-align: right;
-  }
-
-  .cssanimations .cd-timeline-content.is-hidden {
-    visibility: hidden;
-  }
-
-  .cssanimations .cd-timeline-content.bounce-in {
-    visibility: visible;
-    -webkit-animation: cd-bounce-2 0.6s;
-    -moz-animation: cd-bounce-2 0.6s;
-    animation: cd-bounce-2 0.6s;
-  }
-}
-
-@media only screen and (min-width: 1170px) {
-  /* inverse bounce effect on even content blocks */
-  .cssanimations .cd-timeline-block:nth-child(even) .cd-timeline-content.bounce-in {
-    -webkit-animation: cd-bounce-2-inverse 0.6s;
-    -moz-animation: cd-bounce-2-inverse 0.6s;
-    animation: cd-bounce-2-inverse 0.6s;
-  }
 }
 @-webkit-keyframes cd-bounce-2 {
   0% {
@@ -520,7 +390,7 @@
     }
 
     .textfield.dateExt {
-      width: 50%;
+      width: 30%;
       float: right;
       height: 1rem;
       margin: .4rem 0;
@@ -537,12 +407,12 @@
     height: 25rem !important;
 
     h2 {
-      width: 42%;
+      width: 50%;
       float: left;
     }
 
     .dateExt {
-      width: 50%;
+      width: 30%;
       float: right;
       height: 1rem;
 
@@ -551,11 +421,11 @@
 
     .delete{
       position: absolute;
-      top: -9px;
-      left: 93%;
+      top: .3rem;
+      left: 87%;
       color: red;
       z-index: 2;
-      background-color: gray;
+      background-color: white;
     }
   }
 
@@ -570,7 +440,7 @@
 
 #blur{
   width: 100%;
-  position: absolute;
+  position: fixed;
   background-color: #7d7d7d;
   opacity: 0;
   pointer-events: none;
@@ -580,11 +450,11 @@
   bottom: 0;
   right: 0;
 
-  -webkit-transition: opacity .5s;
-  -moz-transition:    opacity .5s;
-  -ms-transition:     opacity .5s;
-  -o-transition:      opacity .5s;
-  transition:         opacity .5s;
+  //-webkit-transition: opacity .5s;
+  //-moz-transition:    opacity .5s;
+  //-ms-transition:     opacity .5s;
+  //-o-transition:      opacity .5s;
+  //transition:         opacity .5s;
 
 }
 
@@ -594,5 +464,17 @@
 }
 
 .salvaReport {
-  margin-left: 6rem;
+  float: right;
+}
+
+.spinner {
+  z-index: 1;
+  width: 20%;
+  position: fixed;
+  top: 50%;
+  left: 53%;
+  margin-top: -50px;
+  margin-left: -50px;
+
+  circle{stroke:#FF6E40;}
 }

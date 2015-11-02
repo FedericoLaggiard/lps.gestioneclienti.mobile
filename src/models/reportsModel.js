@@ -29,7 +29,8 @@ Reports.fetch = function(callback){
     unwrapSuccess: function(response) {
       return response.rows;
     },
-    type: Reports
+    type: Reports,
+    background: true
   }, (err, reports) => {
     if(err) {
       app.showToast('Si è verificato un errore.');

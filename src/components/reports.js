@@ -14,6 +14,7 @@ import Reports from '../models/reportsModel';
 
 import Header from './header';
 import Report from './report';
+import Spinner from './spinner.js';
 
 export default {
 
@@ -22,22 +23,17 @@ export default {
     moment.locale("it-IT");
 
     let editId = app.state.editReportId;
-    let reports = m.prop(app.state.reports());
+    let reports = m.prop();
 
-    if(!app.state.reportsForCustomer() || app.state.reportsForCustomer().id !== m.route.param('id')){
+    //if(!app.state.reportsForCustomer() || app.state.reportsForCustomer().id !== m.route.param('id')){
       app.state.reportsForCustomer({id: m.route.param('id')});
       Reports.fetch((err,r) => {
         if(err) return console.log(err);
 
         reports(r);
-      })
-    }
-
-    function initBlur(element, isInit){
-      if(!isInit) {
-        document.getElementById('blur').style.height = document.getElementsByClassName('mdl-layout')[0].scrollHeight + 'px';
-      }
-    }
+        m.redraw();
+      });
+    //}
 
     function editItem(itemId){
       if (itemId === null && app.state.editReportId() === -1){
@@ -65,7 +61,6 @@ export default {
 
     return {
       editId,
-      initBlur,
       editItem,
       newItem,
       reports
@@ -79,32 +74,38 @@ export default {
         className: 'mdl-layout mdl-js-layout mdl-layout--fixed-header',
         config: redrawMat.removeContainer
       },[
+
         m.component(Header, 'RELAZIONI'),
-        m('div',{
-          className: ctrl.editId() === null ? '' : 'on',
-          id:'blur',
-          onclick:  ctrl.editItem.bind(ctrl,null),
-          config: ctrl.initBlur
-        }),
-        m('section', {id: 'cd-timeline'},
 
-          m('div', { className: 'cd-timeline-block add'}, [
-            m('div', {
-              className: 'cd-timeline-img',
-              onclick: ctrl.newItem.bind(ctrl)
-            }, [
-              m('img', { src: './img/add.svg'})
+        ctrl.reports() ?
+          m('main', { className: 'mdl-layout__content'}, [
+          m('div',{
+            className: ctrl.editId() === null ? '' : 'on',
+            id:'blur',
+            onclick:  ctrl.editItem.bind(ctrl,null)
+          }),
+          m('section', {id: 'cd-timeline'},
+
+            m('div', { className: 'cd-timeline-block add'}, [
+              m('div', {
+                className: 'cd-timeline-img',
+                onclick: ctrl.newItem.bind(ctrl)
+              }, [
+                m('img', { src: './img/add.svg'})
+              ]),
+              m('div', { className: 'cd-timeline-content'})
             ]),
-            m('div', { className: 'cd-timeline-content'})
-          ]),
 
 
-          ctrl.reports().map(function(item, index){
+            ctrl.reports().map(function(item, index){
 
-            return m.component(Report, {index: item._id, data: item})
+              return m.component(Report, {index: item._id, data: item})
 
-          })
-        )
+            })
+          )
+        ])
+        :
+          m.component(Spinner)
       ])
     ];
 

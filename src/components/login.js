@@ -15,8 +15,11 @@ export default {
 
     return {
 
+      name: m.prop(''),
+      password: m.prop(''),
+
       login(){
-        Login.fetch((err,login) => {
+        Login.fetch({name: this.name() ,password: this.password()}, (err,login) => {
           if(err){
             return console.log(err);
           }
@@ -44,8 +47,8 @@ export default {
             className: 'mdl-textfield__input',
             id:        'userName',
             type:      'text',
-            value:     app.state.credentials.name(),
-            onchange:  m.withAttr('value', app.state.credentials.name)
+            value:     ctrl.name() || '',
+            onchange:  m.withAttr('value', ctrl.name)
           }),
           m('label', {
             className: 'mdl-textfield__label',
@@ -61,8 +64,8 @@ export default {
             autocapitalize: 'off',
             autocomplete: 'off',
             spellcheck: false,
-            value:     app.state.credentials.password(),
-            onchange:  m.withAttr('value', app.state.credentials.password)
+            value:     ctrl.password() || '',
+            onchange:  m.withAttr('value', ctrl.password)
           }),
           m('label', {
             className: 'mdl-textfield__label',
@@ -72,7 +75,7 @@ export default {
         m('button', {
           className: mh.buttonRipple,
           style:     {width: '100%'},
-          onclick:   ctrl.login
+          onclick:   ctrl.login.bind(ctrl)
         }, 'Login')
       ])
 

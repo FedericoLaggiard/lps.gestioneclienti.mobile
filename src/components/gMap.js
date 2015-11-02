@@ -11,18 +11,21 @@
 import m from 'mithril';
 import request from '../libs/request';
 
+import Spinner from './spinner.js';
 import style from '../../styles/gMap.less';
 
 const API_KEY="AIzaSyD_rcypgYydqbK5M8ItAtpb16AKcS3yvqI";
 let map;
 let marker;
-let location;
+let location = '';
 let lat = 45.0734673;
 let long = 7.6055664;
 
 export default {
 
   controller(data){
+
+    let loading = m.prop(true);
 
     function gMapConfig(element, isInit){
 
@@ -45,15 +48,17 @@ export default {
 
                 break;
               case "ZERO_RESULTS":
-
+                loading(false);
                 break;
               case "OVER_QUERY_LIMIT":
-
+                loading(false);
                 break;
               default: //REQUEST_DENIED, INVALID_REQUEST, UNKNOWN_ERROR
-
+                loading(false);
                 break;
             }
+
+            m.redraw();
 
           });
 
@@ -82,6 +87,8 @@ export default {
       });
 
       marker.setMap(map);
+
+      loading(false);
     }
 
     function geoCode(address, callback){
@@ -105,7 +112,8 @@ export default {
 
     return {
       gMapConfig,
-      geoCode
+      geoCode,
+      loading
     }
   },
 
@@ -117,6 +125,10 @@ export default {
     }, getContent(ctrl));
 
     function getContent(ctrl){
+
+      if(ctrl.loading()){
+        return m.component(Spinner);
+      }
 
       if (location){
         switch (location.status){
