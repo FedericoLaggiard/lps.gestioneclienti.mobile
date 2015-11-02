@@ -29,21 +29,27 @@ export default {
       });
     //}
 
-    if(app.state.searchText().length > 0){
-      if(customers()){
-        customers(customers().filter(Customers.filterByText));
-      }else{
-        app.state.searchText('')
+    function checkSearch(){
+      if(app.state.searchText().length > 0){
+        if(customers()){
+          customers(customers().filter(Customers.filterByText));
+        }else{
+          app.state.searchText('')
+        }
       }
     }
 
     return {
-      customers
+      customers,
+      checkSearch
     };
 
   },
 
   view(ctrl){
+
+    ctrl.checkSearch();
+
     return m('div', {
       className: 'mdl-layout mdl-js-layout mdl-layout--fixed-header',
       config: redrawMat.removeContainer

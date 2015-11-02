@@ -81,9 +81,9 @@ Customer.update = function(data, callback){
       return callback(err, null);
     }
 
-    data._rev(success.rev);
+    data()._rev(success.rev);
 
-    app.state.customer(data);
+    app.state.customer(data());
 
     callback(null,success);
   })
@@ -92,11 +92,11 @@ Customer.update = function(data, callback){
 
 Customer.insert = function(data, callback){
 
-  if (data._rev){
-    delete data._rev;
+  if (data()._rev){
+    delete data()._rev;
   }
-  if(data._id){
-    delete data._id;
+  if(data()._id){
+    delete data()._id;
   }
 
   request({

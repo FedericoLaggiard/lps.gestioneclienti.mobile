@@ -45,6 +45,7 @@ export default {
 
     if( isNew ){
       cardFlipped(true);
+      customer(new Customer(null));
       if(app.state.customer() && app.state.customer()._id)
         app.state.customer(null);
     }
@@ -138,7 +139,8 @@ export default {
       showDelete,
       getMenuStatus,
       btnDelete,
-      btnUpdate
+      btnUpdate,
+      isNew
     }
 
   },
@@ -147,7 +149,6 @@ export default {
 
     ctrl.getMenuStatus();
 
-    //return m('div', {  }, [
     return  m('div', { config: redrawMat.removeContainer },
         m('div', { className: 'bg' }),
 
@@ -207,194 +208,12 @@ export default {
               //FRONT
               m('div', { className: 'front'}, customerView(ctrl)),
               //BACK
-              m('div', { className: 'back' },[
-                m('div', { id: 'formContainer' },
-                  m('form', { id: 'formEdit' }, [
-                    //RAG SOC
-                    m('label', {
-                      className: 'txtLabel'+ ( app.state.focusedField() === 'txtRagSoc' ? ' focus' : '' )
-                    }, 'Ragione Sociale'),
-                    m('input', {
-                      className: 'textfield',
-                      type: 'text',
-                      id: 'txtRagSoc',
-                      value: ctrl.customer().ragioneSociale(),
-                      oninput: m.withAttr('value', function(value) {
-                        ctrl.customer().ragioneSociale(value);
-                        app.state.customer(ctrl.customer());
-                      }),
-                      onfocus: function() { app.state.focusedField('txtRagSoc'); },
-                      onblur: function() { app.state.focusedField(''); }
-                    }),
-                    //TELEFONO
-                    m('label', {
-                      className: 'txtLabel' + ( app.state.focusedField() === 'txtTelefono' ? ' focus' : '' )
-                    }, 'Telefono'),
-                    m('input', {
-                      className: 'textfield',
-                      type: 'text',
-                      id: 'txtTelefono',
-                      value: ctrl.customer().telefono(),
-                      oninput: m.withAttr('value', function(value) {
-                        ctrl.customer().telefono(value);
-                        app.state.customer(ctrl.customer());
-                      }),
-                      onfocus: function() { app.state.focusedField('txtTelefono'); },
-                      onblur: function() { app.state.focusedField(''); }
-                    }),
-                    //EMAIL
-                    m('label', {
-                      className: 'txtLabel'+ ( app.state.focusedField() === 'txtEmail' ? ' focus' : '' )
-                    }, 'E-mail'),
-                    m('input', {
-                      className: 'textfield',
-                      type: 'text',
-                      id: 'txtEmail',
-                      value: ctrl.customer().email(),
-                      oninput: m.withAttr('value', function(value) {
-                        ctrl.customer().email(value);
-                        app.state.customer(ctrl.customer());
-                      }),
-                      onfocus: function() { app.state.focusedField('txtEmail'); },
-                      onblur: function() { app.state.focusedField(''); }
-                    }),
-                    //FAX
-                    m('label', {
-                      className: 'txtLabel'+ ( app.state.focusedField() === 'txtFax' ? ' focus' : '' )
-                    }, 'Fax'),
-                    m('input', {
-                      className: 'textfield',
-                      type: 'text',
-                      id: 'txtFax',
-                      value: ctrl.customer().fax(),
-                      oninput: m.withAttr('value', function(value) {
-                        ctrl.customer().fax(value);
-                        app.state.customer(ctrl.customer());
-                      }),
-                      onfocus: function() { app.state.focusedField('txtFax'); },
-                      onblur: function() { app.state.focusedField(''); }
-                    }),
-                    //INDIRIZZO
-                    m('label', {
-                      className: 'txtLabel'+ ( app.state.focusedField() === 'txtIndirizzo' ? ' focus' : '' )
-                    }, 'Indirizzo'),
-                    m('input', {
-                      className: 'textfield',
-                      type: 'text',
-                      id: 'txtIndirizzo',
-                      value: ctrl.customer().indirizzo(),
-                      oninput: m.withAttr('value', function(value) {
-                        ctrl.customer().indirizzo(value);
-                        app.state.customer(ctrl.customer());
-                      }),
-                      onfocus: function() { app.state.focusedField('txtIndirizzo'); },
-                      onblur: function() { app.state.focusedField(''); }
-                    }),
-                    //CITTA
-                    m('label', {
-                      className: 'txtLabel'+ ( app.state.focusedField() === 'txtCitta' ? ' focus' : '' )
-                    }, 'Città'),
-                    m('input', {
-                      className: 'textfield',
-                      type: 'text',
-                      id: 'txtCitta',
-                      value: ctrl.customer().citta(),
-                      oninput: m.withAttr('value', function(value) {
-                        ctrl.customer().citta(value);
-                        app.state.customer(ctrl.customer());
-                      }),
-                      onfocus: function() { app.state.focusedField('txtCitta'); },
-                      onblur: function() { app.state.focusedField(''); }
-                    }),
-                    //PROVINCIA
-                    m('label', {
-                      className: 'txtLabel'+ ( app.state.focusedField() === 'txtProvincia' ? ' focus' : '' )
-                    }, 'Provincia'),
-                    m('input', {
-                      className: 'textfield',
-                      type: 'text',
-                      id: 'txtProvincia',
-                      value: ctrl.customer().provincia(),
-                      oninput: m.withAttr('value', function(value) {
-                        ctrl.customer().provincia(value);
-                        app.state.customer(ctrl.customer());
-                      }),
-                      onfocus: function() { app.state.focusedField('txtProvincia'); },
-                      onblur: function() { app.state.focusedField(''); }
-                    }),
-                    //RESPONSABILE
-                    m('label', {
-                      className: 'txtLabel'+ ( app.state.focusedField() === 'txtResponsabile' ? ' focus' : '' )
-                    }, 'Responsabile'),
-                    m('input', {
-                      className: 'textfield',
-                      type: 'text',
-                      id: 'txtResponsabile',
-                      value: ctrl.customer().responsabile(),
-                      oninput: m.withAttr('value', function(value) {
-                        ctrl.customer().responsabile(value);
-                        app.state.customer(ctrl.customer());
-                      }),
-                      onfocus: function() { app.state.focusedField('txtResponsabile'); },
-                      onblur: function() { app.state.focusedField(''); }
-                    }),
-                    //ATTIVITA
-                    m('label', {
-                      className: 'txtLabel'+ ( app.state.focusedField() === 'txtAttivita' ? ' focus' : '' )
-                    }, 'Attività'),
-                    m('input', {
-                      className: 'textfield',
-                      type: 'text',
-                      id: 'txtAttivita',
-                      value: ctrl.customer().attivita(),
-                      oninput: m.withAttr('value', function(value) {
-                        ctrl.customer().attivita(value);
-                        app.state.customer(ctrl.customer());
-                      }),
-                      onfocus: function() { app.state.focusedField('txtAttivita'); },
-                      onblur: function() { app.state.focusedField(''); }
-                    }),
-                    //ULTIMA VISITA
-                    m('label', {
-                      className: 'txtLabel'+ ( app.state.focusedField() === 'txtUltima' ? ' focus' : '' )
-                    }, 'Ultima visita'),
-                    m('input', {
-                      className: 'textfield',
-                      type: 'text',
-                      id: 'txtUltima',
-                      value: ctrl.customer().ultimaVisita(),
-                      oninput: m.withAttr('value', function(value) {
-                        ctrl.customer().ultimaVisita(value);
-                        app.state.customer(ctrl.customer());
-                      }),
-                      onfocus: function() { app.state.focusedField('txtUltima'); },
-                      onblur: function() { app.state.focusedField(''); }
-                    }),
-                    //Agente
-                    m('label', {
-                      className: 'txtLabel'+ ( app.state.focusedField() === 'txtAgente' ? ' focus' : '' )
-                    }, 'Agente'),
-                    m('input', {
-                      className: 'textfield',
-                      type: 'text',
-                      id: 'txtAgente',
-                      value: ctrl.customer().codAgente(),
-                      oninput: m.withAttr('value', function(value) {
-                        ctrl.customer().codAgente(value);
-                        app.state.customer(ctrl.customer());
-                      }),
-                      onfocus: function() { app.state.focusedField('txtAgente'); },
-                      onblur: function() { app.state.focusedField(''); }
-                    })
-                  ])
-                )
-              ])
+              m('div', { className: 'back' }, editView(ctrl))
             ])
           )
         :
           m.component(Spinner)
       );
-    //]);
   }
 
 }
@@ -451,7 +270,7 @@ function customerView(ctrl){
       ]))
     ]),
     m('section', { className: 'map mdl-shadow--4dp'}, [
-      m.component(gMap, { address: ctrl.customer().indirizzo() +',+'+ ctrl.customer().citta() +',+'+ ctrl.customer().provincia() }),
+      ctrl.isNew ? '' : m.component(gMap, { address: ctrl.customer().indirizzo() +',+'+ ctrl.customer().citta() +',+'+ ctrl.customer().provincia() }),
       //m.component(gMap, { address: 'Via Melchiorre Voli 31, torino' }),
       m('div', {className: 'btnHover'},
         m('button', {
@@ -478,3 +297,187 @@ function customerView(ctrl){
 
 }
 
+function editView(ctrl){
+  return [
+    m('div', { id: 'formContainer' },
+      m('form', { id: 'formEdit' }, [
+        //RAG SOC
+        m('label', {
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtRagSoc' ? ' focus' : '' )
+        }, 'Ragione Sociale'),
+        m('input', {
+          className: 'textfield',
+          type: 'text',
+          id: 'txtRagSoc',
+          value: ctrl.customer().ragioneSociale(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().ragioneSociale(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtRagSoc'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
+        //TELEFONO
+        m('label', {
+          className: 'txtLabel' + ( app.state.focusedField() === 'txtTelefono' ? ' focus' : '' )
+        }, 'Telefono'),
+        m('input', {
+          className: 'textfield',
+          type: 'text',
+          id: 'txtTelefono',
+          value: ctrl.customer().telefono(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().telefono(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtTelefono'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
+        //EMAIL
+        m('label', {
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtEmail' ? ' focus' : '' )
+        }, 'E-mail'),
+        m('input', {
+          className: 'textfield',
+          type: 'text',
+          id: 'txtEmail',
+          value: ctrl.customer().email(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().email(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtEmail'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
+        //FAX
+        m('label', {
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtFax' ? ' focus' : '' )
+        }, 'Fax'),
+        m('input', {
+          className: 'textfield',
+          type: 'text',
+          id: 'txtFax',
+          value: ctrl.customer().fax(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().fax(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtFax'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
+        //INDIRIZZO
+        m('label', {
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtIndirizzo' ? ' focus' : '' )
+        }, 'Indirizzo'),
+        m('input', {
+          className: 'textfield',
+          type: 'text',
+          id: 'txtIndirizzo',
+          value: ctrl.customer().indirizzo(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().indirizzo(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtIndirizzo'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
+        //CITTA
+        m('label', {
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtCitta' ? ' focus' : '' )
+        }, 'Città'),
+        m('input', {
+          className: 'textfield',
+          type: 'text',
+          id: 'txtCitta',
+          value: ctrl.customer().citta(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().citta(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtCitta'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
+        //PROVINCIA
+        m('label', {
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtProvincia' ? ' focus' : '' )
+        }, 'Provincia'),
+        m('input', {
+          className: 'textfield',
+          type: 'text',
+          id: 'txtProvincia',
+          value: ctrl.customer().provincia(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().provincia(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtProvincia'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
+        //RESPONSABILE
+        m('label', {
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtResponsabile' ? ' focus' : '' )
+        }, 'Responsabile'),
+        m('input', {
+          className: 'textfield',
+          type: 'text',
+          id: 'txtResponsabile',
+          value: ctrl.customer().responsabile(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().responsabile(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtResponsabile'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
+        //ATTIVITA
+        m('label', {
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtAttivita' ? ' focus' : '' )
+        }, 'Attività'),
+        m('input', {
+          className: 'textfield',
+          type: 'text',
+          id: 'txtAttivita',
+          value: ctrl.customer().attivita(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().attivita(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtAttivita'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
+        //ULTIMA VISITA
+        m('label', {
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtUltima' ? ' focus' : '' )
+        }, 'Ultima visita'),
+        m('input', {
+          className: 'textfield',
+          type: 'text',
+          id: 'txtUltima',
+          value: ctrl.customer().ultimaVisita(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().ultimaVisita(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtUltima'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
+        //Agente
+        m('label', {
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtAgente' ? ' focus' : '' )
+        }, 'Agente'),
+        m('input', {
+          className: 'textfield',
+          type: 'text',
+          id: 'txtAgente',
+          value: ctrl.customer().codAgente(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().codAgente(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtAgente'); },
+          onblur: function() { app.state.focusedField(''); }
+        })
+      ])
+    )
+  ]
+}
