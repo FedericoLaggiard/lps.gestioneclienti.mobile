@@ -32,7 +32,7 @@ export default {
       if(typeof google !== 'undefined' && !isInit) {
 
         window.that = this;
-        google.load("maps", "3", {other_params:'sensor=false&key=' + API_KEY, callback: function(){
+        google.load("maps", "3", {other_params:'key=' + API_KEY, callback: function(){
 
           geoCode(data.address, (err, success) => {
 

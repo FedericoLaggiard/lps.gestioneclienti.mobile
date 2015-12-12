@@ -7,12 +7,12 @@ import app from '../app.js';
 
 /**
  * Request with a Node style callback hiding promises
- * @param noAuth if true no Basic Auth header is sent
+ * @param isAuth if true is a login action
  * @param options
  * @param callback
  */
 
-export default function (options, callback, noAuth = false) {
+export default function (options, callback, isAuth = false) {
 
   if (!options) throw Error('options required');
 
@@ -27,15 +27,32 @@ export default function (options, callback, noAuth = false) {
   };
 
 
-  if (noAuth == false) {
+  if (isAuth == false) {
     options.config = function config(xhr) {
       //xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
       //xhr.setRequestHeader("Access-Control-Allow-Headers", "origin");
+      xhr.withCredentials = true;
     };
 
     options.extract = function (xhr, xhrOptions) {
-      if (xhr.status === 403) {
-        app.state.login({ status: 403 });
+      if (xhr.status === 401) {
+        app.state.login({ status: 401 });
+        m.route('/login');
+        //throw new Error('logged out');
+      }
+      return xhr.responseText ? xhr.responseText : '{}'
+    }
+  }else{
+    options.serialize = function(data){
+      return m.route.buildQueryString(data)
+    };
+    options.config = function(xhr){
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.withCredentials = true;
+    };
+    options.extract = function (xhr, xhrOptions) {
+      if (xhr.status === 401) {
+        app.state.login({ status: 401 });
         m.route('/login');
         //throw new Error('logged out');
       }

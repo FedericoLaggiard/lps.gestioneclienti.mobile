@@ -20,15 +20,16 @@ Login.fetch = function(credentials, callback){
     method: 'POST',
     url: urls[env].login,
     data: credentials,
-    type: Login
+    type: Login,
+    background: true
   }, (err, login) => {
     if(err) {
-      app.showToast('Si è verificato un errore.');
+      //app.showToast('Si è verificato un errore.');
       return callback(err,null);
     }
     app.state.login(login);
     callback(null,login);
-  })
+  }, true)
 
 };
 

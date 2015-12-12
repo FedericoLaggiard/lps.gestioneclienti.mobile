@@ -73,7 +73,8 @@ Customer.update = function(data, callback){
   request({
     method: 'PUT',
     url: urls[env].customer + '/' + m.route.param('id'),
-    data: data
+    data: data,
+    background: true
   }, (err, success) => {
 
     if(err) {
@@ -102,7 +103,8 @@ Customer.insert = function(data, callback){
   request({
     method: 'POST',
     url: urls[env].customer,
-    data: data
+    data: data,
+    background: true
   }, (err, success) => {
     if(err) {
       app.showToast('Si è verificato un errore.');
@@ -120,7 +122,8 @@ Customer.remove = function(data, callback){
 
   request({
     method: 'delete',
-    url: urls[env].customer + '/' + m.route.param('id') + '?rev=' + data
+    url: urls[env].customer + '/' + m.route.param('id') + '?rev=' + data,
+    background: true
   }, (err, success) => {
 
     if(err) {

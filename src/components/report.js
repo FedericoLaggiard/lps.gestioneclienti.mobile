@@ -19,7 +19,7 @@ export default {
 
   controller(params) {
 
-    let index = m.prop(params.index);
+    let index = params.index;
     let editId = app.state.editReportId;
     let data = m.prop(params.data);
 
@@ -32,16 +32,20 @@ export default {
       event.stopPropagation();
 
 
-      if(this.data()._id === -1){
+      if(this.data()._id() === -1){
 
-        Reports.add(this.data(), (err,success) => {
-          console.log(success);
+        Reports.add(JSON.parse(JSON.stringify(this.data())), (err,success) => {
+
+          if(err) return app.showToast('Si è verificato un errore.');
+
+          return app.showToast('Elemento aggiunto con successo.');
         });
 
       }else{
         Reports.update(this.data(), (err, success) => {
-          //do something?
-          console.log(success);
+          if(err) return app.showToast('Si è verificato un errore.');
+
+          return app.showToast('Elemento modificato con successo.');
         });
       }
       app.state.editReportId(null);
@@ -51,7 +55,14 @@ export default {
 
       if(window.confirm('Eliminare questo elemento?')) {
         Reports.remove(this.data(), (err, success) => {
-          if (success) app.state.editReportId(null);
+
+          if(err) return app.showToast('Si è verificato un errore.');
+
+          if (success) {
+            app.showToast('Elemento eliminato con successo.');
+            app.state.editReportId(null);
+            params.refresh();
+          }
         })
       }
 
