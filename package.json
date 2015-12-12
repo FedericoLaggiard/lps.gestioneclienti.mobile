@@ -16,10 +16,10 @@
   "author": "Laggiard Federico",
   "license": "ISC",
   "dependencies": {
-    "fastclick": "^1.0.6",
-    "material-design-lite": "^1.0.2",
+    "fastclick": "1.0.6",
+    "material-design-lite": "1.0.2",
     "mithril": "0.2.0",
-    "moment": "^2.10.6"
+    "moment": "2.10.6"
   },
   "devDependencies": {
     "autoprefixer-loader": "2.0.0",

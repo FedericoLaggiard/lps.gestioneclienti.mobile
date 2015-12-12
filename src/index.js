@@ -19,7 +19,7 @@ import toast from './components/toast';
 import reports from './components/reports';
 
 m.route.mode = 'hash';
-m.route(document.getElementById('app'), '/customers', {
+m.route(document.getElementById('app'), '/login', {
   '/login':                 login,
   '/customers':             customers,
   '/customers/:id':         customer,

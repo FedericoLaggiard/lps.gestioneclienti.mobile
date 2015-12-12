@@ -50,17 +50,16 @@ Reports.update = function(item, callback){
   request({
 
     method: 'PUT',
-    url: urls[env].report + '/' + item._id,
+    url: urls[env].report + '/' + item._id(),
     data: item
   }, (err, result) => {
     if(err){
-      app.showToast('Si è verificato un errore.');
       return callback(err, null);
     }
 
-    item._rev = result.rev;
+    item._rev(result.rev);
 
-    var index = app.state.reports().findIndex(function (it){ return (it._id === item._id) });
+    var index = app.state.reports().findIndex(function (it){ return (it._id === item._id()) });
     var temp = app.state.reports();
     temp[index] = item;
     app.state.reports(temp);
@@ -108,7 +107,7 @@ Reports.remove = function(item, callback){
   request({
 
     method: 'DELETE',
-    url: urls[env].report + '/' + item._id + '?rev=' + item._rev
+    url: urls[env].report + '/' + item._id() + '?rev=' + item._rev()
   }, (err, result) => {
     if(err){
       app.showToast('Si è verificato un errore.');

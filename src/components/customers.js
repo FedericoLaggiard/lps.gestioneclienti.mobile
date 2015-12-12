@@ -31,11 +31,13 @@ export default {
 
     function checkSearch(){
       if(app.state.searchText().length > 0){
-        if(customers()){
-          customers(customers().filter(Customers.filterByText));
-        }else{
-          app.state.searchText('')
-        }
+      //  if(customers()){
+          customers(app.state.customers().filter(Customers.filterByText));
+        //}else{
+        //  app.state.searchText('')
+        //}
+      }else{
+        customers(app.state.customers())
       }
     }
 
