@@ -88,14 +88,6 @@ Reports.add = function(item, callback){
       return callback(err, null);
     }
 
-    item._rev = result.rev;
-    item._id  = result.id;
-
-    var index = app.state.reports().findIndex(function (it){ return (it._id === -1) });
-    var temp = app.state.reports();
-    temp[index] = item;
-    app.state.reports(temp);
-
     return callback(null, result);
 
   })
