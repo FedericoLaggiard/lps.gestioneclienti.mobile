@@ -16,12 +16,8 @@ let app = {
 
   state: {
 
-    //credentials: {
-    //  name: m.prop(''),
-    //  password: m.prop('')
-    //},
-
-    login: storage('login'),
+    login: m.prop(),
+    user: m.prop(),
     customers: storage('customers'),
     customer: storage('customer'),
     reportsForCustomer: storage('reportsForCustomer'),

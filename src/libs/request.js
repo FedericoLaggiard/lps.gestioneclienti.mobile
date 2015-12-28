@@ -12,7 +12,7 @@ import app from '../app.js';
  * @param callback
  */
 
-export default function (options, callback, isAuth = false) {
+export default function (options, callback, isAuth = false, noCookie = false) {
 
   if (!options) throw Error('options required');
 
@@ -31,7 +31,7 @@ export default function (options, callback, isAuth = false) {
     options.config = function config(xhr) {
       //xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
       //xhr.setRequestHeader("Access-Control-Allow-Headers", "origin");
-      xhr.withCredentials = true;
+      if(noCookie === false) xhr.withCredentials = true;
     };
 
     options.extract = function (xhr, xhrOptions) {
@@ -48,12 +48,13 @@ export default function (options, callback, isAuth = false) {
     };
     options.config = function(xhr){
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.withCredentials = true;
+      if(noCookie === false)
+        xhr.withCredentials = true;
     };
     options.extract = function (xhr, xhrOptions) {
       if (xhr.status === 401) {
-        app.state.login({ status: 401 });
-        m.route('/login');
+        //app.state.login({ status: 401 });
+        //m.route('/login');
         //throw new Error('logged out');
       }
       return xhr.responseText ? xhr.responseText : '{}'

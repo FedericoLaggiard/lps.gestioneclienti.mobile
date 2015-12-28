@@ -40,6 +40,9 @@ export default {
           that.editId(itemId);
           var t = that.reports();
           t.shift();
+          //that.reports(t.map( (report) => {
+          //  return new Reports({doc: report });
+          //}));
           that.reports(t);
         }
       }else{
@@ -49,15 +52,32 @@ export default {
     }
 
     function newItem(){
-      var t = app.state.reports();
-      var n = new Reports({doc: {_id: -1, data: moment().format('YYYY-MM-DDTHH:mm:ss'), idCliente: m.route.param('id'), tipoIncontro: 'T' } });
+      var t = app.state.reports().map( (report) => {
+        return new Reports({doc: report });
+      });
+
+      var n = new Reports({
+        doc: {
+          _id: -1,
+          data: moment().format('YYYY-MM-DDTHH:mm:ss'),
+          idCliente: m.route.param('id'),
+          tipoIncontro: 'T' ,
+          codAgente: app.state.user().key()
+        }
+      });
       t.unshift(n);
       this.reports(t);
-      this.editId(app.state.editReportId(-1));
+      app.state.editReportId(-1);
+      this.editId(-1);
     }
 
     function refresh(){
-      this.reports(app.state.reports());
+      Reports.fetch((err,r) => {
+        if(err) return app.showToast('Si è verificato un errore.');
+
+        reports(r);
+        //m.redraw();
+      });
     }
 
     return {
@@ -100,9 +120,9 @@ export default {
             ]),
 
 
-            ctrl.reports().map(function(item, index){
+            ctrl.reports().map(function(item){
 
-              return m.component(Report, {index: item._id, data: item, refresh: that.refresh()})
+              return m.component(Report, {index: item._id, data: item, _ref: that})
 
             })
           )

@@ -34,9 +34,17 @@ export default {
 
       if(this.data()._id() === -1){
 
+        let that = this;
         Reports.add(JSON.parse(JSON.stringify(this.data())), (err,success) => {
 
           if(err) return app.showToast('Si è verificato un errore.');
+
+          var items = params._ref.reports();
+          var item = items[0];
+          item._rev(success.rev);
+          item._id(success.id);
+          items[0] = item;
+          params._ref.reports(items);
 
           return app.showToast('Elemento aggiunto con successo.');
         });
@@ -61,7 +69,7 @@ export default {
           if (success) {
             app.showToast('Elemento eliminato con successo.');
             app.state.editReportId(null);
-            params.refresh();
+            params._ref.refresh();
           }
         })
       }

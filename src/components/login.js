@@ -18,8 +18,8 @@ export default {
     let errors = m.prop(null);
 
 
-    if(app.state.login() && app.state.login().status === "401") {
-      errors("401");
+    if(app.state.login() && app.state.login().status == 401) {
+      errors({error: "401"});
       app.state.login().status = "";
     }
 
@@ -76,7 +76,7 @@ export default {
                 autocorrect: 'off',
                 autocapitalize: 'off',
                 autocomplete:'off',
-                spellcheck: false,
+                spellcheck: 'false',
                 className: 'mdl-textfield__input',
                 id:        'userName',
                 type:      'text',
@@ -96,7 +96,7 @@ export default {
                 autocorrect: 'off',
                 autocapitalize: 'off',
                 autocomplete: 'off',
-                spellcheck: false,
+                spellcheck: 'false',
                 value:     ctrl.password() || '',
                 onchange:  m.withAttr('value', ctrl.password)
               }),
@@ -110,6 +110,7 @@ export default {
           m('button', {
             className: mh.buttonRipple,
             id: 'btnLogin',
+            'tab-index': '3',
             onclick:   ctrl.login.bind(ctrl)
           }, 'Login')
 

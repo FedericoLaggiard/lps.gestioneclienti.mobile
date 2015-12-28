@@ -46,6 +46,7 @@ export default {
     if( isNew ){
       cardFlipped(true);
       customer(new Customer(null));
+      customer().codAgente(app.state.user().key());
       if(app.state.customer() && app.state.customer()._id)
         app.state.customer(null);
     }
@@ -87,7 +88,7 @@ export default {
       if(cardFlipped() && !isNew) {
         flipCard();
       }else{
-        m.route('customers');
+        m.route('/customers');
       }
     }
 

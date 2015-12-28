@@ -4,12 +4,11 @@
 
 'use strict';
 
-export const env = 'dev';
+export const env = 'prod';
 
 const baseUrl = {
 
   prod: 'https://couchdb-0f2b48.smileupps.com',
-  //dev: 'http://192.168.1.102:5984'
   dev: 'http://localhost:5984'
 
 };
@@ -18,6 +17,7 @@ export const urls = {
 
   prod: {
     login:        baseUrl[env] + '/_session',
+    users:        baseUrl[env] + '/_users',
     customer:     baseUrl[env] + '/lps_clienti',
     customers:    baseUrl[env] + '/lps_clienti/_design/listByRagSoc/_view/listByRagSoc',
     report:       baseUrl[env] + '/lps_reports',
@@ -26,6 +26,7 @@ export const urls = {
 
   dev: {
     login:        baseUrl[env] + '/_session',
+    users:        baseUrl[env] + '/_users',
     customer:     baseUrl[env] + '/lps_clienti',
     customers:    baseUrl[env] + '/lps_clienti/_design/listByRagSoc/_view/listByRagSoc',
     report:       baseUrl[env] + '/lps_reports',
