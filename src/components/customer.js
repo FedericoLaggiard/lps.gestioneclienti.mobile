@@ -270,6 +270,16 @@ function customerView(ctrl){
         //m('i', {className: 'material-icons arrow'}, 'email')
       ]))
     ]),
+    m('section', { className: 'other mdl-shadow--4dp'}, [
+      m('span', { className: 'label' }, 'INDIRIZZO:'),
+      m('span', { className: 'value capitalize' }, ctrl.customer().indirizzo().toLowerCase()),
+      m('span', { className: 'value' }, ctrl.customer().citta() + ' - ' + ctrl.customer().provincia()),
+      m('span', { className: 'label' }, "ATTIVITA':"),
+      m('span', { className: 'value' }, ctrl.customer().attivita() ? ctrl.customer().attivita() : 'n/d'),
+      m('span', { className: 'label' }, "RESPONSABILE:"),
+      m('span', { className: 'value' }, ctrl.customer().responsabile() ? ctrl.customer().responsabile() : 'n/d')
+    ]),
+    //GMAP
     m('section', { className: 'map mdl-shadow--4dp'}, [
       ctrl.isNew ? '' : m.component(gMap, { address: ctrl.customer().indirizzo() +',+'+ ctrl.customer().citta() +',+'+ ctrl.customer().provincia() }),
       //m.component(gMap, { address: 'Via Melchiorre Voli 31, torino' }),
@@ -285,16 +295,8 @@ function customerView(ctrl){
         ])
       )
     ]),
-    m('section', { className: 'other mdl-shadow--4dp'}, [
-      m('span', { className: 'label' }, 'INDIRIZZO:'),
-      m('span', { className: 'value capitalize' }, ctrl.customer().indirizzo().toLowerCase()),
-      m('span', { className: 'value' }, ctrl.customer().citta() + ' - ' + ctrl.customer().provincia()),
-      m('span', { className: 'label' }, "ATTIVITA':"),
-      m('span', { className: 'value' }, ctrl.customer().attivita() ? ctrl.customer().attivita() : 'n/d'),
-      m('span', { className: 'label' }, "RESPONSABILE:"),
-      m('span', { className: 'value' }, ctrl.customer().responsabile() ? ctrl.customer().responsabile() : 'n/d')
-    ])
-    ];
+
+  ];
 
 }
 
