@@ -23,7 +23,7 @@ function Customer(data){
     this.fax            = m.prop(data.fax             || '');
     this.email          = m.prop(data.email           || '');
     this.responsabile   = m.prop(data.responsabile    || '');
-    this.attivita       = m.prop(data.attivita         || '');
+    this.attivita       = m.prop(data.attivita        || '');
     this.ultimaVisita   = m.prop(data.ultimaVisita    || '');
     this.relazioni      = m.prop(data.relazioni       || []);
   }else{
@@ -55,7 +55,6 @@ Customer.fetch = function(callback){
     background: true
   }, (err, customer) => {
     if(err) {
-      app.showToast('Si è verificato un errore.');
       return callback(err, null);
     }
 
@@ -78,7 +77,6 @@ Customer.update = function(data, callback){
   }, (err, success) => {
 
     if(err) {
-      app.showToast('Si è verificato un errore.');
       return callback(err, null);
     }
 
@@ -107,7 +105,6 @@ Customer.insert = function(data, callback){
     background: true
   }, (err, success) => {
     if(err) {
-      app.showToast('Si è verificato un errore.');
       return callback(err,null);
     }
 
@@ -127,7 +124,6 @@ Customer.remove = function(data, callback){
   }, (err, success) => {
 
     if(err) {
-      app.showToast('Si è verificato un errore.');
       return callback(err, null);
     }
 
