@@ -7,6 +7,7 @@
 import m from 'mithril';
 import style from '../../styles/customer.less';
 import redrawMat from '../libs/redrawMaterial';
+import moment from 'moment';
 
 import Customer from '../models/customerModel';
 import gMap from './gMap';
@@ -15,6 +16,8 @@ import Spinner from './spinner.js';
 export default {
 
   controller(){
+
+    moment.locale("it-IT");
 
     let isNew = m.route.param('id') === 'new';
 
@@ -32,12 +35,12 @@ export default {
 
         if(err){
           app.state.customer(null);
+          app.showToast('Si è verificato un errore.');
           m.route('/customers');
           return console.log(err);
         }
 
         customer(new Customer(app.state.customer()));
-        //customer = app.state.customer();
         m.redraw();
 
       })
@@ -57,7 +60,7 @@ export default {
 
         Customer.insert(customer, (err, success) => {
 
-          if(err) return console.log(err);
+          if(err) { app.showToast('Si è verificato un errore.'); return console.log(err);}
 
           app.state.customers(null);
           app.state.customer(null);
@@ -72,7 +75,7 @@ export default {
 
         Customer.update(customer,(err, success) => {
 
-          if(err) return console.log(err);
+          if(err) { app.showToast('Si è verificato un errore.'); return console.log(err);}
 
           customer = new Customer(app.state.customer());
 
@@ -96,7 +99,7 @@ export default {
 
       Customer.remove(customer, (err, success) => {
 
-        if(err) return console.log(err);
+        if(err) { app.showToast('Si è verificato un errore.'); return console.log(err);}
 
         app.state.customers(null);
         app.state.customer(null);
@@ -229,7 +232,10 @@ function customerView(ctrl){
       m('div', { className: 'table' }, [
         m('div', { className: 'left'}, [
           m('span', { className: 'label' }, 'ULTIMA VISITA:'),
-          m('span', { className: 'value' }, ctrl.customer().ultimaVisita() ? ctrl.customer().ultimaVisita() : 'n/d')
+          m('span', { className: 'value' }, ctrl.customer().ultimaVisita() ?
+            moment(ctrl.customer().ultimaVisita()).fromNow()
+            :
+            'n/d')
         ]),
         m('div', { className: 'right'}, [
           m('span', { className: 'label' }, 'AGENTE:'),
