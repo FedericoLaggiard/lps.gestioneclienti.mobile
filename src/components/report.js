@@ -45,15 +45,20 @@ export default {
           item._id(success.id);
           items[0] = item;
           params._ref.reports(items);
+          app.showToast('Elemento aggiunto con successo.');
+          params._ref.updateCustomerLastVisit();
 
-          return app.showToast('Elemento aggiunto con successo.');
+          return true;
         });
 
       }else{
         Reports.update(this.data(), (err, success) => {
           if(err) return app.showToast('Si è verificato un errore.');
 
-          return app.showToast('Elemento modificato con successo.');
+          params._ref.updateCustomerLastVisit();
+          app.showToast('Elemento modificato con successo.');
+
+          return true;
         });
       }
       app.state.editReportId(null);
@@ -165,7 +170,7 @@ function viewEdit(ctrl, item, index){
           type: 'text',
           className: 'textfield dateMask',
           value: moment(item.data()).format('DD/MM/YYYY h:mm' ),
-          onblur: m.withAttr('value', function(data) {item.data(moment(data, 'DD/MM/YYYY h:mm').toDate());}),
+          onblur: m.withAttr('value', function(data) {item.data(moment(data, 'DD/MM/YYYY h:mm').format('YYYY-MM-DDThh:mm:ss'));}),
           config: function(element, isInit){
             if(!isInit){
               new InputMask().Initialize(document.querySelectorAll(".dateMask"), {
