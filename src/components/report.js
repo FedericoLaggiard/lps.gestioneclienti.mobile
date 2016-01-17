@@ -170,7 +170,7 @@ function viewEdit(ctrl, item, index){
           type: 'text',
           className: 'textfield dateMask',
           value: moment(item.data()).format('DD/MM/YYYY h:mm' ),
-          onblur: m.withAttr('value', item.data),
+          onblur: m.withAttr('value', function(data) {item.data(moment(data, 'DD/MM/YYYY h:mm').toDate());}),
           config: function(element, isInit){
             if(!isInit){
               new InputMask().Initialize(document.querySelectorAll(".dateMask"), {
