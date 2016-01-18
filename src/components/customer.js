@@ -252,8 +252,10 @@ function customerView(ctrl){
         m('i', {className: 'material-icons arrow'}, 'arrow_forward')
       ])
     ]),
+    //CONTATTI
     m('section', { className: 'contacts mdl-shadow--4dp'}, [
       m('span', { className: 'label' }, 'CONTATTI:'),
+      //TELEFONO
       m('a', {
           className: 'tel',
           href: 'tel:' + ctrl.customer().telefono()
@@ -261,10 +263,42 @@ function customerView(ctrl){
           className: 'mdl-button mdl-js-button mdl-js-ripple-effect phone',
           config: redrawMat
         }, [
-          ctrl.customer().telefono()
-          //m('i', {className: 'material-icons arrow'}, 'phone')
+          ctrl.customer().telefono(),
+          m('i', {className: 'material-icons arrow'}, 'local_phone')
         ])),
+      //CELLULARE
+      ctrl.customer().cellulare() ?
+        m('a', {
+          className: 'tel',
+          href: 'tel:' + ctrl.customer().cellulare()
+        }, m('button', {
+          className: 'mdl-button mdl-js-button mdl-js-ripple-effect phone',
+          config: redrawMat
+        }, [
+          ctrl.customer().cellulare(),
+          m('i', {className: 'icon'}, m('img', {
+            src: '/img/mobile.svg',
+            style: {
+              width: "100%"
+            }
+          }))
+        ]))
+      : '',
+      //FAX
+      ctrl.customer().fax() ?
+        m('a', {
+          className: 'tel',
+          href: 'tel:' + ctrl.customer().fax()
+        }, m('button', {
+          className: 'mdl-button mdl-js-button mdl-js-ripple-effect phone',
+          config: redrawMat
+        }, [
+          ctrl.customer().fax(),
+          m('i', {className: 'icon'}, m('img', { src: '/img/fax.svg' }))
+        ]))
+        : '',
       m('span', { className: 'line' }),
+      //MAIL
       m('a', {
         className: 'mail',
         href: 'mailto:' + ctrl.customer().email()
@@ -274,8 +308,22 @@ function customerView(ctrl){
       }, [
         ctrl.customer().email()
         //m('i', {className: 'material-icons arrow'}, 'email')
-      ]))
+      ])),
+      //WEB
+      ctrl.customer().web() ?
+        m('a', {
+          className: 'mail',
+          href: ctrl.customer().web()
+        }, m('button', {
+          className: 'mdl-button mdl-js-button mdl-js-ripple-effect mail',
+          config: redrawMat
+        }, [
+          ctrl.customer().web()
+          //m('i', {className: 'material-icons arrow'}, 'email')
+        ]))
+      : ''
     ]),
+    //ALTRO
     m('section', { className: 'other mdl-shadow--4dp'}, [
       m('span', { className: 'label' }, 'INDIRIZZO:'),
       m('span', { className: 'value capitalize' }, ctrl.customer().indirizzo().toLowerCase()),
@@ -283,7 +331,11 @@ function customerView(ctrl){
       m('span', { className: 'label' }, "ATTIVITA':"),
       m('span', { className: 'value' }, ctrl.customer().attivita() ? ctrl.customer().attivita() : 'n/d'),
       m('span', { className: 'label' }, "RESPONSABILE:"),
-      m('span', { className: 'value' }, ctrl.customer().responsabile() ? ctrl.customer().responsabile() : 'n/d')
+      m('span', { className: 'value' }, ctrl.customer().responsabile() ? ctrl.customer().responsabile() : 'n/d'),
+      m('span', { className: 'label' }, "DIMENSIONI:"),
+      m('span', { className: 'value' }, ctrl.customer().dimensioniAzienda()),
+      m('span', { className: 'label' }, "NOTE:"),
+      m('span', { className: 'value' }, ctrl.customer().note())
     ]),
     //GMAP
     m('section', { className: 'map mdl-shadow--4dp'}, [
@@ -300,7 +352,7 @@ function customerView(ctrl){
           m('i', {className: 'material-icons arrow'}, 'arrow_forward')
         ])
       )
-    ]),
+    ])
 
   ];
 
@@ -454,23 +506,39 @@ function editView(ctrl){
           onfocus: function() { app.state.focusedField('txtAttivita'); },
           onblur: function() { app.state.focusedField(''); }
         }),
-        //ULTIMA VISITA
+        //DIMENSIONI
         m('label', {
-          className: 'txtLabel'+ ( app.state.focusedField() === 'txtUltima' ? ' focus' : '' )
-        }, 'Ultima visita'),
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtDimensioni' ? ' focus' : '' )
+        }, 'Dimensioni'),
         m('input', {
           className: 'textfield',
           type: 'text',
-          id: 'txtUltima',
-          value: ctrl.customer().ultimaVisita(),
+          id: 'txtDimensioni',
+          value: ctrl.customer().dimensioniAzienda(),
           oninput: m.withAttr('value', function(value) {
-            ctrl.customer().ultimaVisita(value);
+            ctrl.customer().dimensioniAzienda(value);
             app.state.customer(ctrl.customer());
           }),
-          onfocus: function() { app.state.focusedField('txtUltima'); },
+          onfocus: function() { app.state.focusedField('txtDimensioni'); },
           onblur: function() { app.state.focusedField(''); }
         }),
-        //Agente
+        ////ULTIMA VISITA
+        //m('label', {
+        //  className: 'txtLabel'+ ( app.state.focusedField() === 'txtUltima' ? ' focus' : '' )
+        //}, 'Ultima visita'),
+        //m('input', {
+        //  className: 'textfield',
+        //  type: 'text',
+        //  id: 'txtUltima',
+        //  value: ctrl.customer().ultimaVisita(),
+        //  oninput: m.withAttr('value', function(value) {
+        //    ctrl.customer().ultimaVisita(value);
+        //    app.state.customer(ctrl.customer());
+        //  }),
+        //  onfocus: function() { app.state.focusedField('txtUltima'); },
+        //  onblur: function() { app.state.focusedField(''); }
+        //}),
+        //AGENTE
         m('label', {
           className: 'txtLabel'+ ( app.state.focusedField() === 'txtAgente' ? ' focus' : '' )
         }, 'Agente'),
@@ -484,6 +552,20 @@ function editView(ctrl){
             app.state.customer(ctrl.customer());
           }),
           onfocus: function() { app.state.focusedField('txtAgente'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
+        //NOTE
+        m('label', {
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtNote' ? ' focus' : '' )
+        }, 'Note'),
+        m('textarea',{
+          className: 'txtNote',
+          value: ctrl.customer().note(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().note(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtNote'); },
           onblur: function() { app.state.focusedField(''); }
         })
       ])
