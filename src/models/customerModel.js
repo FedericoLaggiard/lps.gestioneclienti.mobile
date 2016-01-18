@@ -11,37 +11,45 @@ import request from '../libs/request';
 function Customer(data){
 
   if(data) {
-    this._id            = m.prop(data._id             || null);
-    this._rev           = m.prop(data._rev            || null);
-    this.codCliente     = m.prop(data.codCliente      || '');
-    this.ragioneSociale = m.prop(data.ragioneSociale  || '');
-    this.codAgente      = m.prop(data.codAgente       || '');
-    this.indirizzo      = m.prop(data.indirizzo       || '');
-    this.citta          = m.prop(data.citta           || '');
-    this.provincia      = m.prop(data.provincia       || '');
-    this.telefono       = m.prop(data.telefono        || '');
-    this.fax            = m.prop(data.fax             || '');
-    this.email          = m.prop(data.email           || '');
-    this.responsabile   = m.prop(data.responsabile    || '');
-    this.attivita       = m.prop(data.attivita        || '');
-    this.ultimaVisita   = m.prop(data.ultimaVisita    || '');
-    this.relazioni      = m.prop(data.relazioni       || []);
+    this._id                = m.prop(data._id               || null);
+    this._rev               = m.prop(data._rev              || null);
+    this.codCliente         = m.prop(data.codCliente        || '');
+    this.ragioneSociale     = m.prop(data.ragioneSociale    || '');
+    this.codAgente          = m.prop(data.codAgente         || '');
+    this.indirizzo          = m.prop(data.indirizzo         || '');
+    this.citta              = m.prop(data.citta             || '');
+    this.provincia          = m.prop(data.provincia         || '');
+    this.telefono           = m.prop(data.telefono          || '');
+    this.cellulare          = m.prop(data.cellulare         || '');
+    this.fax                = m.prop(data.fax               || '');
+    this.email              = m.prop(data.email             || '');
+    this.web                = m.prop(data.web               || '');
+    this.responsabile       = m.prop(data.responsabile      || '');
+    this.attivita           = m.prop(data.attivita          || '');
+    this.ultimaVisita       = m.prop(data.ultimaVisita      || '');
+    this.relazioni          = m.prop(data.relazioni         || []);
+    this.note               = m.prop(data.note              || '');
+    this.dimensioniAzienda  = m.prop(data.dimensioniAzienda || '');
   }else{
-    this._id            = m.prop(null);
-    this._rev           = m.prop(null);
-    this.codCliente     = m.prop('');
-    this.ragioneSociale = m.prop('');
-    this.codAgente      = m.prop('');
-    this.indirizzo      = m.prop('');
-    this.citta          = m.prop('');
-    this.provincia      = m.prop('');
-    this.telefono       = m.prop('');
-    this.fax            = m.prop('');
-    this.email          = m.prop('');
-    this.responsabile   = m.prop('');
-    this.attivita       = m.prop('');
-    this.ultimaVisita   = m.prop('');
-    this.relazioni      = m.prop([]);
+    this._id                = m.prop(null);
+    this._rev               = m.prop(null);
+    this.codCliente         = m.prop('');
+    this.ragioneSociale     = m.prop('');
+    this.codAgente          = m.prop('');
+    this.indirizzo          = m.prop('');
+    this.citta              = m.prop('');
+    this.provincia          = m.prop('');
+    this.telefono           = m.prop('');
+    this.fax                = m.prop('');
+    this.cellulare          = m.prop('');
+    this.email              = m.prop('');
+    this.web                = m.prop('');
+    this.responsabile       = m.prop('');
+    this.attivita           = m.prop('');
+    this.ultimaVisita       = m.prop('');
+    this.relazioni          = m.prop([]);
+    this.note               = m.prop('');
+    this.dimensioniAzienda  = m.prop('');
   }
 }
 
@@ -115,7 +123,7 @@ Customer.insert = function(data, callback){
 
 Customer.remove = function(data, callback){
 
-  data = data._rev();
+  data = data()._rev();
 
   request({
     method: 'delete',
