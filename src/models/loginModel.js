@@ -43,7 +43,7 @@ Login.fetch = function(credentials, callback){
 
     //app.state.login(login);
     //callback(null,login);
-  }, true)
+  }, true, true)
 
 };
 
