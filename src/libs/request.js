@@ -49,7 +49,7 @@ export default function (options, callback, isAuth = false, noCookie = false) {
     options.config = function(xhr){
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
       if(noCookie === false)
-        xhr.withCredentials = true;
+        xhr.withCredentials = false;
     };
     options.extract = function (xhr, xhrOptions) {
       if (xhr.status === 401) {
