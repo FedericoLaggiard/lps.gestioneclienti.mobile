@@ -1,0 +1,176 @@
+@background: #3f51b5;
+@white: #FFFFFF;
+@lvl2: @white - 50;
+@grayedOut: @background - 35;
+
+section.calendar-panel{
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  margin: 0 auto;
+  color: @white;
+  background-color: @background;
+
+  &.on{
+    display: block;
+    z-index: 101;
+  }
+
+  .calendar-month{
+
+    text-align: center;
+    line-height: 2rem;
+    font-size: 2rem;
+    position: relative;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-transform: capitalize;
+
+    .material-icons{
+      display: inline-block;
+      margin: 0 2rem;
+      font-size: 3rem;
+      vertical-align: middle;
+      position: absolute;
+
+      &.left{
+        left: 0;
+      }
+      &.right{
+        right: 0;
+      }
+    }
+
+    h2{
+      display: inline-block;
+      vertical-align: middle;
+      font-size: inherit;
+    }
+  }
+
+  .calendar-year{
+    text-align: center;
+    line-height: 1.5rem;
+    font-size: 1.1rem;
+    position: relative;
+    padding-bottom: 1rem;
+    color: @lvl2;
+
+    .material-icons{
+      display: inline-block;
+      margin: 0 9rem;
+      font-size: 2rem;
+      vertical-align: middle;
+      position: absolute;
+
+      &.left{
+        left: 0;
+      }
+      &.right{
+        right: 0;
+      }
+    }
+
+    h2{
+      display: inline-block;
+      vertical-align: middle;
+      font-size: inherit;
+    }
+  }
+
+  .div-table {
+    display: table;
+  }
+  .div-row{
+    display: table-row;
+  }
+  .div-cell{
+    display: table-cell;
+  }
+
+  .box-content {
+    width: 100vw;
+    height: 100vw;
+    margin: 1rem auto;
+
+    .div-cell{
+      text-align: center;
+      vertical-align: middle;
+      position: relative;
+
+      &.old-month, &.new-month {
+        //visibility: hidden;
+        color: @grayedOut
+      }
+
+      &.today:after {
+        border: 1px solid white;
+        border-radius: 50%;
+        content: "";
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 53%;
+        left: 53%;
+        margin: -50%;
+      }
+
+      &.selected{
+
+        color: @background;
+
+        &:after{
+          border-radius: 50%;
+          background-color: @white;
+          content: attr(value);
+          width: 50px;
+          height: 50px;
+          position: absolute;
+          top: 48%;
+          left: 53%;
+          margin: -50%;
+          line-height: 4rem;
+        }
+
+      }
+
+
+    }
+
+    .table-header {
+      color: @grayedOut;
+    }
+  }
+
+  .selected-date{
+    text-align: center;
+    text-transform: capitalize;
+
+    h2{
+      font-size: 2rem;
+    }
+
+    p{
+      margin: 1rem 0;
+      color: @grayedOut;
+    }
+  }
+
+  .buttons {
+    height: 100%;
+    margin: 1rem 2rem 0 2rem;
+    padding-top: 2rem;
+    text-align: center;
+    border-top: 1px solid;
+
+    #save{
+      float: right;
+    }
+    #back{
+      float: left;
+    }
+  }
+}

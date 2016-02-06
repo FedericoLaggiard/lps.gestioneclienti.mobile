@@ -121,7 +121,7 @@ export default {
       },[
 
         m.component(Header, 'RELAZIONI'),
-
+        m('div',{id: 'calendar',style:{display:'none'}}),
         ctrl.reports() ?
           m('main', { className: 'mdl-layout__content'}, [
           m('div',{
