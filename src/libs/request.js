@@ -12,7 +12,7 @@ import app from '../app.js';
  * @param callback
  */
 
-export default function (options, callback, isAuth = false, noCookie = false) {
+export default function (options, callback, isAuth = false, noCredentials = false) {
 
   if (!options) throw Error('options required');
 
@@ -27,35 +27,31 @@ export default function (options, callback, isAuth = false, noCookie = false) {
   };
 
 
-  if (isAuth == false) {
+  if (isAuth) {
+    options.serialize = function(data){
+      return m.route.buildQueryString(data)
+    };
+    options.config = function(xhr){
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.withCredentials = true;
+    };
+    options.extract = function (xhr, xhrOptions) {
+      if (xhr.status === 401) {
+        app.state.login({ status: 401 });
+        m.route('/login');
+      }
+      return xhr.responseText ? xhr.responseText : '{}'
+    }
+  }else{
     options.config = function config(xhr) {
-      //xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-      //xhr.setRequestHeader("Access-Control-Allow-Headers", "origin");
-      if(noCookie === false) xhr.withCredentials = true;
+      if(!noCredentials)
+        xhr.withCredentials = true;
     };
 
     options.extract = function (xhr, xhrOptions) {
       if (xhr.status === 401) {
         app.state.login({ status: 401 });
         m.route('/login');
-        //throw new Error('logged out');
-      }
-      return xhr.responseText ? xhr.responseText : '{}'
-    }
-  }else{
-    options.serialize = function(data){
-      return m.route.buildQueryString(data)
-    };
-    options.config = function(xhr){
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      if(noCookie === false)
-        xhr.withCredentials = false;
-    };
-    options.extract = function (xhr, xhrOptions) {
-      if (xhr.status === 401) {
-        //app.state.login({ status: 401 });
-        //m.route('/login');
-        //throw new Error('logged out');
       }
       return xhr.responseText ? xhr.responseText : '{}'
     }

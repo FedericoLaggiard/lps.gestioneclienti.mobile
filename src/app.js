@@ -12,6 +12,8 @@ import style from '../styles/main.less';
 import Toast from './components/toast';
 import storage from './libs/store';
 
+import _Ripple from './libs/ripple';
+
 let app = {
 
   state: {
@@ -38,6 +40,11 @@ let app = {
   },
 
   showLoader: m.prop(false),
+  showRippleContent: m.prop(false),
+  Ripple : new _Ripple({ onPause: () => {
+
+  } }),
+
 
   showToast: function(message){
     this.state.toast.message(message);
