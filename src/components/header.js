@@ -83,7 +83,10 @@ function subViewCustomers(ctrl){
     ]),
     m('button', {
       className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored search' + (ctrl.isSearching() ? ' on' : ''),
-      onclick: function(){ ctrl.isSearching(!ctrl.isSearching()) }
+      onclick: function(){
+        ctrl.isSearching(!ctrl.isSearching());
+        document.getElementById('txtSearch').focus();
+      }
     }, [
       m('i', {className: 'material-icons' }, 'search')
     ]),
