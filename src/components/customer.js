@@ -81,6 +81,8 @@ export default {
 
           app.showToast('Il cliente è stato salvato con successo.');
           console.log(success);
+
+          flipCard();
         });
 
       }
