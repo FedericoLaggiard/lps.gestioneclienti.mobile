@@ -277,7 +277,7 @@ function customerView(ctrl){
         }, [
           ctrl.customer().cellulare(),
           m('i', {className: 'icon'}, m('img', {
-            src: '/img/mobile.svg',
+            src: './img/mobile.svg',
             style: {
               width: "100%"
             }
@@ -294,7 +294,7 @@ function customerView(ctrl){
           config: redrawMat
         }, [
           ctrl.customer().fax(),
-          m('i', {className: 'icon'}, m('img', { src: '/img/fax.svg' }))
+          m('i', {className: 'icon'}, m('img', { src: './img/fax.svg' }))
         ]))
         : '',
       m('span', { className: 'line' }),
@@ -327,7 +327,7 @@ function customerView(ctrl){
     m('section', { className: 'other mdl-shadow--4dp'}, [
       m('span', { className: 'label' }, 'INDIRIZZO:'),
       m('span', { className: 'value capitalize' }, ctrl.customer().indirizzo().toLowerCase()),
-      m('span', { className: 'value' }, ctrl.customer().citta() + ' - ' + ctrl.customer().provincia()),
+      m('span', { className: 'value' }, ctrl.customer().citta() + ' - ' + (ctrl.customer().cap() ? ctrl.customer().cap() + ' - ' : '') + ctrl.customer().provincia()),
       m('span', { className: 'label' }, "ATTIVITA':"),
       m('span', { className: 'value' }, ctrl.customer().attivita() ? ctrl.customer().attivita() : 'n/d'),
       m('span', { className: 'label' }, "RESPONSABILE:"),
@@ -376,6 +376,22 @@ function editView(ctrl){
             app.state.customer(ctrl.customer());
           }),
           onfocus: function() { app.state.focusedField('txtRagSoc'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
+        //CELLULARE
+        m('label', {
+          className: 'txtLabel' + ( app.state.focusedField() === 'txtCellulare' ? ' focus' : '' )
+        }, 'Cellulare'),
+        m('input', {
+          className: 'textfield',
+          type: 'text',
+          id: 'txtCellulare',
+          value: ctrl.customer().cellulare(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().cellulare(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtCellulare'); },
           onblur: function() { app.state.focusedField(''); }
         }),
         //TELEFONO
@@ -472,6 +488,22 @@ function editView(ctrl){
             app.state.customer(ctrl.customer());
           }),
           onfocus: function() { app.state.focusedField('txtProvincia'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
+        //CAP
+        m('label', {
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtCap' ? ' focus' : '' )
+        }, 'Cap'),
+        m('input', {
+          className: 'textfield',
+          type: 'text',
+          id: 'txtCap',
+          value: ctrl.customer().cap(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().cap(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtCap'); },
           onblur: function() { app.state.focusedField(''); }
         }),
         //RESPONSABILE

@@ -70,7 +70,10 @@ function subViewCustomers(ctrl){
     //Loader
     m('div', { className: 'loader', style: { display: app.showLoader() ? 'block' : 'none'  } }),
     m('div', { className: 'mdl-layout__header-row' }, [
-      m('span', {className: 'mdl-layout-title headerTitle' }, ctrl.title)
+      m('span', {className: 'mdl-layout-title headerTitle' },[
+        m('i', '(' + app.state.customers().length + ')'),
+        ctrl.title
+      ])
     ]),
     m('button', {
       className: 'mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored add' + (ctrl.isSearching() ? ' undo' : ''),
@@ -114,7 +117,9 @@ function subViewReports(ctrl){
       m('span', {className: 'navTitle' }, ctrl.title)
     ]),
     m('div', { className: 'mdl-layout__header-row noPadding'}, [
-      m('span', {className: 'mdl-layout-title headerTitle'}, app.state.customer().ragioneSociale)
+      m('span', {className: 'mdl-layout-title headerTitle'},
+        app.state.customer().ragioneSociale
+      )
     ])
   ]);
 }
