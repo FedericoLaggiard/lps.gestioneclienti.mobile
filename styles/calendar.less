@@ -1,7 +1,7 @@
 @background: #3f51b5;
 @white: #FFFFFF;
-@lvl2: @white - 50;
-@grayedOut: @background - 35;
+@lvl2: lighten(@background, 20%);
+@grayedOut: lighten(@background, 10%);
 
 section.calendar-panel{
   display: none;
@@ -92,8 +92,8 @@ section.calendar-panel{
   }
 
   .box-content {
-    width: 100vw;
-    height: 100vw;
+    width: 90vw;
+    height: 60vh;
     margin: 1rem auto;
 
     .div-cell{
@@ -102,20 +102,21 @@ section.calendar-panel{
       position: relative;
 
       &.old-month, &.new-month {
-        //visibility: hidden;
-        color: @grayedOut
+        visibility: hidden;
+        //color: @grayedOut
       }
 
       &.today:after {
         border: 1px solid white;
         border-radius: 50%;
         content: "";
-        width: 50px;
-        height: 50px;
+        width: 8vmin;
+        height: 8vmin;
         position: absolute;
-        top: 53%;
-        left: 53%;
-        margin: -50%;
+        top: 50%;
+        left: 50%;
+        margin: -25% -25%;
+        line-height: 8.5vmin;
       }
 
       &.selected{
@@ -123,16 +124,18 @@ section.calendar-panel{
         color: @background;
 
         &:after{
-          border-radius: 50%;
           background-color: @white;
           content: attr(value);
-          width: 50px;
-          height: 50px;
           position: absolute;
-          top: 48%;
-          left: 53%;
-          margin: -50%;
-          line-height: 4rem;
+          margin: -25% -25%;
+          border: 1px solid white;
+          border-radius: 50%;
+          width: 8vmin;
+          height: 8vmin;
+          top: 50%;
+          left: 50%;
+          margin: -25% -25%;
+          line-height: 8.5vmin;
         }
 
       }
@@ -148,6 +151,9 @@ section.calendar-panel{
   .selected-date{
     text-align: center;
     text-transform: capitalize;
+    border-top: 1px solid @grayedOut;
+    padding-top: 2rem;
+    margin: 1rem 2rem 0 2rem;
 
     h2{
       font-size: 2rem;
@@ -162,15 +168,16 @@ section.calendar-panel{
   .buttons {
     height: 100%;
     margin: 1rem 2rem 0 2rem;
-    padding-top: 2rem;
+
     text-align: center;
-    border-top: 1px solid;
 
     #save{
       float: right;
+      color: @white;
     }
     #back{
       float: left;
+      color: @white;
     }
   }
 }

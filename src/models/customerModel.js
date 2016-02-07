@@ -19,6 +19,7 @@ function Customer(data){
     this.indirizzo          = m.prop(data.indirizzo         || '');
     this.citta              = m.prop(data.citta             || '');
     this.provincia          = m.prop(data.provincia         || '');
+    this.cap                = m.prop(data.cap               || '');
     this.telefono           = m.prop(data.telefono          || '');
     this.cellulare          = m.prop(data.cellulare         || '');
     this.fax                = m.prop(data.fax               || '');
@@ -39,6 +40,7 @@ function Customer(data){
     this.indirizzo          = m.prop('');
     this.citta              = m.prop('');
     this.provincia          = m.prop('');
+    this.cap                = m.prop('');
     this.telefono           = m.prop('');
     this.fax                = m.prop('');
     this.cellulare          = m.prop('');
