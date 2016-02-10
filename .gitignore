@@ -6,4 +6,5 @@ cordova/www/*
 !cordova/platforms/platforms.json
 dist/bundle.js
 dist/bundle.js.map
-dist/electron/www/
+dist/electron/www/*
+electron/www

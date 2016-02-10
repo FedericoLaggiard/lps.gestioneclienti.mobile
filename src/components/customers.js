@@ -10,7 +10,6 @@ import style from '../../styles/customersList.less';
 import redrawMat from '../libs/redrawMaterial';
 
 import Header from './header';
-import Drawer from './drawer';
 import Customers from '../models/customersModel';
 import Spinner from './spinner.js';
 

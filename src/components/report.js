@@ -10,6 +10,7 @@ import style from '../../styles/reports.less';
 import redrawMat from '../libs/redrawMaterial';
 import {InputMask, InputMaskDefaultMask} from '../libs/inputMask';
 import Reports from '../models/reportsModel';
+import Calendar from './calendar';
 
 moment.locale("it-IT");
 
@@ -45,15 +46,20 @@ export default {
           item._id(success.id);
           items[0] = item;
           params._ref.reports(items);
+          app.showToast('Elemento aggiunto con successo.');
+          params._ref.updateCustomerLastVisit();
 
-          return app.showToast('Elemento aggiunto con successo.');
+          return true;
         });
 
       }else{
         Reports.update(this.data(), (err, success) => {
           if(err) return app.showToast('Si è verificato un errore.');
 
-          return app.showToast('Elemento modificato con successo.');
+          params._ref.updateCustomerLastVisit();
+          app.showToast('Elemento modificato con successo.');
+
+          return true;
         });
       }
       app.state.editReportId(null);
@@ -94,6 +100,47 @@ export default {
       data().data(moment(val, "DD/MM/YYYY h:mm"));
     }
 
+    function showCalendar(e, ctrl){
+
+      app.showRippleContent(true);
+      app.Ripple.start(e);
+
+      var that = this;
+      setTimeout(() =>{
+        window.requestAnimationFrame(()=>{
+
+          let el = "";
+
+          if(document.querySelector("#calendar-wrapper")){
+            el = document.querySelector("#calendar-wrapper");
+          } else {
+            el = document.createElement("div");
+            el.id="calendar-wrapper";
+            document.body.appendChild(el);
+          }
+          let component = m.component(Calendar, this.data().data(),
+            {
+              inputFormat: "YYYY-MM-DDTHH:mm:SS",
+              callback: hideCalendar.bind(that)
+            });
+          let c = new component.controller();
+          m.mount( el, { controller: () => c, view: component.view } );
+
+          m.redraw();
+        });
+      }, 150);
+
+
+    }
+
+    function hideCalendar(value){
+      document.body.removeChild(document.querySelector("#calendar-wrapper"));
+      app.showRippleContent(false);
+      app.Ripple.resume();
+
+      if(value) this.data().data(value.format('YYYY-MM-DDTHH:mm:SS'));
+    }
+
     return{
       editId,
       index,
@@ -102,7 +149,8 @@ export default {
       editItem,
       switchImage,
       remove,
-      save
+      save,
+      showCalendar
     }
   },
 
@@ -164,17 +212,9 @@ function viewEdit(ctrl, item, index){
       m('input', {
           type: 'text',
           className: 'textfield dateMask',
-          value: moment(item.data()).format('DD/MM/YYYY h:mm' ),
-          onblur: m.withAttr('value', item.data),
-          config: function(element, isInit){
-            if(!isInit){
-              new InputMask().Initialize(document.querySelectorAll(".dateMask"), {
-                mask: InputMaskDefaultMask.DateTimeShort,
-                placeHolder: "Data: 01/01/2000 13:59"
-              });
-            }
-          }
-        }, moment(item.data()).format('DD/MM/YYYY h:mm' )),
+          value: moment(item.data()).format('DD/MM/YYYY' ),
+          onclick: ctrl.showCalendar.bind(ctrl)
+        }, moment(item.data()).format('DD/MM/YYYY' )),
       m('button', {
         className: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored salvaReport',
         config: redrawMat,
@@ -199,7 +239,7 @@ function viewStandard(ctrl, item, index){
         m('span', {className: 'dateExt'}, item.codAgente())
       ]),
       m('p', item.note()),
-      m('span', {className: 'cd-date'}, moment(item.data()).format('D MMMM YYYY, h:mm' ))
+      m('span', {className: 'cd-date'}, moment(item.data()).format('D MMMM YYYY' ))
     ])
   ]
 }

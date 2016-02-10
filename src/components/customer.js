@@ -7,6 +7,7 @@
 import m from 'mithril';
 import style from '../../styles/customer.less';
 import redrawMat from '../libs/redrawMaterial';
+import moment from 'moment';
 
 import Customer from '../models/customerModel';
 import gMap from './gMap';
@@ -15,6 +16,8 @@ import Spinner from './spinner.js';
 export default {
 
   controller(){
+
+    moment.locale("it-IT");
 
     let isNew = m.route.param('id') === 'new';
 
@@ -32,12 +35,12 @@ export default {
 
         if(err){
           app.state.customer(null);
+          app.showToast('Si è verificato un errore.');
           m.route('/customers');
           return console.log(err);
         }
 
         customer(new Customer(app.state.customer()));
-        //customer = app.state.customer();
         m.redraw();
 
       })
@@ -57,7 +60,7 @@ export default {
 
         Customer.insert(customer, (err, success) => {
 
-          if(err) return console.log(err);
+          if(err) { app.showToast('Si è verificato un errore.'); return console.log(err);}
 
           app.state.customers(null);
           app.state.customer(null);
@@ -72,12 +75,14 @@ export default {
 
         Customer.update(customer,(err, success) => {
 
-          if(err) return console.log(err);
+          if(err) { app.showToast('Si è verificato un errore.'); return console.log(err);}
 
           customer = new Customer(app.state.customer());
 
           app.showToast('Il cliente è stato salvato con successo.');
           console.log(success);
+
+          flipCard();
         });
 
       }
@@ -96,7 +101,7 @@ export default {
 
       Customer.remove(customer, (err, success) => {
 
-        if(err) return console.log(err);
+        if(err) { app.showToast('Si è verificato un errore.'); return console.log(err);}
 
         app.state.customers(null);
         app.state.customer(null);
@@ -229,7 +234,10 @@ function customerView(ctrl){
       m('div', { className: 'table' }, [
         m('div', { className: 'left'}, [
           m('span', { className: 'label' }, 'ULTIMA VISITA:'),
-          m('span', { className: 'value' }, ctrl.customer().ultimaVisita() ? ctrl.customer().ultimaVisita() : 'n/d')
+          m('span', { className: 'value' }, ctrl.customer().ultimaVisita() ?
+            moment(ctrl.customer().ultimaVisita()).fromNow()
+            :
+            'n/d')
         ]),
         m('div', { className: 'right'}, [
           m('span', { className: 'label' }, 'AGENTE:'),
@@ -246,8 +254,10 @@ function customerView(ctrl){
         m('i', {className: 'material-icons arrow'}, 'arrow_forward')
       ])
     ]),
+    //CONTATTI
     m('section', { className: 'contacts mdl-shadow--4dp'}, [
       m('span', { className: 'label' }, 'CONTATTI:'),
+      //TELEFONO
       m('a', {
           className: 'tel',
           href: 'tel:' + ctrl.customer().telefono()
@@ -255,10 +265,42 @@ function customerView(ctrl){
           className: 'mdl-button mdl-js-button mdl-js-ripple-effect phone',
           config: redrawMat
         }, [
-          ctrl.customer().telefono()
-          //m('i', {className: 'material-icons arrow'}, 'phone')
+          ctrl.customer().telefono(),
+          m('i', {className: 'material-icons arrow'}, 'local_phone')
         ])),
+      //CELLULARE
+      ctrl.customer().cellulare() ?
+        m('a', {
+          className: 'tel',
+          href: 'tel:' + ctrl.customer().cellulare()
+        }, m('button', {
+          className: 'mdl-button mdl-js-button mdl-js-ripple-effect phone',
+          config: redrawMat
+        }, [
+          ctrl.customer().cellulare(),
+          m('i', {className: 'icon'}, m('img', {
+            src: './img/mobile.svg',
+            style: {
+              width: "100%"
+            }
+          }))
+        ]))
+      : '',
+      //FAX
+      ctrl.customer().fax() ?
+        m('a', {
+          className: 'tel',
+          href: 'tel:' + ctrl.customer().fax()
+        }, m('button', {
+          className: 'mdl-button mdl-js-button mdl-js-ripple-effect phone',
+          config: redrawMat
+        }, [
+          ctrl.customer().fax(),
+          m('i', {className: 'icon'}, m('img', { src: './img/fax.svg' }))
+        ]))
+        : '',
       m('span', { className: 'line' }),
+      //MAIL
       m('a', {
         className: 'mail',
         href: 'mailto:' + ctrl.customer().email()
@@ -268,8 +310,36 @@ function customerView(ctrl){
       }, [
         ctrl.customer().email()
         //m('i', {className: 'material-icons arrow'}, 'email')
-      ]))
+      ])),
+      //WEB
+      ctrl.customer().web() ?
+        m('a', {
+          className: 'mail',
+          href: ctrl.customer().web()
+        }, m('button', {
+          className: 'mdl-button mdl-js-button mdl-js-ripple-effect mail',
+          config: redrawMat
+        }, [
+          ctrl.customer().web()
+          //m('i', {className: 'material-icons arrow'}, 'email')
+        ]))
+      : ''
     ]),
+    //ALTRO
+    m('section', { className: 'other mdl-shadow--4dp'}, [
+      m('span', { className: 'label' }, 'INDIRIZZO:'),
+      m('span', { className: 'value capitalize' }, ctrl.customer().indirizzo().toLowerCase()),
+      m('span', { className: 'value' }, ctrl.customer().citta() + ' - ' + (ctrl.customer().cap() ? ctrl.customer().cap() + ' - ' : '') + ctrl.customer().provincia()),
+      m('span', { className: 'label' }, "ATTIVITA':"),
+      m('span', { className: 'value' }, ctrl.customer().attivita() ? ctrl.customer().attivita() : 'n/d'),
+      m('span', { className: 'label' }, "RESPONSABILE:"),
+      m('span', { className: 'value' }, ctrl.customer().responsabile() ? ctrl.customer().responsabile() : 'n/d'),
+      m('span', { className: 'label' }, "DIMENSIONI:"),
+      m('span', { className: 'value' }, ctrl.customer().dimensioniAzienda()),
+      m('span', { className: 'label' }, "NOTE:"),
+      m('span', { className: 'value' }, ctrl.customer().note())
+    ]),
+    //GMAP
     m('section', { className: 'map mdl-shadow--4dp'}, [
       ctrl.isNew ? '' : m.component(gMap, { address: ctrl.customer().indirizzo() +',+'+ ctrl.customer().citta() +',+'+ ctrl.customer().provincia() }),
       //m.component(gMap, { address: 'Via Melchiorre Voli 31, torino' }),
@@ -284,17 +354,9 @@ function customerView(ctrl){
           m('i', {className: 'material-icons arrow'}, 'arrow_forward')
         ])
       )
-    ]),
-    m('section', { className: 'other mdl-shadow--4dp'}, [
-      m('span', { className: 'label' }, 'INDIRIZZO:'),
-      m('span', { className: 'value capitalize' }, ctrl.customer().indirizzo().toLowerCase()),
-      m('span', { className: 'value' }, ctrl.customer().citta() + ' - ' + ctrl.customer().provincia()),
-      m('span', { className: 'label' }, "ATTIVITA':"),
-      m('span', { className: 'value' }, ctrl.customer().attivita() ? ctrl.customer().attivita() : 'n/d'),
-      m('span', { className: 'label' }, "RESPONSABILE:"),
-      m('span', { className: 'value' }, ctrl.customer().responsabile() ? ctrl.customer().responsabile() : 'n/d')
     ])
-    ];
+
+  ];
 
 }
 
@@ -316,6 +378,22 @@ function editView(ctrl){
             app.state.customer(ctrl.customer());
           }),
           onfocus: function() { app.state.focusedField('txtRagSoc'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
+        //CELLULARE
+        m('label', {
+          className: 'txtLabel' + ( app.state.focusedField() === 'txtCellulare' ? ' focus' : '' )
+        }, 'Cellulare'),
+        m('input', {
+          className: 'textfield',
+          type: 'text',
+          id: 'txtCellulare',
+          value: ctrl.customer().cellulare(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().cellulare(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtCellulare'); },
           onblur: function() { app.state.focusedField(''); }
         }),
         //TELEFONO
@@ -414,6 +492,22 @@ function editView(ctrl){
           onfocus: function() { app.state.focusedField('txtProvincia'); },
           onblur: function() { app.state.focusedField(''); }
         }),
+        //CAP
+        m('label', {
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtCap' ? ' focus' : '' )
+        }, 'Cap'),
+        m('input', {
+          className: 'textfield',
+          type: 'text',
+          id: 'txtCap',
+          value: ctrl.customer().cap(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().cap(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtCap'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
         //RESPONSABILE
         m('label', {
           className: 'txtLabel'+ ( app.state.focusedField() === 'txtResponsabile' ? ' focus' : '' )
@@ -446,23 +540,39 @@ function editView(ctrl){
           onfocus: function() { app.state.focusedField('txtAttivita'); },
           onblur: function() { app.state.focusedField(''); }
         }),
-        //ULTIMA VISITA
+        //DIMENSIONI
         m('label', {
-          className: 'txtLabel'+ ( app.state.focusedField() === 'txtUltima' ? ' focus' : '' )
-        }, 'Ultima visita'),
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtDimensioni' ? ' focus' : '' )
+        }, 'Dimensioni'),
         m('input', {
           className: 'textfield',
           type: 'text',
-          id: 'txtUltima',
-          value: ctrl.customer().ultimaVisita(),
+          id: 'txtDimensioni',
+          value: ctrl.customer().dimensioniAzienda(),
           oninput: m.withAttr('value', function(value) {
-            ctrl.customer().ultimaVisita(value);
+            ctrl.customer().dimensioniAzienda(value);
             app.state.customer(ctrl.customer());
           }),
-          onfocus: function() { app.state.focusedField('txtUltima'); },
+          onfocus: function() { app.state.focusedField('txtDimensioni'); },
           onblur: function() { app.state.focusedField(''); }
         }),
-        //Agente
+        ////ULTIMA VISITA
+        //m('label', {
+        //  className: 'txtLabel'+ ( app.state.focusedField() === 'txtUltima' ? ' focus' : '' )
+        //}, 'Ultima visita'),
+        //m('input', {
+        //  className: 'textfield',
+        //  type: 'text',
+        //  id: 'txtUltima',
+        //  value: ctrl.customer().ultimaVisita(),
+        //  oninput: m.withAttr('value', function(value) {
+        //    ctrl.customer().ultimaVisita(value);
+        //    app.state.customer(ctrl.customer());
+        //  }),
+        //  onfocus: function() { app.state.focusedField('txtUltima'); },
+        //  onblur: function() { app.state.focusedField(''); }
+        //}),
+        //AGENTE
         m('label', {
           className: 'txtLabel'+ ( app.state.focusedField() === 'txtAgente' ? ' focus' : '' )
         }, 'Agente'),
@@ -476,6 +586,20 @@ function editView(ctrl){
             app.state.customer(ctrl.customer());
           }),
           onfocus: function() { app.state.focusedField('txtAgente'); },
+          onblur: function() { app.state.focusedField(''); }
+        }),
+        //NOTE
+        m('label', {
+          className: 'txtLabel'+ ( app.state.focusedField() === 'txtNote' ? ' focus' : '' )
+        }, 'Note'),
+        m('textarea',{
+          className: 'txtNote',
+          value: ctrl.customer().note(),
+          oninput: m.withAttr('value', function(value) {
+            ctrl.customer().note(value);
+            app.state.customer(ctrl.customer());
+          }),
+          onfocus: function() { app.state.focusedField('txtNote'); },
           onblur: function() { app.state.focusedField(''); }
         })
       ])

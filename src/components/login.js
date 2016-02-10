@@ -16,46 +16,66 @@ export default {
   controller(){
 
     let errors = m.prop(null);
-
+    let name = m.prop('');
+    let password = m.prop('');
+    let isRemember= m.prop(localStorage.getItem("remember") ? true : false);
 
     if(app.state.login() && app.state.login().status == 401) {
       errors({error: "401"});
       app.state.login().status = "";
     }
 
-    return {
+    if(isRemember()){
+      name(localStorage.getItem("name"));
+      password(localStorage.getItem("password"));
+    }
 
-      errors,
-      name: m.prop(''),
-      password: m.prop(''),
 
-      login(){
-        this.errors(null);
-        Login.fetch({name: this.name() ,password: this.password()}, (err,login) => {
-          if(err){
-            this.errors(err);
-            app.m.redraw();
-            return console.log(err);
-          }
-
-          m.route('/customers');
-        })
-      },
-
-      getErrorMessage(err){
-
-        if(!err.error) return "Si è verificato un errore. Verificare la connessione o Riprovare più tardi.";
-        switch (err.error){
-          case "unauthorized":
-            return 'Nome utente o password errati.';
-          case "401":
-            return "La sessione è scaduta. Effettuare nuovamente il log-in.";
-          default:
-            return err.reason;
+    function login(){
+      this.errors(null);
+      Login.fetch({name: this.name() ,password: this.password()}, (err,login) => {
+        if(err){
+          this.errors(err);
+          app.m.redraw();
+          return console.log(err);
         }
 
+        if(isRemember){
+          localStorage.setItem("name", name());
+          localStorage.setItem("password", password());
+          localStorage.setItem("remember", true);
+        }
+
+        m.route('/customers');
+      })
+    }
+    function getErrorMessage(err){
+
+      if(!err.error) return "Si è verificato un errore. Verificare la connessione o Riprovare più tardi.";
+      switch (err.error){
+        case "unauthorized":
+          return 'Nome utente o password errati.';
+        case "401":
+          return "La sessione è scaduta. Effettuare nuovamente il log-in.";
+        default:
+          return err.reason;
       }
 
+    }
+    function remember(){
+      isRemember(!isRemember());
+      console.log(isRemember())
+    }
+
+    return {
+      errors,
+      name,
+      password,
+      isRemember,
+
+      login,
+      getErrorMessage,
+      remember
     }
 
   },
@@ -104,6 +124,19 @@ export default {
                 className: 'mdl-textfield__label',
                 'for':     'password'
               }, 'Password')
+            ]),
+            m('label', {
+              "for": "swRemember",
+              className: "mdl-switch mdl-js-switch"
+            }, [
+              m('input', {
+                type: "checkbox",
+                id: "swRemember",
+                className: "mdl-switch__input",
+                onchange: ctrl.remember.bind(ctrl),
+                checked: ctrl.isRemember()
+              }),
+              m('span', { className: "mdl-switch__label" }, "Ricordami")
             ])
           ]),
          m('span', { className: 'errors' }, ctrl.errors() ? ctrl.getErrorMessage(ctrl.errors()) : ''),

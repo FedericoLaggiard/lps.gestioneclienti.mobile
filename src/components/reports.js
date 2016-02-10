@@ -11,6 +11,7 @@ import redrawMat from '../libs/redrawMaterial';
 import inputMask from '../libs/inputMask';
 
 import Reports from '../models/reportsModel';
+import Customer from '../models/customerModel';
 
 import Header from './header';
 import Report from './report';
@@ -30,8 +31,28 @@ export default {
       if(err) return app.showToast('Si è verificato un errore.');
 
       reports(r);
+      updateCustomerLastVisit();
       m.redraw();
     });
+
+    function updateCustomerLastVisit(){
+      if(reports().length > 0){
+        var customer = app.state.customer();
+        if(customer.ultimaVisita !== reports()[0].data()){
+          customer.ultimaVisita = reports()[0].data();
+          Customer.update(m.prop(new Customer(customer)), (err, resp) => {
+
+            if(err) {
+              app.showToast("Si è verificato un errore durante l'aggiornamento dell'ultima visita");
+              return console.log(err);
+            }
+
+            return app.showToast("l'ultima visita è stata aggiornata.");
+
+          })
+        }
+      }
+    }
 
     function editItem(itemId){
       if (itemId === null && app.state.editReportId() === -1){
@@ -85,7 +106,8 @@ export default {
       editItem,
       newItem,
       reports,
-      refresh
+      refresh,
+      updateCustomerLastVisit
     }
   },
 
@@ -99,7 +121,7 @@ export default {
       },[
 
         m.component(Header, 'RELAZIONI'),
-
+        m('div',{id: 'calendar',style:{display:'none'}}),
         ctrl.reports() ?
           m('main', { className: 'mdl-layout__content'}, [
           m('div',{
