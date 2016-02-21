@@ -4,12 +4,12 @@
 
 'use strict';
 
-export const env = 'prod';
+export const env = 'dev';
 
 const baseUrl = {
 
   prod: 'https://couchdb-0f2b48.smileupps.com',
-  dev: 'http://localhost:5984'
+  dev: 'http://192.168.1.103:5984'
 
 };
 

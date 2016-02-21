@@ -6,6 +6,7 @@
 
 import m from 'mithril';
 import style from '../../styles/customer.less';
+import ribbonStyle from '../../styles/ribbon.less';
 import redrawMat from '../libs/redrawMaterial';
 import moment from 'moment';
 
@@ -229,7 +230,15 @@ function customerView(ctrl){
 
   return [
     m('section', { className: 'head mdl-shadow--4dp' }, [
-      m('div', { className: 'circular' }),
+      m('div', {
+        className: 'circular' + ( ctrl.customer().isFornitore() ? ' supplier' : '' )
+      },
+        m('div', { className: 'ribbon' },
+          m('div', {className: 'ribbon-content'},
+            m('h1', ctrl.customer().isFornitore() ? 'fornitore' : 'cliente' )
+          )
+        )
+      ),
       m('h2', { className: 'name' }, ctrl.customer().ragioneSociale()),
       m('div', { className: 'table' }, [
         m('div', { className: 'left'}, [
@@ -380,6 +389,27 @@ function editView(ctrl){
           onfocus: function() { app.state.focusedField('txtRagSoc'); },
           onblur: function() { app.state.focusedField(''); }
         }),
+        //IS FORNITORE
+        m('div', { className: 'fornitoreContainer'},
+          m('label', {
+            "for": "swFornitore",
+            className: "mdl-switch mdl-js-switch"
+          }, [
+            m('input', {
+              type: "checkbox",
+              id: "swFornitore",
+              className: "mdl-switch__input",
+              config: redrawMat,
+              onchange: m.withAttr('checked', function(val){
+                ctrl.customer().isFornitore(val);
+                app.state.customer(ctrl.customer());
+                redrawMat(false,null);
+              }),
+              checked: ctrl.customer().isFornitore()
+            }),
+            m('span', { className: "mdl-switch__label" + ( ctrl.customer().isFornitore() ? ' on' : '' ) }, "Fornitore")
+          ])
+        ),
         //CELLULARE
         m('label', {
           className: 'txtLabel' + ( app.state.focusedField() === 'txtCellulare' ? ' focus' : '' )
