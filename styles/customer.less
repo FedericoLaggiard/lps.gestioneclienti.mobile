@@ -29,6 +29,19 @@
         -webkit-box-shadow: 0px 4px 8px #838383;
         -moz-box-shadow: 0px 4px 8px #838383;
         box-shadow: 0px 4px 8px #838383;
+        background: url(../dist/img/ph.jpg) no-repeat;
+        background-size: 100%;
+        background-position: 50%;
+
+        &.supplier{
+          background: url(../dist/img/supplier.jpg) no-repeat;
+          background-size: 130%;
+          background-position: 44%;
+        }
+
+        .ribbon{
+          top: 65%;
+        }
       }
 
       h2.name{
@@ -284,12 +297,31 @@ END CARD FLIP
 
 #formEdit {
 
+  position: relative;
+
   .txtNote {
     width: 100%;
     height: 25rem;
     padding-top: .5rem;
     font-size: 1.2rem;
     margin-top: .5rem;
+  }
+
+  .fornitoreContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #c9c9c9;
+
+    .mdl-switch .mdl-switch__label {
+      position: initial;
+      margin: 0 0 0 24px;
+      font-size: 1rem;
+
+      &.on{
+        color: #3f51b5;
+      }
+    }
   }
 
 }
