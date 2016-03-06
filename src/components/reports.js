@@ -120,7 +120,7 @@ export default {
         config: redrawMat.removeContainer
       },[
 
-        m.component(Header, 'RELAZIONI'),
+        m.component(Header, 'RELAZIONI', { newItem: ctrl.newItem, ctrl: ctrl }),
         m('div',{id: 'calendar',style:{display:'none'}}),
         ctrl.reports() ?
           m('main', { className: 'mdl-layout__content'}, [
@@ -131,15 +131,15 @@ export default {
           }),
           m('section', {id: 'cd-timeline'},
 
-            m('div', { className: 'cd-timeline-block add'}, [
-              m('div', {
-                className: 'cd-timeline-img',
-                onclick: ctrl.newItem.bind(ctrl)
-              }, [
-                m('img', { src: './img/add.svg'})
-              ]),
-              m('div', { className: 'cd-timeline-content'})
-            ]),
+            //m('div', { className: 'cd-timeline-block add'}, [
+            //  m('div', {
+            //    className: 'cd-timeline-img',
+            //    onclick: ctrl.newItem.bind(ctrl)
+            //  }, [
+            //    m('img', { src: './img/add.svg'})
+            //  ]),
+            //  m('div', { className: 'cd-timeline-content'})
+            //]),
 
 
             ctrl.reports().map(function(item){
