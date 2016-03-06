@@ -18,6 +18,7 @@ function Reports(data){
   this.data =         m.prop(data.doc.data          ||  '');
   this.tipoIncontro = m.prop(data.doc.tipoIncontro  ||  '');
   this.note =         m.prop(data.doc.note          ||  '');
+  this.reportedTo   = m.prop(data.doc.reportedTo    ||  '');
 
 }
 
