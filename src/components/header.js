@@ -10,7 +10,7 @@ import redrawMat from '../libs/redrawMaterial';
 
 export default {
 
-  controller(title){
+  controller(title, options){
 
     let isSearching = m.prop(false);
 
@@ -38,7 +38,8 @@ export default {
 
       },
 
-      title
+      title,
+      options
     }
 
   },
@@ -104,7 +105,7 @@ function subViewCustomers(ctrl){
 }
 
 function subViewReports(ctrl){
-  return m('header', { className: 'mdl-layout__header' }, [
+  return m('header', { className: 'mdl-layout__header', id: 'reports-header' }, [
     //Loader
     m('div', { className: 'loader', style: { display: app.showLoader() ? 'block' : 'none'  } }),
     m('div', { className: 'mdl-layout__header-row noPadding'}, [
@@ -123,6 +124,18 @@ function subViewReports(ctrl){
       m('span', {className: 'mdl-layout-title headerTitle'},
         app.state.customer().ragioneSociale
       )
+    ]),
+    //Add
+    m('div', {
+      className: 'cd-timeline-block add' + ( app.state.editReportId() !== null ? ' disabled' : '' )
+    }, [
+      m('div', {
+        className: 'cd-timeline-img',
+        onclick: app.state.editReportId() === null ? ctrl.options.newItem.bind(ctrl.options.ctrl) : ''
+      }, [
+        m('img', { src: './img/add.svg'})
+      ]),
+      m('div', { className: 'cd-timeline-content'})
     ])
   ]);
 }

@@ -31,6 +31,7 @@ function Customer(data){
     this.relazioni          = m.prop(data.relazioni         || []);
     this.note               = m.prop(data.note              || '');
     this.dimensioniAzienda  = m.prop(data.dimensioniAzienda || '');
+    this.isFornitore        = m.prop(data.isFornitore       || false);
   }else{
     this._id                = m.prop(null);
     this._rev               = m.prop(null);
@@ -52,6 +53,7 @@ function Customer(data){
     this.relazioni          = m.prop([]);
     this.note               = m.prop('');
     this.dimensioniAzienda  = m.prop('');
+    this.isFornitore        = m.prop(false);
   }
 }
 

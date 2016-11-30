@@ -184,17 +184,6 @@ function viewEdit(ctrl, item, index){
       className: 'cd-timeline-content',
       onclick: ctrl.editItem.bind(ctrl,index)
     }, [
-      m('button', {
-          className: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored delete',
-          style: {
-            display: item._id() === -1 ? 'none' : 'block'
-          },
-          onclick: ctrl.remove.bind(ctrl)
-        },
-        m('i', {
-          className: 'material-icons'
-        }, 'delete')
-      ),
       m('h2', [
         moment(item.data()).fromNow()
       ]),
@@ -203,6 +192,15 @@ function viewEdit(ctrl, item, index){
           value: item.codAgente(),
           oninput: m.withAttr('value', item.codAgente)
         }
+      ),
+      m('div', { className: 'reportedTo'},
+        m('span', { className: 'lbl' }, 'Parlato con:'),
+        m('input', {
+            className: 'textfield',
+            value: item.reportedTo(),
+            oninput: m.withAttr('value', item.reportedTo)
+          }
+        )
       ),
       m('textarea',{
           className: 'txtNote',
@@ -219,7 +217,14 @@ function viewEdit(ctrl, item, index){
         className: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored salvaReport',
         config: redrawMat,
         onclick: ctrl.save.bind(ctrl)
-      }, 'Salva')
+      }, 'Salva'),
+      m('button', {
+          className: 'mdl-button mdl-js-button mdl-button--raised mdl-button--accent delete',
+          style: {
+            display: item._id() === -1 ? 'none' : 'block'
+          },
+          onclick: ctrl.remove.bind(ctrl)
+        }, 'Elimina')
     ])
   ]
 }
@@ -238,6 +243,10 @@ function viewStandard(ctrl, item, index){
         moment(item.data()).fromNow(),
         m('span', {className: 'dateExt'}, item.codAgente())
       ]),
+      m('div', { className: 'reportedTo'},
+        //m('span', { className: 'lbl' }, 'Parlato con:'),
+        m('span', item.reportedTo())
+      ),
       m('p', item.note()),
       m('span', {className: 'cd-date'}, moment(item.data()).format('D MMMM YYYY' ))
     ])

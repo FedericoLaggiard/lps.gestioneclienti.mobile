@@ -2,11 +2,11 @@
   /* this is the vertical line */
   content: '';
   position: absolute;
-  top: 0;
-  left: 18px;
+  top: 5em;
+  left: 20px;
   height: 100%;
-  width: 4px;
-  background: #d7e4ed;
+  width: 1px;
+  background: #C5C5C5;
   margin: 1rem;
 }
 
@@ -15,6 +15,8 @@
   position: relative;
   padding: 1rem;
   margin-bottom: 2em;
+  background-color: white;
+  padding-top: 3rem;
 
   .cd-container {
     /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
@@ -37,7 +39,6 @@
   }
   header h1 {
     color: white;
-    font-size: 18px;
     font-size: 1.125rem;
   }
 
@@ -54,7 +55,6 @@
     }
 
     header h1 {
-      font-size: 24px;
       font-size: 1.5rem;
     }
   }
@@ -84,7 +84,6 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
   background-color: #FF5722;
 }
 .cd-timeline-img img {
@@ -168,18 +167,18 @@
   position: relative;
   margin-left: 60px;
   background: white;
-  border-radius: 0.25em;
   padding: 1em;
-  box-shadow: 0 3px 0 #d7e4ed;
-  height: 10rem;
-
   will-change: height;
+  border-bottom: 1px solid #C5C5C5;
 
-  //-webkit-transition: height .5s;
-  //-moz-transition:    height .5s;
-  //-ms-transition:     height .5s;
-  //-o-transition:      height .5s;
-  //transition:         height .5s;
+  .reportedTo {
+    margin-top: 1rem;
+
+    span {
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+  }
 }
 .cd-timeline-content:after {
   content: "";
@@ -187,11 +186,11 @@
   clear: both;
 }
 .cd-timeline-content h2 {
-  color: #303e49;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: bold;
 }
 .cd-timeline-content p, .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
-  font-size: 13px;
-  font-size: 0.8125rem;
+  font-size: 1rem;
 }
 .cd-timeline-content p {
   margin: 1em 0;
@@ -227,16 +226,16 @@
   padding: .8em 0;
   opacity: .7;
 }
-.cd-timeline-content::before {
-  content: '';
-  position: absolute;
-  top: 16px;
-  right: 100%;
-  height: 0;
-  width: 0;
-  border: 7px solid transparent;
-  border-right: 7px solid white;
-}
+//.cd-timeline-content::before {
+//  content: '';
+//  position: absolute;
+//  top: 16px;
+//  right: 100%;
+//  height: 0;
+//  width: 0;
+//  border: 7px solid transparent;
+//  border-right: 7px solid white;
+//}
 @-webkit-keyframes cd-bounce-2 {
   0% {
     opacity: 0;
@@ -354,15 +353,27 @@
 
 .cd-timeline-block.add {
 
-  height: 4rem;
-  
+  position: absolute;
+  margin-top: -4.5vh;
+  margin-left: .8rem;
+
+  &.disabled{
+    .cd-timeline-img{
+      background-color: gray;
+    }
+  }
+
   .cd-timeline-img{
     background-color: #4CAF50;
+    box-shadow: none;
+    width: 50px;
+    height: 50px;
   }
 
   .cd-timeline-content{
     height: 0;
     padding: 0;
+    border-bottom: none;
   }
 
   .cd-timeline-content:before{
@@ -407,31 +418,44 @@
     height: 25rem !important;
 
     h2 {
-      width: 50%;
       float: left;
     }
 
     .dateExt {
-      width: 30%;
-      float: right;
+      width: 10%;
+      float: left;
       height: 1rem;
-
+      text-align: center;
       margin: 0;
     }
 
+    .reportedTo {
+      display: inline-block;
+      width: 100%;
+      margin: 0;
+
+      .lbl {
+        margin-right: 1rem;
+        line-height: 3rem;
+        vertical-align: top;
+        font-weight: normal;
+        text-transform: none;
+      }
+
+      .textfield {
+        width: 69%;
+      }
+    }
+
     .delete{
-      position: absolute;
-      top: .3rem;
-      left: 87%;
-      color: red;
-      z-index: 2;
-      background-color: white;
+      float: right;
+      margin-right: 2rem;
     }
   }
 
   .txtNote {
     width: 100%;
-    height: 77%;
+    height: 65%;
     padding-top: .5rem;
     font-size: 1.2rem;
     margin-top: .5rem;

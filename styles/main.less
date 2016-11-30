@@ -103,7 +103,8 @@ body {
 #app {
   width: 100%;
   height: 100%;
-  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 main {
@@ -122,6 +123,10 @@ h3 {
 
 input, textarea, keygen, select, button {
   font-family: Roboto, sans-serif;
+}
+
+.mdl-button--accent.mdl-button--accent.mdl-button--raised, .mdl-button--accent.mdl-button--accent.mdl-button--fab{
+  background-color: #F44336;
 }
 
 .material-icons {
@@ -155,9 +160,6 @@ input, textarea, keygen, select, button {
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
-  background: url(../dist/img/ph.jpg) no-repeat;
-  background-size: 100%;
-  background-position: 50%;
 }
 
 .textfield {
@@ -250,3 +252,4 @@ input, textarea, keygen, select, button {
 body .ripple{
   border-color: #3f51b5;
 }
+
