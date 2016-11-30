@@ -1,10 +1,13 @@
 /**
  * Created by federicolaggiard on 14/08/15.
+ *
+ * for development purpose only.
+ *
  */
 
 'use strict';
 
-export const env = 'prod';
+export const env = 'dev';
 
 const baseUrl = {
 
