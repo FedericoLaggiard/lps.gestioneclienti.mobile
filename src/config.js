@@ -8,7 +8,6 @@ export const env = 'prod';
 
 const baseUrl = {
 
-  prod: 'https://couchdb-0f2b48.smileupps.com',
   dev: 'http://localhost:5984'
 
 };
