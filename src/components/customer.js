@@ -5,8 +5,8 @@
 'use strict';
 
 import m from 'mithril';
-import style from '../../styles/customer.less';
-import ribbonStyle from '../../styles/ribbon.less';
+//import style from '../../styles/customer.less';
+//import ribbonStyle from '../../styles/ribbon.less';
 import redrawMat from '../libs/redrawMaterial';
 import moment from 'moment';
 

@@ -1,0 +1,66 @@
+section.loginSection{
+  height: 100%;
+  background: url(../../dist/img/bg4.jpg)no-repeat center center fixed;
+  background-size: cover;
+  color: #FFFFFF;
+
+  div.loader{
+    margin-top: 0;
+    background-color: transparent;
+  }
+
+  div.head{
+    padding: 2rem 2rem 0 2rem;
+  }
+
+  div.background{
+    background-color: rgba(0,0,0,0.4);
+    height: 100%;
+    position: relative;
+
+    form#loginForm{
+      width: 100%;
+      padding: 0 2rem;
+      top: 50vh;
+      position: absolute;
+
+      div.mdl-textfield{
+        width: 100%;
+        color: #3f51b5;
+
+        input{
+          border-bottom: 1px solid rgba(255,255,255,.3);
+          color: blue;
+        }
+
+        label{
+          color: rgba(255, 255, 255, .5);
+
+          &:after{
+            background-color: #FFFFFF;
+          }
+        }
+      }
+    }
+
+    button#btnLogin{
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background-color: #3f51b5;
+    }
+
+    span.errors{
+      color: #b00000;
+      font-weight: bold;
+      position: absolute;
+      bottom: 5rem;
+      padding: 0 2rem;
+    }
+  }
+
+
+
+
+}

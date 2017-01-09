@@ -5,7 +5,7 @@
 "use strict";
 
 import m from 'mithril';
-import style from '../../styles/spinner.less';
+//import style from '../../styles/spinner.less';
 
 let Spinner = {
   visible: m.prop(true)

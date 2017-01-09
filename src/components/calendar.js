@@ -5,7 +5,7 @@
 
 'use strict';
 
-import Style from '../../styles/calendar.less';
+//import Style from '../../styles/calendar.less';
 
 import m from 'mithril';
 import moment from 'moment';

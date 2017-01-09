@@ -8,7 +8,8 @@ import m from 'mithril';
 
 import moment from 'moment';
 
-import style from '../styles/main.less';
+import style from '../styles/greenberry/main.less';
+
 import Toast from './components/toast';
 import storage from './libs/store';
 

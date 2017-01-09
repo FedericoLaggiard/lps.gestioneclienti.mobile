@@ -5,7 +5,7 @@
 'use strict';
 
 import m from 'mithril';
-import style from '../../styles/header.less';
+//import style from '../../styles/header.less';
 import redrawMat from '../libs/redrawMaterial';
 
 export default {

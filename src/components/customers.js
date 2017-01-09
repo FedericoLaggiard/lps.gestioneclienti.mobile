@@ -6,7 +6,7 @@
 
 import m from 'mithril';
 
-import style from '../../styles/customersList.less';
+//import style from '../../styles/customersList.less';
 import redrawMat from '../libs/redrawMaterial';
 
 import Header from './header';
