@@ -8,6 +8,7 @@
 'use strict';
 
 export const env = 'prod';
+export const company = 'gb';
 
 const baseUrl = {
 
@@ -21,10 +22,10 @@ export const urls = {
   prod: {
     login:        baseUrl[env] + '/_session',
     users:        baseUrl[env] + '/_users',
-    customer:     baseUrl[env] + '/lps_clienti',
-    customers:    baseUrl[env] + '/lps_clienti/_design/listByRagSoc/_view/listByRagSoc',
-    report:       baseUrl[env] + '/lps_reports',
-    reports:      baseUrl[env] + '/lps_reports/_design/reportsByCustomer/_view/reportsByCustomer'
+    customer:     baseUrl[env] + '/'+ [company] +'_clienti',
+    customers:    baseUrl[env] + '/'+ [company] +'_clienti/_design/listByRagSoc/_view/listByRagSoc',
+    report:       baseUrl[env] + '/'+ [company] +'_reports',
+    reports:      baseUrl[env] + '/'+ [company] +'_reports/_design/reportsByCustomer/_view/reportsByCustomer'
   },
 
   dev: {
