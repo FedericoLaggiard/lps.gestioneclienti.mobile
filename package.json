@@ -9,7 +9,7 @@
     "serve": "npm run build && ./node_modules/.bin/webpack-dev-server --hot",
     "build": "./node_modules/.bin/webpack",
     "build-cordova": "npm run build && node scripts/cordova.js",
-    "build-electron": "node scripts/electron.js && electron-packager ./ Tallyman --platform=win32 --arch=x64",
+    "build-electron": "node scripts/electron.js && electron-packager ./electron/ Greenberry --platform=win32 --arch=x64 --electron-version=1.4.15 --icon ./icon.ico",
     "electron": "./node_modules/.bin/electron ./electron/"
   },
   "repository": {
