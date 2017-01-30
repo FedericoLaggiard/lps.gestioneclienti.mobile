@@ -1,0 +1,52 @@
+ul.activityList {
+  list-style: none;
+  padding: 1.5rem 0 0 0;
+}
+
+//li.customerItem {
+//  padding: .8em;
+//  border-bottom: 1px solid gray;
+//}
+
+li.activityItem {
+  padding: 1rem 3rem;
+  //border: 1px solid #FFFFFF;
+  margin: 1rem .8rem;
+  background-color: #FFFFFF;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  position: relative;
+
+  span{
+    display: inline-block;
+    text-transform: capitalize;
+    margin-left: 6%;
+
+    &::first-letter{
+      text-transform: uppercase;
+    }
+  }
+
+  i.arrow {
+
+    position: absolute;
+    right: 21px;
+    font-size: 1.5rem;
+    color: #3f51b5;
+
+  }
+
+  .activity-count {
+    position: absolute;
+    left: 2%;
+    border: 2px solid #3f51b5;
+    top: 15%;
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    line-height: 34px;
+  }
+
+}

@@ -17,12 +17,15 @@ import customers from './components/customers';
 import customer from './components/customer';
 import toast from './components/toast';
 import reports from './components/reports';
+import activities from './components/activities';
 
 m.route.mode = 'hash';
 m.route(document.getElementById('app'), '/login', {
-  '/login':                 login,
-  '/customers':             customers,
-  '/customers/:id':         customer,
-  '/customers/:id/reports': reports
+  '/login'                          : login,
+  '/customers'                      : customers,
+  '/customers/:id'                  : customer,
+  '/customers/:id/reports'          : reports,
+  '/activities'                     : activities,
+  '/customersByActivities/:activity': customers
 });
 m.mount(document.getElementById('toast'), toast);

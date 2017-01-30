@@ -96,7 +96,7 @@ html, body{
 
 body {
   font-family: Roboto, sans-serif;
-  background-color: #e9f0f5;
+  background-color: black;
   overflow: hidden;
 }
 
@@ -105,10 +105,21 @@ body {
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+  position: relative;
 }
 
 main {
   height: 100%;
+  background-color: #e9f0f5;
+
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  transform: perspective(900px) rotate3d(0,0,0,0);
+  transform-origin: 100% 50%;
+
+  &.hide{
+    transform: perspective(900px) rotate3d(0,1,0,-52deg) translate3d(50%,0,0);
+  }
 }
 
 h1 {
@@ -264,3 +275,5 @@ body .ripple{
 @import "ribbon.less";
 @import "spinner.less";
 @import "toast.less";
+@import "activityList.less";
+@import "menu.less";

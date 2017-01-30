@@ -3,15 +3,19 @@ header{
 
   button.add {
     position: absolute;
-    top: 3rem;
-    left: 1rem;
-    background-color: #FF5722 !important;
+    top: 80%;
+    left: 85%;
+    background-color: #3f51b5 !important;
 
     -webkit-transition: transform .5s;
     -moz-transition:    transform .5s;
     -ms-transition:     transform .5s;
     -o-transition:      transform .5s;
     transition:         transform .5s;
+
+    &.off{
+      top: 95%;
+    }
 
   }
 
@@ -118,6 +122,57 @@ header{
     box-shadow: none;
   }
 
+  &#activities-header{
+
+    button.search{
+      left: 1rem;
+    }
+
+    .txtSearchContainer{
+      left: 4rem;
+      top: 2rem;
+
+      &.on {
+        width: 81%;
+      }
+    }
+
+  }
+
+  &#activity-header{
+
+    .headerTitle {
+      padding-right: .6em;
+      text-align: right;
+      width: 100%;
+      font-size: 2rem;
+      overflow: hidden;
+      display: block;
+      height: 5rem;
+      white-space: pre-wrap;
+      overflow-wrap: normal;
+      word-break: normal;
+    }
+
+    #btnBack {
+      padding: 0;
+      position: absolute;
+    }
+
+    button.search{
+      left: 4rem;
+    }
+
+    .txtSearchContainer{
+      left: 7rem;
+      top: 2rem;
+
+      &.on {
+        width: 72%;
+      }
+    }
+
+  }
 }
 
 .headerTitle {
