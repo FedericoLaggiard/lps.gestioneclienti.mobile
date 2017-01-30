@@ -158,6 +158,7 @@ export default {
 
     return  m('div', { config: redrawMat.removeContainer },
         m('div', { className: 'bg' }),
+        m('div', { className: 'bg2' }),
 
         m('div', { className: 'nav'}, [
           //BACK
