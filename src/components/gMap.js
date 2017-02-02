@@ -12,7 +12,7 @@ import m from 'mithril';
 import request from '../libs/request';
 
 import Spinner from './spinner.js';
-import style from '../../styles/gMap.less';
+//import style from '../../styles/gMap.less';
 
 const API_KEY="AIzaSyD_rcypgYydqbK5M8ItAtpb16AKcS3yvqI";
 let map;

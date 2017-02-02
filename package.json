@@ -3,12 +3,14 @@
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
+  "company": "lps",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "npm run build && ./node_modules/.bin/webpack-dev-server --hot",
     "build": "./node_modules/.bin/webpack",
-    "build-cordova": "npm run build && node scripts/cordova.js",
-    "build-electron": "node scripts/electron.js && electron-packager ./ Tallyman --platform=win32 --arch=x64",
+    "build-cordova": "npm run build && node scripts/cordova.js && (cd cordova && cordova build)",
+    "cordova-ios": "npm run build && node scripts/cordova.js && (cd cordova && cordova run ios --target=\"iPhone-6-Plus, 10.2\")",
+    "build-electron": "node scripts/electron.js && electron-packager ./electron/ Greenberry --platform=win32 --arch=x64 --electron-version=1.4.15 --icon ./icon.ico",
     "electron": "./node_modules/.bin/electron ./electron/"
   },
   "repository": {
@@ -19,6 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "fastclick": "1.0.6",
+    "material-design-icons": "3.0.1",
     "material-design-lite": "1.0.2",
     "mithril": "0.2.0",
     "moment": "2.10.6",

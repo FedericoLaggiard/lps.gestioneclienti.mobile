@@ -8,7 +8,8 @@ import m from 'mithril';
 
 import moment from 'moment';
 
-import style from '../styles/main.less';
+import style from '../styles/lps/main.less';
+
 import Toast from './components/toast';
 import storage from './libs/store';
 
@@ -24,6 +25,8 @@ let app = {
     customer: storage('customer'),
     reportsForCustomer: storage('reportsForCustomer'),
     reports: storage('reports'),
+    activities: storage('activities'),
+    customersByActivities: storage('customersByActivities'),
 
     searchText: m.prop(''),
 
@@ -31,6 +34,8 @@ let app = {
     editReportId: m.prop(null),
 
     focusedField: m.prop(''),
+
+    menuOpen: m.prop(false),
 
     toast: {
       buffer: m.prop([]),

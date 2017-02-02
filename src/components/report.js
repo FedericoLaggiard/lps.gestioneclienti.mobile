@@ -6,7 +6,7 @@
 
 import m from 'mithril';
 import moment from 'moment';
-import style from '../../styles/reports.less';
+//import style from '../../styles/reports.less';
 import redrawMat from '../libs/redrawMaterial';
 import {InputMask, InputMaskDefaultMask} from '../libs/inputMask';
 import Reports from '../models/reportsModel';
