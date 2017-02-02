@@ -157,7 +157,13 @@ export default {
 
     ctrl.getMenuStatus();
 
-    return  m('div', { config: redrawMat.removeContainer },
+    return  m('div', {
+      style: {
+        height: "100%",
+        overflow: "hidden"
+      },
+      config: redrawMat.removeContainer
+    },
         m('div', { className: 'bg' + (app.state.menuOpen() ? ' hide' : '') }),
         m('div', { className: 'bg2'+ (app.state.menuOpen() ? ' hide' : '') }),
 

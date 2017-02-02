@@ -1,13 +1,14 @@
 #customerContainer{
   width: 95%;
-  -webkit-box-shadow: 0px 0px 79px 0px rgba(0,0,0,0.57);
-  -moz-box-shadow: 0px 0px 79px 0px rgba(0,0,0,0.57);
-  box-shadow: 0px 0px 79px 0px rgba(0,0,0,0.57);
+  //-webkit-box-shadow: 0px 0px 79px 0px rgba(0,0,0,0.57);
+  //-moz-box-shadow: 0px 0px 79px 0px rgba(0,0,0,0.57);
+  //box-shadow: 0px 0px 79px 0px rgba(0,0,0,0.57);
   left: 0;
   right: 0;
   margin-left: auto;
   margin-right: auto;
   top: 6rem;
+  position: relative;
 
   .front {
 
@@ -249,6 +250,7 @@ CARD FLIP
 
 .container {
   z-index: 2;
+  overflow-y: auto;
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
@@ -269,15 +271,7 @@ CARD FLIP
   position: absolute;
   transition: transform 1s;
 
-  -webkit-transform-origin: right center;
-  -moz-transform-origin: right center;
-  -ms-transform-origin: right center;
-  -o-transform-origin: right center;
-  transform-origin: right center;
-
-  -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  -ms-transform-style: preserve-3d;
+  transform-origin: 50%;
   transform-style: preserve-3d;
 }
 
@@ -306,7 +300,7 @@ CARD FLIP
 }
 
 .container .card.flipped {
-  transform: translateX( -100% ) rotateY( -180deg ) translateZ(1px);
+  transform: rotate3d(0,1,0,-180deg); //-180 per ios!!!
 }
 
 /*
