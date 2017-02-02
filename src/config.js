@@ -7,7 +7,7 @@
 
 'use strict';
 
-export const env = 'prod';
+export const env = 'dev';
 export const company = 'lps';
 
 const baseUrl = {

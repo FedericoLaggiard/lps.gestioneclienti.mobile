@@ -109,7 +109,7 @@ function viewCustomers(ctrl){
       )
     )
   ]);
-};
+}
 
 function viewCustomersByActivities(ctrl){
   return m('div', {

@@ -19,6 +19,11 @@ export default {
 
       isSearching,
 
+      onunload: function() {
+        app.state.searchText('');
+        app.state.menuOpen(false);
+      },
+
       btnAdd: function(){
 
         if(isSearching()) {
@@ -79,7 +84,7 @@ function subViewCustomers(ctrl){
     m('div', { className: 'mdl-layout__header-row' }, [
       m('span', {className: 'mdl-layout-title headerTitle' },[
         m('i', '(' + app.state.customers().length + ')'),
-        ctrl.title
+        'CLIENTI'
       ])
     ]),
     m('button', {
@@ -90,23 +95,7 @@ function subViewCustomers(ctrl){
     }, [
       m('i', {className: 'material-icons' }, 'add')
     ]),
-    m('button', {
-      className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored search'
-      + (ctrl.isSearching() ? ' on' : '')
-      + (app.state.menuOpen() ? ' off' : ''),
-      onclick: function(){
-        ctrl.isSearching(!ctrl.isSearching());
-
-        if(!ctrl.isSearching()) document.activeElement.blur(); //remove focus from input on close
-
-        document.getElementById('txtSearch').focus();
-      }
-    }, [
-      ctrl.isSearching() ?
-        m('i', {className: 'material-icons' }, 'clear')
-      :
-        m('i', {className: 'material-icons' }, 'search')
-    ]),
+    buttonSearch(ctrl),
     m('div', {
       className: 'txtSearchContainer'+ (ctrl.isSearching() ? ' on' : '')
     }, m('input', {
@@ -160,27 +149,22 @@ function subViewActivities(ctrl){
   return m('header', { className: 'mdl-layout__header', id: 'activities-header' }, [
     //Loader
     m('div', { className: 'loader', style: { display: app.showLoader() ? 'block' : 'none'  } }),
+    //BACK
+    m('button', {
+        className: 'mdl-button mdl-js-button mdl-button--icon',
+        id: 'btnBack',
+        config: redrawMat,
+        onclick: ctrl.btnBack.bind(ctrl)
+      },
+      m('i', {className: 'material-icons' }, 'arrow_back')
+    ),
     m('div', { className: 'mdl-layout__header-row' }, [
       m('span', {className: 'mdl-layout-title headerTitle' },[
         m('i', '(' + app.state.activities().length + ')'),
         m.trust('ATTIVIT&Agrave;')
       ])
     ]),
-    //m('button', {
-    //  className: 'mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored add' + (ctrl.isSearching() ? ' undo' : ''),
-    //  onclick: ctrl.btnAdd.bind(ctrl)
-    //}, [
-    //  m('i', {className: 'material-icons' }, 'add')
-    //]),
-    m('button', {
-      className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored search' + (ctrl.isSearching() ? ' on' : ''),
-      onclick: function(){
-        ctrl.isSearching(!ctrl.isSearching());
-        document.getElementById('txtSearch').focus();
-      }
-    }, [
-      m('i', {className: 'material-icons' }, 'search')
-    ]),
+    buttonSearch(ctrl),
     m('div', {
         className: 'txtSearchContainer'+ (ctrl.isSearching() ? ' on' : '')
       }, m('input', {
@@ -227,15 +211,7 @@ function subViewCustomersByActivity(ctrl){
     //}, [
     //  m('i', {className: 'material-icons' }, 'add')
     //]),
-    m('button', {
-      className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored search' + (ctrl.isSearching() ? ' on' : ''),
-      onclick: function(){
-        ctrl.isSearching(!ctrl.isSearching());
-        document.getElementById('txtSearch').focus();
-      }
-    }, [
-      m('i', {className: 'material-icons' }, 'search')
-    ]),
+    buttonSearch(ctrl),
     m('div', {
         className: 'txtSearchContainer'+ (ctrl.isSearching() ? ' on' : '')
       }, m('input', {
@@ -247,4 +223,24 @@ function subViewCustomersByActivity(ctrl){
       })
     )
   ]);
+}
+
+function buttonSearch(ctrl){
+  return m('button', {
+    className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored search'
+    + (ctrl.isSearching() ? ' on' : '')
+    + (app.state.menuOpen() ? ' off' : ''),
+    onclick: function(){
+      ctrl.isSearching(!ctrl.isSearching());
+
+      if(!ctrl.isSearching()) document.activeElement.blur(); //remove focus from input on close
+
+      document.getElementById('txtSearch').focus();
+    }
+  }, [
+    ctrl.isSearching() ?
+      m('i', {className: 'material-icons' }, 'clear')
+      :
+      m('i', {className: 'material-icons' }, 'search')
+  ])
 }

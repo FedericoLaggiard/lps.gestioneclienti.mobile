@@ -46,7 +46,7 @@ export default {
           localStorage.setItem("remember", true);
         }
 
-        m.route('/customers');
+        m.route('/customers', true);
       })
     }
     function getErrorMessage(err){

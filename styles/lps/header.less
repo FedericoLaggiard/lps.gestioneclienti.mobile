@@ -130,13 +130,26 @@ header{
 
   &#activities-header{
 
+    .mdl-layout__header-row{
+      padding: 0 16px 0 1rem;
+    }
+
     button.search{
       left: 1rem;
+      top: 11%;
+
+      &.on {
+        transform: translate3d(0, -1.5rem, 0);
+      }
+    }
+
+    #btnBack{
+      margin-left: 4%;
     }
 
     .txtSearchContainer{
       left: 4rem;
-      top: 2rem;
+      top: 4rem;
 
       &.on {
         width: 81%;

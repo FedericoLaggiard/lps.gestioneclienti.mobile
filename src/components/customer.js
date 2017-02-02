@@ -94,7 +94,7 @@ export default {
       if(cardFlipped() && !isNew) {
         flipCard();
       }else{
-        m.route('/customers');
+        window.history.back();
       }
     }
 
