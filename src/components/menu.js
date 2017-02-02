@@ -16,7 +16,7 @@ export default {
     }, [
       m('ul', {}, [
         m('li',{
-          className: 'menu-item current'
+          className: 'menu-item'
         }, [
           m('i', {className: 'material-icons arrow'}, 'assignment_ind'),
           m('span',{},'clienti')

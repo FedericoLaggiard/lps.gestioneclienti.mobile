@@ -16,6 +16,7 @@ import Customer from '../models/customerModel';
 import Header from './header';
 import Report from './report';
 import Spinner from './spinner.js';
+import Menu from './menu';
 
 export default {
 
@@ -123,8 +124,11 @@ export default {
         m.component(Header, 'RELAZIONI', { newItem: ctrl.newItem, ctrl: ctrl }),
         m('div', { className: 'bg' }),
         m('div',{id: 'calendar',style:{display:'none'}}),
+        m.component(Menu),
         ctrl.reports() ?
-          m('main', { className: 'mdl-layout__content'}, [
+          m('main', {
+            className: 'mdl-layout__content' + (app.state.menuOpen() ? ' hide' : '')
+          }, [
           m('div',{
             className: ctrl.editId() === null ? '' : 'on',
             id:'blur',

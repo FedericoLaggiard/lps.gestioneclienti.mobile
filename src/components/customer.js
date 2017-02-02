@@ -13,6 +13,7 @@ import moment from 'moment';
 import Customer from '../models/customerModel';
 import gMap from './gMap';
 import Spinner from './spinner.js';
+import Menu from './menu';
 
 export default {
 
@@ -157,8 +158,8 @@ export default {
     ctrl.getMenuStatus();
 
     return  m('div', { config: redrawMat.removeContainer },
-        m('div', { className: 'bg' }),
-        m('div', { className: 'bg2' }),
+        m('div', { className: 'bg' + (app.state.menuOpen() ? ' hide' : '') }),
+        m('div', { className: 'bg2'+ (app.state.menuOpen() ? ' hide' : '') }),
 
         m('div', { className: 'nav'}, [
           //BACK
@@ -208,8 +209,10 @@ export default {
           )
         ]),
 
+        m.component(Menu),
+
         ctrl.customer() ?
-          m('section', { className: 'container' },
+          m('section', { className: 'container' + (app.state.menuOpen() ? ' hide' : '')  },
             m('div', {
               className: 'page-content card' + (ctrl.cardFlipped() ? ' flipped' : ''),
               id: 'customerContainer'},[

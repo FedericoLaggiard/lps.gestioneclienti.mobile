@@ -11,6 +11,7 @@ import redrawMat from '../libs/redrawMaterial';
 import Header from './header';
 import Activities from '../models/activitiesModel';
 import Spinner from './spinner.js';
+import Menu from './menu';
 
 export default {
 
@@ -55,8 +56,9 @@ export default {
       config: redrawMat.removeContainer
     },[
       m.component(Header, 'ACTIVITIES'),
+      m.component(Menu),
       m('main', {
-          className: 'mdl-layout__content'
+          className: 'mdl-layout__content' + (app.state.menuOpen() ? ' hide' : '')
         },
         m('div', { className: 'page-content'},
           m('ul',{ className: 'activityList' },

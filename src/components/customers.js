@@ -103,7 +103,7 @@ function viewCustomers(ctrl){
                 //m('i', {className: 'material-icons arrow'}, 'arrow_forward')
               ])
             })
-            :
+          :
             m.component(Spinner)
         )
       )
@@ -117,8 +117,9 @@ function viewCustomersByActivities(ctrl){
     config: redrawMat.removeContainer
   },[
     m.component(Header, 'ACTIVITY'),
+    m.component(Menu),
     m('main', {
-        className: 'mdl-layout__content'
+        className: 'mdl-layout__content' + (app.state.menuOpen() ? ' hide' : '')
       },
       m('div', { className: 'page-content'},
         m('ul',{ className: 'customersList' },
@@ -134,10 +135,10 @@ function viewCustomersByActivities(ctrl){
                 //m('i', {className: 'material-icons arrow'}, 'arrow_forward')
               ])
             })
-            :
+          :
             m.component(Spinner)
         )
       )
     )
   ]);
-};
+}
