@@ -1,7 +1,7 @@
 .reports{
   .bg{
-    position: fixed;
-    margin-top: 9rem;
+    //position: fixed;
+    //margin-top: 9rem;
     width: 100%;
     height: 100%;
     background-color: #e9f0f5;
@@ -394,7 +394,6 @@
     z-index: 2;
 
     .cd-timeline-content {
-      height: 25rem !important;
       padding: 1rem;
     }
 
@@ -404,7 +403,7 @@
 
     .txtNote {
       width: 100%;
-      height: 77%;
+      height: 10rem;
       padding-top: .5rem;
       font-size: 1.2rem;
       margin-top: .5rem;
@@ -425,7 +424,6 @@
   z-index: 2;
 
   .cd-timeline-content {
-    height: 25rem !important;
 
     h2 {
       float: left;
@@ -440,9 +438,12 @@
     }
 
     .reportedTo {
-      display: inline-block;
-      width: 100%;
       margin: 0;
+      display: inline-flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      width: 100%;
 
       .lbl {
         margin-right: 1rem;
@@ -453,22 +454,33 @@
       }
 
       .textfield {
-        width: 69%;
+        width: 67%;
       }
     }
 
-    .delete{
-      float: right;
-      margin-right: 2rem;
+    .row{
+      display: inline-flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      width: 100%;
+
+      .delete{
+        display: block;
+        background-color: #e20101;
+      }
     }
+
+
   }
 
   .txtNote {
     width: 100%;
-    height: 65%;
+    height: 10rem;
     padding-top: .5rem;
     font-size: 1.2rem;
     margin-top: .5rem;
+    margin-bottom: 1.6rem;
   }
 }
 
@@ -498,7 +510,7 @@
 }
 
 .salvaReport {
-  float: right;
+  display: inline-block;
 }
 
 .spinner {

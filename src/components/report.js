@@ -207,24 +207,28 @@ function viewEdit(ctrl, item, index){
           value: item.note(),
           oninput: m.withAttr('value', item.note)
         }),
-      m('input', {
+      m('div', {
+        className: 'row'
+      },[
+        m('input', {
           type: 'text',
           className: 'textfield dateMask',
           value: moment(item.data()).format('DD/MM/YYYY' ),
           onclick: ctrl.showCalendar.bind(ctrl)
         }, moment(item.data()).format('DD/MM/YYYY' )),
-      m('button', {
-        className: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored salvaReport',
-        config: redrawMat,
-        onclick: ctrl.save.bind(ctrl)
-      }, 'Salva'),
-      m('button', {
+        m('button', {
+          className: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored salvaReport',
+          config: redrawMat,
+          onclick: ctrl.save.bind(ctrl)
+        }, 'Salva'),
+        m('button', {
           className: 'mdl-button mdl-js-button mdl-button--raised mdl-button--accent delete',
           style: {
             display: item._id() === -1 ? 'none' : 'block'
           },
           onclick: ctrl.remove.bind(ctrl)
         }, 'Elimina')
+      ])
     ])
   ]
 }
