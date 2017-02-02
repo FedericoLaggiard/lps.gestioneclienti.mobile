@@ -7,6 +7,9 @@
         "files": {}
     },
     "installed_plugins": {
+        "spindox-plugin-iOSHTTPSfix": {
+            "PACKAGE_NAME": "com.federicolaggiard.tallyman"
+        },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.federicolaggiard.tallyman"
         },
@@ -16,7 +19,7 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.federicolaggiard.tallyman"
         },
-        "spindox-plugin-iOSHTTPSfix": {
+        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.federicolaggiard.tallyman"
         }
     },
