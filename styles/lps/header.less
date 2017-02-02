@@ -3,38 +3,40 @@ header{
 
   button.add {
     position: absolute;
-    top: 80%;
-    left: 85%;
     background-color: #3f51b5 !important;
+    top: 82%;
+    left: 85%;
 
-    -webkit-transition: transform .5s;
-    -moz-transition:    transform .5s;
-    -ms-transition:     transform .5s;
-    -o-transition:      transform .5s;
-    transition:         transform .5s;
+
+    //-webkit-transition: transform .5s, top .9s ease-out;
+    //-moz-transition:    transform .5s, top .9s ease-out;
+    //-ms-transition:     transform .5s, top .9s ease-out;
+    //-o-transition:      transform .5s, top .9s ease-out;
+    //transition:         transform .5s, top .9s ease-out;
 
     &.off{
-      top: 95%;
+      //transform: translate3d(800%, 1380%, 0);
+      display: none;
     }
 
   }
 
-  button.add.undo {
-
-    -webkit-transform:  rotate3d(0, 0,  1, 45deg);
-    -moz-transform:     rotate3d(0, 0,  1, 45deg);
-    -ms-transform:      rotate3d(0, 0,  1, 45deg);
-    -o-transform:       rotate3d(0, 0,  1, 45deg);
-    transform:          rotate3d(0, 0,  1, 45deg);
-
-  }
+  //button.add.undo {
+  //
+  //  -webkit-transform:  rotate3d(0, 0,  1, 45deg);
+  //  -moz-transform:     rotate3d(0, 0,  1, 45deg);
+  //  -ms-transform:      rotate3d(0, 0,  1, 45deg);
+  //  -o-transform:       rotate3d(0, 0,  1, 45deg);
+  //  transform:          rotate3d(0, 0,  1, 45deg);
+  //
+  //}
 
   div.txtSearchContainer {
     position: absolute;
-    top: 2.1rem;
-    left: 10rem;
-    width: 1rem;
+    width: 0;
     height: 2rem;
+    left: 4rem;
+    top: 2rem;
 
     will-change: width;
 
@@ -84,9 +86,9 @@ header{
 
   div.txtSearchContainer.on {
     position: absolute;
-    top: 2.1rem;
-    left: 10rem;
-    width: 62%;
+    top: 1.6rem;
+    //left: 10rem;
+    width: 80%;
     height: 2rem;
 
     //-webkit-transform:  scale3d(12,1,1);
@@ -99,7 +101,7 @@ header{
   button.search {
     position: absolute;
     top: 3.7rem;
-    left: 7rem;
+    left: 1rem;
     background-color: #3f51b5 !important;
 
     will-change: transform;
@@ -109,6 +111,10 @@ header{
     -ms-transition:     transform .5s;
     -o-transition:      transform .5s;
     transition:         transform .5s;
+
+    &.off{
+      display: none;
+    }
   }
 
   button.search.on {

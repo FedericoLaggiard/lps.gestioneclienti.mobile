@@ -16,20 +16,36 @@ export default {
     }, [
       m('ul', {}, [
         m('li',{
+          className: 'menu-item current'
+        }, [
+          m('i', {className: 'material-icons arrow'}, 'assignment_ind'),
+          m('span',{},'clienti')
+        ]),
+        m('li',{
           className: 'menu-item'
-        }, 'clienti'),
+        }, [
+          m('i', {className: 'material-icons arrow'}, 'local_shipping'),
+          m('span',{},'fornitori')
+        ]),
         m('li', {
-          className: 'menu-item'
-        }, 'attività'),
+          className: 'menu-item',
+          onclick: function(){ m.route('/activities') }
+        }, [
+          m('i', {className: 'material-icons arrow'}, 'zoom_in'),
+          m('span',{},'ricerche avanzate')
+        ]),
         m('li',{
-          className: 'menu-item'
-        }, 'località'),
+          className: 'menu-item disabled'
+        }, [
+          m('i', {className: 'material-icons arrow'}, 'person_pin_circle'),
+          m('span',{},'mappa')
+        ]),
         m('li',{
-          className: 'menu-item'
-        }, 'statistiche'),
-        m('li',{
-          className: 'menu-item'
-        }, 'mappa')
+          className: 'menu-item disabled'
+        }, [
+          m('i', {className: 'material-icons arrow'}, 'pie_chart'),
+          m('span',{},'statistiche')
+        ])
       ]),
       m('div', {
         className: 'menu-button'
