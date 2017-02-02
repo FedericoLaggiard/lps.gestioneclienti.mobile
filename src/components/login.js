@@ -6,7 +6,7 @@
 
 import m from 'mithril';
 import mh from '../libs/materialHelpers';
-//import style from '../../styles/login.less';
+import style from '../../styles/login.less';
 import redrawMat from '../libs/redrawMaterial';
 
 import Login from '../models/loginModel';

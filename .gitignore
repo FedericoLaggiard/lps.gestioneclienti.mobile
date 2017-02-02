@@ -8,4 +8,3 @@ dist/bundle.js
 dist/bundle.js.map
 dist/electron/www/*
 electron/www
-cordova/.DS_Store

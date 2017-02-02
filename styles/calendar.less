@@ -1,0 +1,183 @@
+@background: #3f51b5;
+@white: #FFFFFF;
+@lvl2: lighten(@background, 20%);
+@grayedOut: lighten(@background, 10%);
+
+section.calendar-panel{
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  margin: 0 auto;
+  color: @white;
+  background-color: @background;
+
+  &.on{
+    display: block;
+    z-index: 101;
+  }
+
+  .calendar-month{
+
+    text-align: center;
+    line-height: 2rem;
+    font-size: 2rem;
+    position: relative;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-transform: capitalize;
+
+    .material-icons{
+      display: inline-block;
+      margin: 0 2rem;
+      font-size: 3rem;
+      vertical-align: middle;
+      position: absolute;
+
+      &.left{
+        left: 0;
+      }
+      &.right{
+        right: 0;
+      }
+    }
+
+    h2{
+      display: inline-block;
+      vertical-align: middle;
+      font-size: inherit;
+    }
+  }
+
+  .calendar-year{
+    text-align: center;
+    line-height: 1.5rem;
+    font-size: 1.1rem;
+    position: relative;
+    padding-bottom: 1rem;
+    color: @lvl2;
+
+    .material-icons{
+      display: inline-block;
+      margin: 0 9rem;
+      font-size: 2rem;
+      vertical-align: middle;
+      position: absolute;
+
+      &.left{
+        left: 0;
+      }
+      &.right{
+        right: 0;
+      }
+    }
+
+    h2{
+      display: inline-block;
+      vertical-align: middle;
+      font-size: inherit;
+    }
+  }
+
+  .div-table {
+    display: table;
+  }
+  .div-row{
+    display: table-row;
+  }
+  .div-cell{
+    display: table-cell;
+  }
+
+  .box-content {
+    width: 90vw;
+    height: 60vh;
+    margin: 1rem auto;
+
+    .div-cell{
+      text-align: center;
+      vertical-align: middle;
+      position: relative;
+
+      &.old-month, &.new-month {
+        visibility: hidden;
+        //color: @grayedOut
+      }
+
+      &.today:after {
+        border: 1px solid white;
+        border-radius: 50%;
+        content: "";
+        width: 8vmin;
+        height: 8vmin;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -25% -25%;
+        line-height: 8.5vmin;
+      }
+
+      &.selected{
+
+        color: @background;
+
+        &:after{
+          background-color: @white;
+          content: attr(value);
+          position: absolute;
+          margin: -25% -25%;
+          border: 1px solid white;
+          border-radius: 50%;
+          width: 8vmin;
+          height: 8vmin;
+          top: 50%;
+          left: 50%;
+          margin: -25% -25%;
+          line-height: 8.5vmin;
+        }
+
+      }
+
+
+    }
+
+    .table-header {
+      color: @grayedOut;
+    }
+  }
+
+  .selected-date{
+    text-align: center;
+    text-transform: capitalize;
+    border-top: 1px solid @grayedOut;
+    padding-top: 2rem;
+    margin: 1rem 2rem 0 2rem;
+
+    h2{
+      font-size: 2rem;
+    }
+
+    p{
+      margin: 1rem 0;
+      color: @grayedOut;
+    }
+  }
+
+  .buttons {
+    height: 100%;
+    margin: 1rem 2rem 0 2rem;
+
+    text-align: center;
+
+    #save{
+      float: right;
+      color: @white;
+    }
+    #back{
+      float: left;
+      color: @white;
+    }
+  }
+}

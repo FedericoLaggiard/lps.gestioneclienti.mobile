@@ -5,7 +5,7 @@
 'use strict';
 
 import m from 'mithril';
-//import style from '../../styles/header.less';
+import style from '../../styles/header.less';
 import redrawMat from '../libs/redrawMaterial';
 
 export default {
@@ -59,11 +59,6 @@ export default {
       case 'RELAZIONI':
         return subViewReports(ctrl);
         break;
-      case 'ACTIVITIES':
-        return subViewActivities(ctrl);
-        break;
-      case 'ACTIVITY':
-        return subViewCustomersByActivity(ctrl);
     }
 
 
@@ -82,29 +77,19 @@ function subViewCustomers(ctrl){
       ])
     ]),
     m('button', {
-      className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab ' +
-      'mdl-js-ripple-effect mdl-button--colored mdl-shadow--16dp add' +
-      (app.state.menuOpen() ? ' off' : ''),
+      className: 'mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored add' + (ctrl.isSearching() ? ' undo' : ''),
       onclick: ctrl.btnAdd.bind(ctrl)
     }, [
       m('i', {className: 'material-icons' }, 'add')
     ]),
     m('button', {
-      className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored search'
-      + (ctrl.isSearching() ? ' on' : '')
-      + (app.state.menuOpen() ? ' off' : ''),
+      className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored search' + (ctrl.isSearching() ? ' on' : ''),
       onclick: function(){
         ctrl.isSearching(!ctrl.isSearching());
-
-        if(!ctrl.isSearching()) document.activeElement.blur(); //remove focus from input on close
-
         document.getElementById('txtSearch').focus();
       }
     }, [
-      ctrl.isSearching() ?
-        m('i', {className: 'material-icons' }, 'clear')
-      :
-        m('i', {className: 'material-icons' }, 'search')
+      m('i', {className: 'material-icons' }, 'search')
     ]),
     m('div', {
       className: 'txtSearchContainer'+ (ctrl.isSearching() ? ' on' : '')
@@ -152,98 +137,5 @@ function subViewReports(ctrl){
       ]),
       m('div', { className: 'cd-timeline-content'})
     ])
-  ]);
-}
-
-function subViewActivities(ctrl){
-  return m('header', { className: 'mdl-layout__header', id: 'activities-header' }, [
-    //Loader
-    m('div', { className: 'loader', style: { display: app.showLoader() ? 'block' : 'none'  } }),
-    m('div', { className: 'mdl-layout__header-row' }, [
-      m('span', {className: 'mdl-layout-title headerTitle' },[
-        m('i', '(' + app.state.activities().length + ')'),
-        m.trust('ATTIVIT&Agrave;')
-      ])
-    ]),
-    //m('button', {
-    //  className: 'mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored add' + (ctrl.isSearching() ? ' undo' : ''),
-    //  onclick: ctrl.btnAdd.bind(ctrl)
-    //}, [
-    //  m('i', {className: 'material-icons' }, 'add')
-    //]),
-    m('button', {
-      className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored search' + (ctrl.isSearching() ? ' on' : ''),
-      onclick: function(){
-        ctrl.isSearching(!ctrl.isSearching());
-        document.getElementById('txtSearch').focus();
-      }
-    }, [
-      m('i', {className: 'material-icons' }, 'search')
-    ]),
-    m('div', {
-        className: 'txtSearchContainer'+ (ctrl.isSearching() ? ' on' : '')
-      }, m('input', {
-        className: 'txtSearch'+ (ctrl.isSearching() ? ' on' : ''),
-        type: 'text',
-        id: 'txtSearch',
-        oninput: m.withAttr('value', app.state.searchText),
-        value: app.state.searchText()
-      })
-    )
-  ]);
-}
-
-function subViewCustomersByActivity(ctrl){
-
-  let showTitle = m.prop(!ctrl.isSearching());
-
-  return m('header', { className: 'mdl-layout__header', id: 'activity-header' }, [
-    //Loader
-    m('div', { className: 'loader', style: { display: app.showLoader() ? 'block' : 'none'  } }),
-    //BACK
-    m('button', {
-        className: 'mdl-button mdl-js-button mdl-button--icon',
-        id: 'btnBack',
-        config: redrawMat,
-        onclick: ctrl.btnBack.bind(ctrl)
-      },
-      m('i', {className: 'material-icons' }, 'arrow_back')
-    ),
-    m('div', { className: 'mdl-layout__header-row' }, [
-      m('span', {
-        className: 'mdl-layout-title headerTitle',
-        style: {
-          display: showTitle() ? 'block' : 'none'
-        }
-      },[
-        m('i', '(' + app.state.customersByActivities().length + ')'),
-        'CLIENTI per ' + m.route.param('activity')
-      ])
-    ]),
-    //m('button', {
-    //  className: 'mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored add' + (ctrl.isSearching() ? ' undo' : ''),
-    //  onclick: ctrl.btnAdd.bind(ctrl)
-    //}, [
-    //  m('i', {className: 'material-icons' }, 'add')
-    //]),
-    m('button', {
-      className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored search' + (ctrl.isSearching() ? ' on' : ''),
-      onclick: function(){
-        ctrl.isSearching(!ctrl.isSearching());
-        document.getElementById('txtSearch').focus();
-      }
-    }, [
-      m('i', {className: 'material-icons' }, 'search')
-    ]),
-    m('div', {
-        className: 'txtSearchContainer'+ (ctrl.isSearching() ? ' on' : '')
-      }, m('input', {
-        className: 'txtSearch'+ (ctrl.isSearching() ? ' on' : ''),
-        type: 'text',
-        id: 'txtSearch',
-        oninput: m.withAttr('value', app.state.searchText),
-        value: app.state.searchText()
-      })
-    )
   ]);
 }

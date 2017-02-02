@@ -30,6 +30,7 @@
 @class CDVInAppBrowserViewController;
 
 @interface CDVInAppBrowser : CDVPlugin {
+    BOOL _injectedIframeBridge;
 }
 
 @property (nonatomic, retain) CDVInAppBrowserViewController* inAppBrowserViewController;
@@ -40,7 +41,6 @@
 - (void)close:(CDVInvokedUrlCommand*)command;
 - (void)injectScriptCode:(CDVInvokedUrlCommand*)command;
 - (void)show:(CDVInvokedUrlCommand*)command;
-- (void)hide:(CDVInvokedUrlCommand*)command;
 
 @end
 

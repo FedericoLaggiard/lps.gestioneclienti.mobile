@@ -4,7 +4,7 @@
 
 'use strict';
 
-//import style from '../../styles/toast.less';
+import style from '../../styles/toast.less';
 import m from 'mithril';
 
 export default  {

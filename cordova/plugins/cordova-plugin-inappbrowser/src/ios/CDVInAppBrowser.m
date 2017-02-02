@@ -47,11 +47,6 @@
     _callbackIdPattern = nil;
 }
 
-- (id)settingForKey:(NSString*)key
-{
-    return [self.commandDelegate.settings objectForKey:[key lowercaseString]];
-}
-
 - (void)onReset
 {
     [self close:nil];
@@ -142,16 +137,8 @@
     }
 
     if (self.inAppBrowserViewController == nil) {
-        NSString* userAgent = [CDVUserAgentUtil originalUserAgent];
-        NSString* overrideUserAgent = [self settingForKey:@"OverrideUserAgent"];
-        NSString* appendUserAgent = [self settingForKey:@"AppendUserAgent"];
-        if(overrideUserAgent){
-            userAgent = overrideUserAgent;
-        }
-        if(appendUserAgent){
-            userAgent = [userAgent stringByAppendingString: appendUserAgent];
-        }
-        self.inAppBrowserViewController = [[CDVInAppBrowserViewController alloc] initWithUserAgent:userAgent prevUserAgent:[self.commandDelegate userAgent] browserOptions: browserOptions];
+        NSString* originalUA = [CDVUserAgentUtil originalUserAgent];
+        self.inAppBrowserViewController = [[CDVInAppBrowserViewController alloc] initWithUserAgent:originalUA prevUserAgent:[self.commandDelegate userAgent] browserOptions: browserOptions];
         self.inAppBrowserViewController.navigationDelegate = self;
 
         if ([self.viewController conformsToProtocol:@protocol(CDVScreenOrientationDelegate)]) {
@@ -227,67 +214,39 @@
 
     _previousStatusBarStyle = [UIApplication sharedApplication].statusBarStyle;
 
-    __block CDVInAppBrowserNavigationController* nav = [[CDVInAppBrowserNavigationController alloc]
+    CDVInAppBrowserNavigationController* nav = [[CDVInAppBrowserNavigationController alloc]
                                    initWithRootViewController:self.inAppBrowserViewController];
     nav.orientationDelegate = self.inAppBrowserViewController;
     nav.navigationBarHidden = YES;
-    nav.modalPresentationStyle = self.inAppBrowserViewController.modalPresentationStyle;
-
-    __weak CDVInAppBrowser* weakSelf = self;
-
-    // Run later to avoid the "took a long time" log message.
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (weakSelf.inAppBrowserViewController != nil) {
-            [weakSelf.viewController presentViewController:nav animated:YES completion:nil];
-        }
-    });
-}
-
-- (void)hide:(CDVInvokedUrlCommand*)command
-{
-    if (self.inAppBrowserViewController == nil) {
-        NSLog(@"Tried to hide IAB after it was closed.");
-        return;
-
-
-    }
-    if (_previousStatusBarStyle == -1) {
-        NSLog(@"Tried to hide IAB while already hidden");
-        return;
-    }
-
-    _previousStatusBarStyle = [UIApplication sharedApplication].statusBarStyle;
-
     // Run later to avoid the "took a long time" log message.
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.inAppBrowserViewController != nil) {
-            _previousStatusBarStyle = -1;
-            [self.viewController dismissViewControllerAnimated:YES completion:nil];
+            [self.viewController presentViewController:nav animated:YES completion:nil];
         }
     });
 }
 
 - (void)openInCordovaWebView:(NSURL*)url withOptions:(NSString*)options
 {
-    NSURLRequest* request = [NSURLRequest requestWithURL:url];
-
-#ifdef __CORDOVA_4_0_0
-    // the webview engine itself will filter for this according to <allow-navigation> policy
-    // in config.xml for cordova-ios-4.0
-    [self.webViewEngine loadRequest:request];
-#else
     if ([self.commandDelegate URLIsWhitelisted:url]) {
+        NSURLRequest* request = [NSURLRequest requestWithURL:url];
+#ifdef __CORDOVA_4_0_0
+        [self.webViewEngine loadRequest:request];
+#else
         [self.webView loadRequest:request];
+#endif
     } else { // this assumes the InAppBrowser can be excepted from the white-list
         [self openInInAppBrowser:url withOptions:options];
     }
-#endif
 }
 
 - (void)openInSystem:(NSURL*)url
 {
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPluginHandleOpenURLNotification object:url]];
-    [[UIApplication sharedApplication] openURL:url];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url];
+    } else { // handle any custom schemes to plugins
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPluginHandleOpenURLNotification object:url]];
+    }
 }
 
 // This is a helper method for the inject{Script|Style}{Code|File} API calls, which
@@ -301,8 +260,11 @@
 
 - (void)injectDeferredObject:(NSString*)source withWrapper:(NSString*)jsWrapper
 {
-    // Ensure an iframe bridge is created to communicate with the CDVInAppBrowserViewController
-    [self.inAppBrowserViewController.webView stringByEvaluatingJavaScriptFromString:@"(function(d){_cdvIframeBridge=d.getElementById('_cdvIframeBridge');if(!_cdvIframeBridge) {var e = _cdvIframeBridge = d.createElement('iframe');e.id='_cdvIframeBridge'; e.style.display='none';d.body.appendChild(e);}})(document)"];
+    if (!_injectedIframeBridge) {
+        _injectedIframeBridge = YES;
+        // Create an iframe bridge in the new document to communicate with the CDVInAppBrowserViewController
+        [self.inAppBrowserViewController.webView stringByEvaluatingJavaScriptFromString:@"(function(d){var e = _cdvIframeBridge = d.createElement('iframe');e.style.display='none';d.body.appendChild(e);})(document)"];
+    }
 
     if (jsWrapper != nil) {
         NSData* jsonData = [NSJSONSerialization dataWithJSONObject:@[source] options:0 error:nil];
@@ -425,14 +387,7 @@
             [self.commandDelegate sendPluginResult:pluginResult callbackId:scriptCallbackId];
             return NO;
         }
-    } 
-    //if is an app store link, let the system handle it, otherwise it fails to load it
-    else if ([[ url scheme] isEqualToString:@"itms-appss"] || [[ url scheme] isEqualToString:@"itms-apps"]) {
-        [theWebView stopLoading];
-        [self openInSystem:url];
-        return NO;
-    }
-    else if ((self.callbackId != nil) && isTopLevelNavigation) {
+    } else if ((self.callbackId != nil) && isTopLevelNavigation) {
         // Send a loadstart event for each top-level navigation (includes redirects).
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                       messageAsDictionary:@{@"type":@"loadstart", @"url":[url absoluteString]}];
@@ -446,6 +401,7 @@
 
 - (void)webViewDidStartLoad:(UIWebView*)theWebView
 {
+    _injectedIframeBridge = NO;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView*)theWebView
@@ -488,9 +444,7 @@
     self.inAppBrowserViewController = nil;
 
     if (IsAtLeastiOSVersion(@"7.0")) {
-        if (_previousStatusBarStyle != -1) {
-            [[UIApplication sharedApplication] setStatusBarStyle:_previousStatusBarStyle];
-        }
+        [[UIApplication sharedApplication] setStatusBarStyle:_previousStatusBarStyle];
     }
 
     _previousStatusBarStyle = -1; // this value was reset before reapplying it. caused statusbar to stay black on ios7
@@ -523,11 +477,6 @@
     return self;
 }
 
-// Prevent crashes on closing windows
--(void)dealloc {
-   self.webView.delegate = nil;
-}
-
 - (void)createViews
 {
     // We create the views in code for primarily for ease of upgrades and not requiring an external .xib to be included
@@ -553,15 +502,15 @@
     self.webView.scalesPageToFit = NO;
     self.webView.userInteractionEnabled = YES;
 
-    self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     self.spinner.alpha = 1.000;
     self.spinner.autoresizesSubviews = YES;
-    self.spinner.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin);
+    self.spinner.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
     self.spinner.clearsContextBeforeDrawing = NO;
     self.spinner.clipsToBounds = NO;
     self.spinner.contentMode = UIViewContentModeScaleToFill;
-    self.spinner.frame = CGRectMake(CGRectGetMidX(self.webView.frame), CGRectGetMidY(self.webView.frame), 20.0, 20.0);
-    self.spinner.hidden = NO;
+    self.spinner.frame = CGRectMake(454.0, 231.0, 20.0, 20.0);
+    self.spinner.hidden = YES;
     self.spinner.hidesWhenStopped = YES;
     self.spinner.multipleTouchEnabled = NO;
     self.spinner.opaque = NO;
@@ -790,10 +739,6 @@
     return UIStatusBarStyleDefault;
 }
 
-- (BOOL)prefersStatusBarHidden {
-    return NO;
-}
-
 - (void)close
 {
     [CDVUserAgentUtil releaseLock:&_userAgentLockToken];
@@ -803,14 +748,12 @@
         [self.navigationDelegate browserExit];
     }
 
-    __weak UIViewController* weakSelf = self;
-
     // Run later to avoid the "took a long time" log message.
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([weakSelf respondsToSelector:@selector(presentingViewController)]) {
-            [[weakSelf presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+        if ([self respondsToSelector:@selector(presentingViewController)]) {
+            [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
         } else {
-            [[weakSelf parentViewController] dismissViewControllerAnimated:YES completion:nil];
+            [[self parentViewController] dismissViewControllerAnimated:YES completion:nil];
         }
     });
 }
@@ -822,11 +765,10 @@
     if (_userAgentLockToken != 0) {
         [self.webView loadRequest:request];
     } else {
-        __weak CDVInAppBrowserViewController* weakSelf = self;
         [CDVUserAgentUtil acquireLock:^(NSInteger lockToken) {
             _userAgentLockToken = lockToken;
             [CDVUserAgentUtil setUserAgent:_userAgent lockToken:lockToken];
-            [weakSelf.webView loadRequest:request];
+            [self.webView loadRequest:request];
         }];
     }
 }
@@ -1033,38 +975,19 @@
 
 @implementation CDVInAppBrowserNavigationController : UINavigationController
 
-- (void) dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
-    if ( self.presentedViewController) {
-        [super dismissViewControllerAnimated:flag completion:completion];
-    }
-}
-
 - (void) viewDidLoad {
 
     CGRect frame = [UIApplication sharedApplication].statusBarFrame;
 
     // simplified from: http://stackoverflow.com/a/25669695/219684
 
-    UIToolbar* bgToolbar = [[UIToolbar alloc] initWithFrame:[self invertFrameIfNeeded:frame]];
+    UIToolbar* bgToolbar = [[UIToolbar alloc] initWithFrame:frame];
     bgToolbar.barStyle = UIBarStyleDefault;
-    [bgToolbar setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self.view addSubview:bgToolbar];
 
     [super viewDidLoad];
 }
 
-- (CGRect) invertFrameIfNeeded:(CGRect)rect {
-    // We need to invert since on iOS 7 frames are always in Portrait context
-    if (!IsAtLeastiOSVersion(@"8.0")) {
-        if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
-            CGFloat temp = rect.size.width;
-            rect.size.width = rect.size.height;
-            rect.size.height = temp;
-        }
-        rect.origin = CGPointZero;
-    }
-    return rect;
-}
 
 #pragma mark CDVScreenOrientationDelegate
 

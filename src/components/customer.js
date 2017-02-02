@@ -5,8 +5,8 @@
 'use strict';
 
 import m from 'mithril';
-//import style from '../../styles/customer.less';
-//import ribbonStyle from '../../styles/ribbon.less';
+import style from '../../styles/customer.less';
+import ribbonStyle from '../../styles/ribbon.less';
 import redrawMat from '../libs/redrawMaterial';
 import moment from 'moment';
 
@@ -158,7 +158,6 @@ export default {
 
     return  m('div', { config: redrawMat.removeContainer },
         m('div', { className: 'bg' }),
-        m('div', { className: 'bg2' }),
 
         m('div', { className: 'nav'}, [
           //BACK

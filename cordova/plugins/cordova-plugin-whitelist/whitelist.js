@@ -1,5 +1,4 @@
 /*
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -19,11 +18,10 @@
  *
 */
 
-oxide.addMessageHandler("EXECUTE", function(msg) {
-    var code = msg.args.code;
-    try {
-        msg.reply({result: eval(code)});
-    } catch(e) {
-        msg.error("Code threw exception: \"" + e + "\"");
-    }
-});
+if (!document.querySelector('meta[http-equiv=Content-Security-Policy]')) {
+    var msg = 'No Content-Security-Policy meta tag found. Please add one when using the cordova-plugin-whitelist plugin.';
+    console.error(msg);
+    setInterval(function() {
+        console.warn(msg);
+    }, 10000);
+}

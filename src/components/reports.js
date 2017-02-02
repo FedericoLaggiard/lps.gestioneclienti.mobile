@@ -6,7 +6,7 @@
 
 import m from 'mithril';
 import moment from 'moment';
-//import style from '../../styles/reports.less';
+import style from '../../styles/reports.less';
 import redrawMat from '../libs/redrawMaterial';
 import inputMask from '../libs/inputMask';
 
@@ -116,12 +116,11 @@ export default {
     let that = ctrl;
     return [
       m('div', {
-        className: 'mdl-layout mdl-js-layout mdl-layout--fixed-header reports',
+        className: 'mdl-layout mdl-js-layout mdl-layout--fixed-header',
         config: redrawMat.removeContainer
       },[
 
         m.component(Header, 'RELAZIONI', { newItem: ctrl.newItem, ctrl: ctrl }),
-        m('div', { className: 'bg' }),
         m('div',{id: 'calendar',style:{display:'none'}}),
         ctrl.reports() ?
           m('main', { className: 'mdl-layout__content'}, [

@@ -1,6 +1,6 @@
 "use strict";
 
-//import Style from '../../styles/ripple.css';
+import Style from '../../styles/ripple.css';
 
 let Ripple = function(_options) {
 
