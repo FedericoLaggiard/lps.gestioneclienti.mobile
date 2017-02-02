@@ -13,6 +13,7 @@ export default {
   controller(title, options){
 
     let isSearching = m.prop(false);
+    let route = m.route();
 
     return{
 
@@ -37,7 +38,7 @@ export default {
         }
 
       },
-
+      route,
       title,
       options
     }
@@ -47,8 +48,8 @@ export default {
   view(ctrl){
 
 
-    switch(ctrl.title){
-      case 'CLIENTI':
+    switch(ctrl.route){
+      case '/customers':
         return m('header', {
             className: 'mdl-layout__header',
             config: redrawMat
@@ -56,13 +57,13 @@ export default {
           subViewCustomers(ctrl)
         );
         break;
-      case 'RELAZIONI':
+      case '/customers/' + m.route.param('id') + '/reports':
         return subViewReports(ctrl);
         break;
-      case 'ACTIVITIES':
+      case '/activities':
         return subViewActivities(ctrl);
         break;
-      case 'ACTIVITY':
+      case '/customersByActivities/' + m.route.param('activity'):
         return subViewCustomersByActivity(ctrl);
     }
 
