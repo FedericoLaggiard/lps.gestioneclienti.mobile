@@ -11,7 +11,7 @@ import redrawMat from '../libs/redrawMaterial';
 
 import Header from './header';
 import Customers from '../models/customersModel';
-import CustomersByActivity from '../models/customersByActivityModel';
+import CustomersFiltered from '../models/customersFilteredModel';
 import Spinner from './spinner.js';
 import Menu from './menu.js';
 
@@ -19,17 +19,19 @@ export default {
 
   controller(){
 
-    let isCustomersByActivity = m.route().indexOf('customersByActivities') > -1;
-    let activity;
+    let isCustomersFiltered = m.route().indexOf('customersFiltered') > -1;
+    let field;
+    let filterValue;
 
-    let customers = isCustomersByActivity ? m.prop(app.state.customersByActivities()) : m.prop(app.state.customers());
+    let customers = isCustomersFiltered ? m.prop(app.state.customersFiltered()) : m.prop(app.state.customers());
 
-    if(isCustomersByActivity) {
-      activity = m.route.param('activity');
-      CustomersByActivity.fetch( activity, (err,cust) => {
+    if(isCustomersFiltered) {
+      field = m.route.param('field').replace('+', ' ');
+      filterValue = m.route.param('value').replace('+', ' ');
+      CustomersFiltered.fetch( field,filterValue, (err, cust) => {
         if(err) return console.log(err);
 
-        customers(app.state.customersByActivities());
+        customers(app.state.customersFiltered());
         m.redraw();
       });
     }else{
@@ -43,14 +45,14 @@ export default {
 
     function checkSearch(){
       if(app.state.searchText().length > 0){
-        if(isCustomersByActivity){
-          customers(app.state.customersByActivities().filter(CustomersByActivity.filterByText));
+        if(isCustomersFiltered){
+          customers(app.state.customersFiltered().filter(CustomersFiltered.filterByText));
         }else {
           customers(app.state.customers().filter(Customers.filterByText));
         }
       }else{
-        if(isCustomersByActivity) {
-          customers(app.state.customersByActivities());
+        if(isCustomersFiltered) {
+          customers(app.state.customersFiltered());
         }else{
           customers(app.state.customers());
         }
@@ -60,8 +62,9 @@ export default {
     return {
       customers,
       checkSearch,
-      isCustomersByActivity,
-      activity
+      isCustomersFiltered,
+      field,
+      filterValue
     };
 
   },
@@ -70,8 +73,8 @@ export default {
 
     ctrl.checkSearch();
 
-    if(ctrl.isCustomersByActivity){
-      return viewCustomersByActivities(ctrl);
+    if(ctrl.isCustomersFiltered){
+      return viewCustomersFiltered(ctrl);
     }else{
       return viewCustomers(ctrl);
     }
@@ -111,7 +114,7 @@ function viewCustomers(ctrl){
   ]);
 }
 
-function viewCustomersByActivities(ctrl){
+function viewCustomersFiltered(ctrl){
   return m('div', {
     className: 'mdl-layout mdl-js-layout mdl-layout--fixed-header',
     config: redrawMat.removeContainer

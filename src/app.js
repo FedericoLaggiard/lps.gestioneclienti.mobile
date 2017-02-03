@@ -26,7 +26,7 @@ let app = {
     reportsForCustomer: storage('reportsForCustomer'),
     reports: storage('reports'),
     search: storage('search'),
-    customersByActivities: storage('customersByActivities'),
+    customersFiltered: storage('customersFiltered'),
 
     searchText: m.prop(''),
     searchField: m.prop(''),

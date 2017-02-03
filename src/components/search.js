@@ -18,7 +18,7 @@ export default {
   controller(){
 
     let search = m.prop(app.state.search());
-    let searchField = m.prop(null);
+    let searchField = m.prop(app.state.searchField());
 
     Search.fetch( (err, cust) => {
       if(err) return console.log(err);
@@ -80,7 +80,10 @@ export default {
                     key: index,
                     id: index,
                     className: 'activityItem',
-                    onclick: function() { m.route('/customersByActivities/' + customer.key) }
+                    onclick: function() {
+                      console.log('a');
+                      m.route('/customersFiltered/' + app.state.searchField().key.replace(' ', '+') +  '/' + customer.key.replace(' ', '+'));
+                    }
                   },[
                     m('div', {
                       className: 'activity-count'

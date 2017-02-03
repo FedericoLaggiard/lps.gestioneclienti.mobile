@@ -110,8 +110,8 @@ Search.fetch = function(callback){
     }
 
     app.state.fullCustomers(customers);
-    app.state.searchField(Search.defaultSearchField);
-    let temp = Search.groupBy(customers, Search.defaultSearchField.key);
+    app.state.searchField(app.state.searchField() || Search.defaultSearchField);
+    let temp = Search.groupBy(customers, app.state.searchField().key);
 
     app.state.search(temp);
     callback(null,temp);

@@ -78,8 +78,8 @@ export default {
       case '/search':
         return subViewSearch(ctrl);
         break;
-      case '/customersByActivities/' + m.route.param('activity'):
-        return subViewCustomersByActivity(ctrl);
+      case `/customersFiltered/${ m.route.param('field') }/${ m.route.param('value') }`:
+        return subViewCustomersFiltered(ctrl);
     }
 
 
@@ -220,7 +220,7 @@ function subViewSearch(ctrl){
   ]);
 }
 
-function subViewCustomersByActivity(ctrl){
+function subViewCustomersFiltered(ctrl){
 
   let showTitle = m.prop(!ctrl.isSearching());
 
@@ -243,8 +243,8 @@ function subViewCustomersByActivity(ctrl){
           display: showTitle() ? 'block' : 'none'
         }
       },[
-        m('i', '(' + app.state.customersByActivities().length + ')'),
-        'CLIENTI per ' + m.route.param('activity')
+        m('i', '(' + app.state.customersFiltered().length + ')'),
+        'CLIENTI per ' + m.route.param('value').replace('+',' ')
       ])
     ]),
     //m('button', {

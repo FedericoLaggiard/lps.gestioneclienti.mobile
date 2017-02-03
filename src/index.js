@@ -21,11 +21,11 @@ import search from './components/search';
 
 m.route.mode = 'hash';
 m.route(document.getElementById('app'), '/login', {
-  '/login'                          : login,
-  '/customers'                      : customers,
-  '/customers/:id'                  : customer,
-  '/customers/:id/reports'          : reports,
-  '/search'                         : search,
-  '/customersByActivities/:activity': customers
+  '/login'                            : login,
+  '/customers'                        : customers,
+  '/customers/:id'                    : customer,
+  '/customers/:id/reports'            : reports,
+  '/search'                           : search,
+  '/customersFiltered/:field/:value'  : customers
 });
 m.mount(document.getElementById('toast'), toast);
