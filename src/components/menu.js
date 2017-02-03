@@ -29,7 +29,7 @@ export default {
         ]),
         m('li', {
           className: 'menu-item',
-          onclick: function(){ m.route('/activities') }
+          onclick: function(){ m.route('/search') }
         }, [
           m('i', {className: 'material-icons arrow'}, 'zoom_in'),
           m('span',{},'ricerche avanzate')

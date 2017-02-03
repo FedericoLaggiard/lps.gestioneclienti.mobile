@@ -8,6 +8,8 @@ import m from 'mithril';
 //import style from '../../styles/header.less';
 import redrawMat from '../libs/redrawMaterial';
 
+import Search from '../models/searchModel';
+
 export default {
 
   controller(title, options){
@@ -33,6 +35,14 @@ export default {
           m.route('/customers/new');
         }
 
+      },
+
+      titleClicked: function(){
+        app.state.showDropDown(!app.state.showDropDown());
+      },
+
+      dropDownItemClick: function(searched){
+        app.state.searchField(Search.fields.find(function(item) { return item.key === searched.key;  }))
       },
 
       btnBack: function(){
@@ -65,8 +75,8 @@ export default {
       case '/customers/' + m.route.param('id') + '/reports':
         return subViewReports(ctrl);
         break;
-      case '/activities':
-        return subViewActivities(ctrl);
+      case '/search':
+        return subViewSearch(ctrl);
         break;
       case '/customersByActivities/' + m.route.param('activity'):
         return subViewCustomersByActivity(ctrl);
@@ -145,7 +155,7 @@ function subViewReports(ctrl){
   ]);
 }
 
-function subViewActivities(ctrl){
+function subViewSearch(ctrl){
   return m('header', { className: 'mdl-layout__header', id: 'activities-header' }, [
     //Loader
     m('div', { className: 'loader', style: { display: app.showLoader() ? 'block' : 'none'  } }),
@@ -158,10 +168,21 @@ function subViewActivities(ctrl){
       },
       m('i', {className: 'material-icons' }, 'arrow_back')
     ),
-    m('div', { className: 'mdl-layout__header-row' }, [
+    m('div', {
+      className: 'mdl-layout__header-row',
+      onclick: ctrl.titleClicked.bind(ctrl)
+    }, [
       m('span', {className: 'mdl-layout-title headerTitle' },[
-        m('i', '(' + app.state.activities().length + ')'),
-        m.trust('ATTIVIT&Agrave;')
+        m('i', '(' + app.state.search().length + ')'),
+        app.state.searchField() ? m.trust(app.state.searchField().label) : ''
+      ]),
+      m('div', {
+        className: 'toggle-filters'
+      },[
+        !app.state.showDropDown() ?
+          m('i', {className: 'material-icons' }, 'keyboard_arrow_down')
+        :
+          m('i', {className: 'material-icons' }, 'keyboard_arrow_up')
       ])
     ]),
     buttonSearch(ctrl),
@@ -174,7 +195,28 @@ function subViewActivities(ctrl){
         oninput: m.withAttr('value', app.state.searchText),
         value: app.state.searchText()
       })
-    )
+    ),
+    m('div', {
+      className: 'search-drop-down' + (app.state.showDropDown() ? ' show' : '')
+    }, [
+      m('h2',{
+        className: 'filter-by-lbl'
+      }, 'Filtra per:'),
+      m('div',{ className: 'scroller' }, [
+        m('ul',{},
+          Search.fields.map(function(item){
+            return m('li', {
+              className: 'menu-item' + (app.state.searchField().key === item.key ? ' current' : ''),
+              id: item.key,
+              key: item.key,
+              onclick: ctrl.dropDownItemClick.bind(ctrl, item)
+            },[
+              m('span',{}, m.trust(item.label))
+            ])
+          })
+        )
+      ])
+    ])
   ]);
 }
 
@@ -229,7 +271,7 @@ function buttonSearch(ctrl){
   return m('button', {
     className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored search'
     + (ctrl.isSearching() ? ' on' : '')
-    + (app.state.menuOpen() ? ' off' : ''),
+    + (app.state.menuOpen() || app.state.showDropDown() ? ' off' : ''),
     onclick: function(){
       ctrl.isSearching(!ctrl.isSearching());
 

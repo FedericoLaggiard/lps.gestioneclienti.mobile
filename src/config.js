@@ -26,7 +26,7 @@ export const urls = {
     customers:          baseUrl[env] + '/'+ [company] +'_clienti/_design/listByRagSoc/_view/listByRagSoc',
     report:             baseUrl[env] + '/'+ [company] +'_reports',
     reports:            baseUrl[env] + '/'+ [company] +'_reports/_design/reportsByCustomer/_view/reportsByCustomer',
-    activity:           baseUrl[env] + '/'+ [company] +'_clienti/_design/activity_list/_view/activity_list?group=true',
+    search:             baseUrl[env] + '/'+ [company] +'_clienti/_all_docs?include_docs=true',
     customerByActivity: baseUrl[env] + '/'+ [company] +'_clienti/_design/customer_by_activity/_view/customer_by_activity?key='
   },
 
@@ -37,7 +37,7 @@ export const urls = {
     customers:          baseUrl[env] + '/lps_clienti/_design/listByRagSoc/_view/listByRagSoc',
     report:             baseUrl[env] + '/lps_reports',
     reports:            baseUrl[env] + '/lps_reports/_design/reportsByCustomer/_view/reportsByCustomer',
-    activity:           baseUrl[env] + '/'+ [company] +'_clienti/_design/activity_list/_view/activity_list?group=true',
+    search:             baseUrl[env] + '/'+ [company] +'_clienti/_all_docs?include_docs=true',
     customerByActivity: baseUrl[env] + '/'+ [company] +'_clienti/_design/customer_by_activity/_view/customer_by_activity?key='
   }
 

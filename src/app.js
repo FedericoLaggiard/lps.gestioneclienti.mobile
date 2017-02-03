@@ -25,10 +25,12 @@ let app = {
     customer: storage('customer'),
     reportsForCustomer: storage('reportsForCustomer'),
     reports: storage('reports'),
-    activities: storage('activities'),
+    search: storage('search'),
     customersByActivities: storage('customersByActivities'),
 
     searchText: m.prop(''),
+    searchField: m.prop(''),
+    fullCustomers: m.prop(null),
 
     customerEdit: m.prop(false),
     editReportId: m.prop(null),
@@ -36,6 +38,7 @@ let app = {
     focusedField: m.prop(''),
 
     menuOpen: m.prop(false),
+    showDropDown: m.prop(false),
 
     toast: {
       buffer: m.prop([]),

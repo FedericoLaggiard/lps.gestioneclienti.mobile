@@ -9,7 +9,7 @@ import m from 'mithril';
 import redrawMat from '../libs/redrawMaterial';
 
 import Header from './header';
-import Activities from '../models/activitiesModel';
+import Search from '../models/searchModel';
 import Spinner from './spinner.js';
 import Menu from './menu';
 
@@ -17,31 +17,43 @@ export default {
 
   controller(){
 
-    let activities = m.prop(app.state.activities());
+    let search = m.prop(app.state.search());
+    let searchField = m.prop(null);
 
-    //if(!app.state.customers()){
-      Activities.fetch( (err,cust) => {
-        if(err) return console.log(err);
+    Search.fetch( (err, cust) => {
+      if(err) return console.log(err);
 
-        activities(app.state.activities());
-        m.redraw();
-      });
-    //}
+      search(app.state.search());
+      searchField(app.state.searchField());
+      m.redraw();
+    });
 
     function checkSearch(){
+      // Search text
       if(app.state.searchText().length > 0){
-      //  if(customers()){
-          activities(app.state.activities().filter(Activities.filterByText));
-        //}else{
-        //  app.state.searchText('')
-        //}
+        search(app.state.search().filter(Search.filterByText));
       }else{
-        activities(app.state.activities())
+        search(app.state.search())
+      }
+      //Search field
+      if(searchField() && searchField().key !== app.state.searchField().key){
+        console.log('searchField changed');
+
+        m.startComputation();
+
+        setTimeout(function(){
+          app.state.search(Search.groupBy(app.state.fullCustomers(),app.state.searchField().key));
+          searchField(app.state.searchField());
+          app.state.showDropDown(false);
+
+          m.endComputation();
+        },100);
+
       }
     }
 
     return {
-      activities,
+      search,
       checkSearch
     };
 
@@ -62,18 +74,18 @@ export default {
         },
         m('div', { className: 'page-content'},
           m('ul',{ className: 'activityList' },
-              ctrl.activities() ?
-                ctrl.activities().map((activity, index) => {
+              ctrl.search() ?
+                ctrl.search().map((customer, index) => {
                   return m('li',{
                     key: index,
                     id: index,
                     className: 'activityItem',
-                    onclick: function() { m.route('/customersByActivities/' + activity.name) }
+                    onclick: function() { m.route('/customersByActivities/' + customer.key) }
                   },[
                     m('div', {
                       className: 'activity-count'
-                    }, activity.count),
-                    m('span',activity.name)
+                    }, customer.count),
+                    m('span',customer.key)
                     //m('i', {className: 'material-icons arrow'}, 'arrow_forward')
                   ])
                 })
