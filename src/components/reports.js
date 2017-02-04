@@ -132,7 +132,12 @@ export default {
           m('div',{
             className: ctrl.editId() === null ? '' : 'on',
             id:'blur',
-            onclick:  ctrl.editItem.bind(ctrl,null)
+            onclick:  ctrl.editItem.bind(ctrl,null),
+            config: (element, isInit) => {
+              if(isInit){
+                element.style.height = document.querySelector('#cd-timeline').clientHeight + 'px';
+              }
+            }
           }),
           m('section', {id: 'cd-timeline'},
 
