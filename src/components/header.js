@@ -101,7 +101,7 @@ function subViewVendors(ctrl){
     m('div', { className: 'loader', style: { display: app.showLoader() ? 'block' : 'none'  } }),
     m('div', { className: 'mdl-layout__header-row' }, [
       m('span', {className: 'mdl-layout-title headerTitle' },[
-        m('i', '(' + app.state.customers().length + ')'),
+        m('i', '(' + app.state.vendors().length + ')'),
         'FORNITORI'
       ])
     ]),
