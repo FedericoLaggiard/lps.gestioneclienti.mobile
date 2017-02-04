@@ -12,6 +12,7 @@ import redrawMat from '../libs/redrawMaterial';
 import Header from './header';
 import Customers from '../models/customersModel';
 import CustomersFiltered from '../models/customersFilteredModel';
+import Vendors from '../models/vendorsModel';
 import Spinner from './spinner.js';
 import Menu from './menu.js';
 
@@ -20,10 +21,20 @@ export default {
   controller(){
 
     let isCustomersFiltered = m.route().indexOf('customersFiltered') > -1;
+    let isVendors = m.route().indexOf('vendors') > -1;
     let field;
     let filterValue;
 
-    let customers = isCustomersFiltered ? m.prop(app.state.customersFiltered()) : m.prop(app.state.customers());
+    let customers = (function(){
+      if (isCustomersFiltered){
+        return m.prop(app.state.customersFiltered());
+      }
+      if(isVendors){
+        return m.prop(app.state.vendors());
+      }
+      if(!isCustomersFiltered && ! isVendors)
+        return m.prop(app.state.customers());
+    })();
 
     if(isCustomersFiltered) {
       field = m.route.param('field').replace('+', ' ');
@@ -34,7 +45,16 @@ export default {
         customers(app.state.customersFiltered());
         m.redraw();
       });
-    }else{
+    }
+    if(isVendors){
+      Vendors.fetch( (err,vendors) => {
+        if(err) return console.log(err);
+
+        customers(app.state.vendors());
+        m.redraw();
+      });
+    }
+    if(!isVendors && !isCustomersFiltered){
       Customers.fetch( (err,cust) => {
         if(err) return console.log(err);
 
@@ -47,13 +67,21 @@ export default {
       if(app.state.searchText().length > 0){
         if(isCustomersFiltered){
           customers(app.state.customersFiltered().filter(CustomersFiltered.filterByText));
-        }else {
+        }
+        if(isVendors){
+          customers(app.state.vendors().filter(Vendors.filterByText));
+        }
+        if(!isCustomersFiltered && !isVendors){
           customers(app.state.customers().filter(Customers.filterByText));
         }
       }else{
         if(isCustomersFiltered) {
           customers(app.state.customersFiltered());
-        }else{
+        }
+        if(isVendors){
+          customers(app.state.vendors());
+        }
+        if(!isVendors && !isCustomersFiltered){
           customers(app.state.customers());
         }
       }

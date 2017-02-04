@@ -16,13 +16,15 @@ export default {
     }, [
       m('ul', {}, [
         m('li',{
-          className: 'menu-item'
+          className: 'menu-item',
+          onclick: function(){ m.route('/customers') }
         }, [
           m('i', {className: 'material-icons arrow'}, 'assignment_ind'),
           m('span',{},'clienti')
         ]),
         m('li',{
-          className: 'menu-item'
+          className: 'menu-item',
+          onclick: function(){ m.route('/vendors') }
         }, [
           m('i', {className: 'material-icons arrow'}, 'local_shipping'),
           m('span',{},'fornitori')

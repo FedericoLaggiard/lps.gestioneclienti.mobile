@@ -64,6 +64,14 @@ export default {
 
 
     switch(ctrl.route){
+      case '/vendors':
+        return m('header', {
+            className: 'mdl-layout__header',
+            config: redrawMat
+          },
+          subViewVendors(ctrl)
+        );
+        break;
       case '/customers':
         return m('header', {
             className: 'mdl-layout__header',
@@ -85,6 +93,38 @@ export default {
 
 
   }
+}
+
+function subViewVendors(ctrl){
+  return [
+    //Loader
+    m('div', { className: 'loader', style: { display: app.showLoader() ? 'block' : 'none'  } }),
+    m('div', { className: 'mdl-layout__header-row' }, [
+      m('span', {className: 'mdl-layout-title headerTitle' },[
+        m('i', '(' + app.state.customers().length + ')'),
+        'FORNITORI'
+      ])
+    ]),
+    m('button', {
+      className: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab ' +
+      'mdl-js-ripple-effect mdl-button--colored mdl-shadow--16dp add' +
+      (app.state.menuOpen() ? ' off' : ''),
+      onclick: ctrl.btnAdd.bind(ctrl)
+    }, [
+      m('i', {className: 'material-icons' }, 'add')
+    ]),
+    buttonSearch(ctrl),
+    m('div', {
+        className: 'txtSearchContainer'+ (ctrl.isSearching() ? ' on' : '')
+      }, m('input', {
+        className: 'txtSearch'+ (ctrl.isSearching() ? ' on' : ''),
+        type: 'text',
+        id: 'txtSearch',
+        oninput: m.withAttr('value', app.state.searchText),
+        value: app.state.searchText()
+      })
+    )
+  ]
 }
 
 function subViewCustomers(ctrl){

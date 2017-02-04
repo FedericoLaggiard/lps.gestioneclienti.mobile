@@ -26,6 +26,7 @@ m.route(document.getElementById('app'), '/login', {
   '/customers/:id'                    : customer,
   '/customers/:id/reports'            : reports,
   '/search'                           : search,
-  '/customersFiltered/:field/:value'  : customers
+  '/customersFiltered/:field/:value'  : customers,
+  '/vendors'                          : customers
 });
 m.mount(document.getElementById('toast'), toast);

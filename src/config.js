@@ -27,7 +27,8 @@ export const urls = {
     report:             baseUrl[env] + '/'+ [company] +'_reports',
     reports:            baseUrl[env] + '/'+ [company] +'_reports/_design/reportsByCustomer/_view/reportsByCustomer',
     search:             baseUrl[env] + '/'+ [company] +'_clienti/_all_docs?include_docs=true',
-    customerByActivity: baseUrl[env] + '/'+ [company] +'_clienti/_design/customer_by_activity/_view/customer_by_activity?key='
+    customerByActivity: baseUrl[env] + '/'+ [company] +'_clienti/_design/customer_by_activity/_view/customer_by_activity?key=',
+    vendors:            baseUrl[env] + '/'+ [company] +'_clienti/_design/listByFornitore/_view/listByFornitore'
   },
 
   dev: {
@@ -38,7 +39,8 @@ export const urls = {
     report:             baseUrl[env] + '/lps_reports',
     reports:            baseUrl[env] + '/lps_reports/_design/reportsByCustomer/_view/reportsByCustomer',
     search:             baseUrl[env] + '/'+ [company] +'_clienti/_all_docs?include_docs=true',
-    customerByActivity: baseUrl[env] + '/'+ [company] +'_clienti/_design/customer_by_activity/_view/customer_by_activity?key='
+    customerByActivity: baseUrl[env] + '/'+ [company] +'_clienti/_design/customer_by_activity/_view/customer_by_activity?key=',
+    vendors:            baseUrl[env] + '/'+ [company] +'_clienti/_design/listByFornitore/_view/listByFornitore'
   }
 
 };
