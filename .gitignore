@@ -1,5 +1,6 @@
 .idea
 .idea/*git
+.DS_Store
 node_modules
 cordova/platforms
 cordova/www/*
