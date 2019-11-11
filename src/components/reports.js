@@ -84,7 +84,7 @@ export default {
           data: moment().format('YYYY-MM-DDTHH:mm:ss'),
           idCliente: m.route.param('id'),
           tipoIncontro: 'T' ,
-          codAgente: app.state.user().key()
+          codAgente: app.state.user() ? app.state.user().key() : null
         }
       });
       t.unshift(n);
